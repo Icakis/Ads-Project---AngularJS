@@ -1,0 +1,29 @@
+﻿<form name="addNewVideoForm" ng-submit="addNewVideo(newVideo)" novalidate>
+    <fieldset>
+        <h2>Add Video</h2>
+        <p>
+            <label for="title">Tittle*:</label>
+            <input type="text" name="title" id="title" required="required" data-ng-model="newVideo.title" />
+            <span class="error" ng-show="addNewVideoForm.title.$error.required">*Required!</span>
+        </p>
+        <p>
+            <label for="pictireUrl">Picture(url)*:</label>
+            <input type="text" name="pictireUrl" id="pictireUrl" required="required" data-ng-pattern="/^(((http|ftp|https)://)|www\.)(\w+\.\w+)+([a-zA-Z0-9\~\!\@\#\$\%\^\&\*\(\)_\-\=\+\\\/\?\.\:\;\'\,]*)?$/" data-ng-model="newVideo.pictureUrl" />
+            <span class="error" ng-show="addNewVideoForm.pictireUrl.$error.required">*Required!</span>
+            <span class="error" ng-show="addNewVideoForm.pictireUrl.$error.required==false && !addNewVideoForm.pictireUrl.$valid">Invalid url!</span>
+        </p>
+        <p>
+            <label for="category">Category*:</label>
+            <input type="text" name="category" id="category" required="required" data-ng-model="newVideo.category" />
+            <span class="error" ng-show="addNewVideoForm.category.$error.required">*Required!</span>
+        </p>
+        <p><label for="lenght">Length:</label><input type="text" id="lenght" data-ng-model="newVideo.length" /></p>
+        <p>
+            <label>Subtitles:</label>
+            <select ng-model="newVideo.haveSubtitles" data-ng-init="newVideo.haveSubtitles = haveSubtitlesConfigs[0]" ng-options="item.name for item in haveSubtitlesConfigs"></select>
+           
+        </p>
+        <input type="submit" value="Add video" data-ng-disabled="!addNewVideoForm.$valid" />
+        <input type="button" data-ng-click="reset()" value="Reset" />
+    </fieldset>
+</form>

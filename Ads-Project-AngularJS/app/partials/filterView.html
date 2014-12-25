@@ -1,0 +1,36 @@
+﻿<div>
+    <form name="filterForm" novalidate="">
+        <fieldset>
+            <h2>Filter</h2>
+            <p>
+                by Category:
+                <select ng-model="filter.filterCategory" data-ng-options="item for item in allCategories" data-ng-change="categoryChange()">
+                    <option value="" selected="selected">All</option>
+                </select>
+            </p>
+            <p>
+                by Having subtitles:
+                <select ng-model="filter.haveSubtitles" data-ng-options="item.name for item in haveSubtitlesConfigs">
+                    <option value="" selected="selected">All</option>
+                </select>
+            </p>
+
+            <div>
+                by Date:
+                <div id="inputDatesContainer">
+                    <p>
+                        From:
+                        <input type="date" id="fromDateInput" name="fromDate" ng-model="filter.fromDateValue" placeholder="yyyy-MM-dd" data-ng-pattern="/\d\d\d\d-\d\d-\d\d$/" data-ng-change="changeFromDate(filterForm.fromDate.$viewValue)" />
+                        <span class="error" ng-show="filterForm.fromDate.$error.date">Not a valid date!</span>
+                    </p>
+                    <p>
+                        To:
+                        <input type="date" id="toDateInput" name="toDate" ng-model="filter.toDateValue" placeholder="yyyy-MM-dd" data-ng-pattern="/\d\d\d\d-\d\d-\d\d$/" data-ng-change="changeToDate(filterForm.toDate.$viewValue)" /> 
+                        <span class="error" ng-show="filterForm.toDate.$error.date">Not a valid date!</span>
+                </div>
+            </div>
+            <!--<input type="submit" value="Filter" />-->
+            <input type="reset" value="Reset" data-ng-click="reset()" />
+        </fieldset>
+    </form>
+</div>

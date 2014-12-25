@@ -1,0 +1,10 @@
+﻿<fieldset>
+    <p>
+        <span>Sort by:</span>
+        <select data-ng-model="sortCriteriaObj.sortCriteria" ng-options="value for (key, value) in sortCriteriaArray" data-ng-init="sortCriteriaObj.sortCriteria = sortCriteriaArray[0]"></select>
+    </p>
+    <p>
+        <span>Order by:</span>
+        <select data-ng-model="sortCriteriaObj.orderCriteria" ng-options="value for (key, value) in orderCriteriaArray" data-ng-init="sortCriteriaObj.orderCriteria = orderCriteriaArray[0]"></select>
+    </p>
+</fieldset>

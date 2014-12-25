@@ -1,0 +1,20 @@
+﻿
+<div class="videoInfo">
+    <img data-ng-src="{{video.pictureUrl}}" class="pictureUrl" />
+    <p><span>Tittle:</span>{{video.title}}</p>
+    <p><span>Length:</span>{{video.length}}</p>
+    <p><span>Category:</span>{{video.category}}</p>
+    <p><span>Subscribers:</span>{{video.subscribers}}</p>
+    <p><span>Add date:</span>{{video.date| date:"dd/MM/yyyy"}}</p>
+    <p><span>Subtitles available:</span>{{video.haveSubtitles?"Yes":"No"}}</p>
+</div>
+<div>
+    Comments:
+    <div data-ng-repeat="comment in video.comments" class="userComment">
+        <p><span>Username:</span>{{comment.username}}</p>
+        <p><span>Content:</span>{{comment.content}}</p>
+        <p><span>Date:</span>{{comment.date| date:"dd/MM/yyyy 'at' HH:mm"}}</p>
+        <p><span>Likes:</span>{{comment.likes}}</p>
+        <p><span>Website:</span><a href="{{comment.websiteUrl}}">{{comment.websiteUrl}}</a></p>
+    </div>
+</div>

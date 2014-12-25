@@ -1,0 +1,5 @@
+C:\Users\Icakis Nikus\Desktop\Ads-Project-AngularJS\Ads-REST-Services\Ads.Common\bin\Debug\Ads.Common.dll
+C:\Users\Icakis Nikus\Desktop\Ads-Project-AngularJS\Ads-REST-Services\Ads.Common\bin\Debug\Ads.Common.pdb
+C:\Users\Icakis Nikus\Desktop\Ads-Project-AngularJS\Ads-REST-Services\Ads.Common\obj\Debug\Ads.Common.csprojResolveAssemblyReference.cache
+C:\Users\Icakis Nikus\Desktop\Ads-Project-AngularJS\Ads-REST-Services\Ads.Common\obj\Debug\Ads.Common.dll
+C:\Users\Icakis Nikus\Desktop\Ads-Project-AngularJS\Ads-REST-Services\Ads.Common\obj\Debug\Ads.Common.pdb
