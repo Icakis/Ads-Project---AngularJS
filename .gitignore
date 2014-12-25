@@ -1,0 +1,8 @@
+Ads-REST-Services
+Ads-REST-Services/packages
+Ads-REST-Services/*.suo
+Ads-REST-Services/bin
+Ads-REST-Services/obj
+Ads-Project-AngularJS/*.suo
+Ads-Project-AngularJS/bin
+Ads-Project-AngularJS/obj

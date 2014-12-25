@@ -1,17 +1,31 @@
 'use strict';
 /* http://docs.angularjs.org/#!angular.service */
 app.factory('userData', function ($resource, $cookieStore) {
+    var baseUrl = 'http://localhost:1337';
+    function request(url, accessToken) {
+        $http.defaults.headers.common['Authorization'] = 'Bearer ' + accessToken;
+
+        var resource = $resource(baseUrl + url,
+            { id: '@id' },
+            {
+                update: {
+                    method: 'PUT'
+                }
+            });
+        return resource;
+    }
+
     function login(username, password) {
-        return $resource.save('http://softuni-ads.azurewebsites.net/api/user/login', {
+        return $resource(baseUrl + '/api/user/login', {
             "username": username,
             "password": password
-        }).success(function (user) {
+        }).save().success(function (user) {
             setLoggedUser(user);
         });
     }
 
     function register(username, password, confirmPassword, name, email, phone, townId) {
-        return $resource.save('http://softuni-ads.azurewebsites.net/api/user/login', {
+        return $resource(baseUrl + '/api/user/register', {
             "username": username,
             "password": password,
             "confirmPassword": confirmPassword,
@@ -19,7 +33,7 @@ app.factory('userData', function ($resource, $cookieStore) {
             "email": email,
             "phone": phone,
             "townId": townId
-        }).success(function (user) {
+        }).save().success(function (user) {
             setLoggedUser(user);
         });
     }
@@ -33,23 +47,54 @@ app.factory('userData', function ($resource, $cookieStore) {
     }
 
     function logout() {
-        $cookieStore.put('loggedUser', user);
+        $cookieStore.put('loggedUser', null);
     }
 
     function editUser(name, email, phoneNumber, townId) {
+        var resource = request('/api/user/profile', getLoggedUser().access_token);
+        var updatedUser = {
+            "username": username,
+            "name": name,
+            "email": email,
+            "phone": phone,
+            "townId": townId
+        };
 
+        resource.update({ id: id }, updatedUser).success(function (user) {
+            var loggedUser = getLoggedUser();
+            var updatedLoggedUser = {
+                "username": username,
+                "name": name,
+                "email": email,
+                "phone": phone,
+                "townId": townId,
+                "access_token": loggedUser.access_token,
+
+                "token_type": "bearer",
+                "expires_in": parseInt(getLoggedUser().expires_in),
+                ".issued": getLoggedUser()[".issued"],
+                ".expires": getLoggedUser()[".expires"]
+            };
+
+            setLoggedUser(updatedLoggedUser);
+        });
     }
 
-    function deleteUser(userId) {
+    //function deleteUser(userId) {
+    //    // TODO:
+    //}
 
-    }
+    //function getUserById(userId) {
+    //    // TODO:
+    //}
 
-    function getUserById(userId) {
-
-    }
-
-    function changeUserPassword(newPassword) {
-
+    function changeUserPassword(oldPassword, newPassword, confirmPassword) {
+        var resource = request('/api/user/changePassword', getLoggedUser().access_token);
+        resource.update({
+            "oldPassword": oldPassword,
+            "newPassword": newPassword,
+            "confirmPassword": confirmPassword
+        });
     }
 
     return {
@@ -58,8 +103,8 @@ app.factory('userData', function ($resource, $cookieStore) {
         getLoggedUser: getLoggedUser,
         logout: logout,
         editUser: editUser,
-        deleteUser: deleteUser,
-        getUserById: getUserById,
+        //deleteUser: deleteUser,
+        //getUserById: getUserById,
         changeUserPassword: changeUserPassword
     }
 });
