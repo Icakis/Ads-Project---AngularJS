@@ -1,58 +1,13 @@
-﻿body {
-}
+/*
+Bootstrap 3.1 overrides from http://bootply.com
 
-.error {
-    color: red;
-}
+This CSS code should follow the 'bootstrap.css'
+in your HTML file.
 
-input.ng-valid {
-    /*background-color: greenyellow;
-    color: blanchedalmond;*/
-}
+license: MIT
+author: bootply.com
+*/
 
-.videoContainer {
-    display: block;
-    background-color: yellow;
-    margin: 10px;
-    padding: 10px;
-}
-
-.pictureUrl {
-    width: 100px;
-    height: 100px;
-    display: inline-block;
-    float: left;
-}
-
-.videoInfo {
-    display: block;
-    background-color: greenyellow;
-}
-
-.userComment {
-    display: block;
-    margin: 15px;
-    background-color: grey;
-    padding: 25px;
-}
-
-#addVideoContainer, #filterContainer, #sortContainer {
-    display: block;
-    vertical-align: top;
-    padding: 15px;
-}
-
-aside {
-    width: 22.5%;
-    display: inline-block;
-    vertical-align: top;
-}
-
-#allVideosContainer {
-    display: inline-block;
-    width: 50%;
-}
-
-#inputDatesContainer {
-    padding-left: 10px;
+body {
+  padding-top: 70px;
 }

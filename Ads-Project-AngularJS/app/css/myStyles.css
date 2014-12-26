@@ -1,0 +1,41 @@
+﻿#navHeading {
+    text-align: center;
+}
+
+aside {
+    padding-top: 2em;
+}
+
+#buttonContainer, #buttonContainer a {
+    text-align: center;
+    margin: 0.2em;
+}
+.adImageContainer{
+    width: 100%;
+}
+/*.button {
+    background: #70AD47;
+    border: 2px solid #507E32;
+    border-radius: 5px;
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    display: inline-block;
+    margin: 0 10px;
+}*/
+#middleContainer {
+    margin-top: 2em;
+}
+
+.addHedingTitleContainer, .addHedingTitleContainer h2 {
+    
+    /*margin: 2em 0;*/
+    display: inline;
+}
+.adDateSpan {
+    /*text-align: right;
+    display: inline;*/
+    float: right;
+    /*vertical-align: top;*/
+
+}

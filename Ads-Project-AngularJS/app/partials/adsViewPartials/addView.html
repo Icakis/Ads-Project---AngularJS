@@ -1,7 +1,78 @@
-﻿<aside data-ng-controller="loginRegisterController">
-    <aside data-ng-include="'partials/adsViewPartials/loginRegisterView.html'"></aside>
-</aside>
-<main>
-    All adds
-</main>
+﻿<div>
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <h1 id="navHeading">Ads Home</h1>
+    </nav>
+    <div class="container-fluid">
+        <!--left-->
+        <aside id="leftAside" class="col-sm-3" data-ng-controller="loginRegisterController">
+            <div data-ng-include="'partials/adsViewPartials/loginRegisterView.html'"></div>
+        </aside>
+        <!--/left-->
+        <!--center-->
+        <div class="col-sm-6" data-ng-controller="AllAdsController" id="middleContainer">
+            <div data-ng-repeat="add in allAdsData.ads">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="addHedingTitleContainer">
+                            <h2>{{add.title}}</h2>
+                            <span class="adDateSpan">{{add.date | date:'d-MMM-yyyy'}}</span>
+                        </div>
 
+                        <!--<p class="lead"><button class="btn btn-default">Read More</button></p>
+                            <p class="pull-right"><span class="label label-default">keyword</span> <span class="label label-default">tag</span> <span class="label label-default">post</span></p>
+                            <ul class="list-inline"><li><a href="#">2 Days Ago</a></li><li><a href="#"><i class="glyphicon glyphicon-comment"></i> 2 Comments</a></li><li><a href="#"><i class="glyphicon glyphicon-share"></i> 14 Shares</a></li></ul>-->
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <img data-ng-src="{{add.imageDataUrl?add.imageDataUrl:'./img/No_Image_Available.png'}}" class="adImageContainer" />
+                    </div>
+                    <div class="col-md-8">
+                        <p>{{add.text}}</p>
+                        <p>Name: <span>{{add.ownerName}}</span></p>
+                        <p>Email: <span>{{add.ownerEmail}}</span></p>
+                        <p>Tel: <span>{{add.ownerPhone}}</span></p>
+                    </div>
+                </div>
+                <hr data-ng-if="!$last">
+
+            </div>
+        </div>
+        <!--/center-->
+        <!--right-->
+        <div class="col-sm-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">Categories</div>
+                <div class="panel-body">
+                    <ul>
+                        <li data-ng-repeat="category in allCategories">{{allCategories[category].name}}</li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <div class="panel panel-default">
+                <div class="panel-heading">Title</div>
+                <div class="panel-body">Content here..</div>
+            </div>
+            <hr>
+            <div class="panel panel-default">
+                <div class="panel-heading">Title</div>
+                <div class="panel-body">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate.
+                    Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis
+                    dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan.
+                    Aliquam in felis sit amet augue.
+                </div>
+            </div>
+            <hr>
+            <div class="panel panel-default">
+                <div class="panel-heading">Title</div>
+                <div class="panel-body">Content here..</div>
+            </div>
+            <hr>
+        </div><!--/right-->
+        <hr>
+    </div><!--/container-fluid-->
+    <!-- script references -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+</div>

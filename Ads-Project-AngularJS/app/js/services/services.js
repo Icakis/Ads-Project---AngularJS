@@ -1,7 +1,9 @@
 'use strict';
 /* http://docs.angularjs.org/#!angular.service */
-app.factory('userData', function ($resource, $cookieStore) {
-    var baseUrl = 'http://localhost:1337';
+
+app.constant('baseUrl', 'http://localhost:1337');
+
+app.factory('userData', function ($resource, $cookieStore, baseUrl) {
     function request(url, accessToken) {
         $http.defaults.headers.common['Authorization'] = 'Bearer ' + accessToken;
 
@@ -109,10 +111,10 @@ app.factory('userData', function ($resource, $cookieStore) {
     }
 });
 
-app.factory('userAdsData', function ($resource, $http, userData) {
+app.factory('userAdsData', function ($resource, baseUrl, userData) {
     $http.defaults.headers.common['Authorization'] = 'Bearer ' + userData.getLoggedUser.access_token;
 
-    var resource = $resource('http://localhost:1337/api/user/ads/:id',
+    var resource = $resource(baseUrl + '/api/user/ads/:id',
 		{ id: '@id' },
 		{
 		    update: {
@@ -146,5 +148,20 @@ app.factory('userAdsData', function ($resource, $http, userData) {
         getById: getAdById,
         edit: editAd,
         delete: deleteAd
+    }
+});
+
+app.factory('adsData', function ($resource, baseUrl, userData) {
+    function getAllPublishedAdsByFilter() {
+        return $resource(baseUrl + '/api/ads').get();
+    }
+
+    function getAllCategories() {
+        return $resource(baseUrl + '/api/Categories').query();
+    }
+
+    return {
+        getAllPublishedAdsByFilter: getAllPublishedAdsByFilter,
+        getAllCategories: getAllCategories,
     }
 });

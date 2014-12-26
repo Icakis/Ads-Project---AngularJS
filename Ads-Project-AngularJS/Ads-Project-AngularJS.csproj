@@ -57,7 +57,10 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\css\bootstrap.min.css" />
+    <Content Include="app\css\myStyles.css" />
     <Content Include="app\css\styles.css" />
+    <Content Include="app\img\No_Image_Available.png" />
     <Content Include="app\index-async.html" />
     <Content Include="app\index-seed.html" />
     <Content Include="app\index.html" />
@@ -2283,6 +2286,14 @@
     <Content Include="app\lib\angular-1.3.8\i18n\angular-locale_zu.js" />
     <Content Include="app\lib\angular-1.3.8\version.txt" />
     <Content Include="app\lib\angular.js" />
+    <Content Include="app\lib\bootstrap-3.3.1-dist\dist\css\bootstrap-theme.css" />
+    <Content Include="app\lib\bootstrap-3.3.1-dist\dist\css\bootstrap-theme.min.css" />
+    <Content Include="app\lib\bootstrap-3.3.1-dist\dist\css\bootstrap.css" />
+    <Content Include="app\lib\bootstrap-3.3.1-dist\dist\css\bootstrap.min.css" />
+    <Content Include="app\lib\bootstrap-3.3.1-dist\dist\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="app\lib\bootstrap-3.3.1-dist\dist\js\bootstrap.js" />
+    <Content Include="app\lib\bootstrap-3.3.1-dist\dist\js\bootstrap.min.js" />
+    <Content Include="app\lib\bootstrap-3.3.1-dist\dist\js\npm.js" />
     <Content Include="app\lib\underscore.js" />
     <Content Include="app\partials\addVideoView.html" />
     <Content Include="app\partials\adsViewPartials\addView.html" />
@@ -2522,6 +2533,12 @@
     <Content Include="app\lib\angular-1.3.8\docs\js\search-worker.min.js.map" />
     <Content Include="app\lib\angular-1.3.8\errors.json" />
     <Content Include="app\lib\angular-1.3.8\version.json" />
+    <Content Include="app\lib\bootstrap-3.3.1-dist\dist\css\bootstrap-theme.css.map" />
+    <Content Include="app\lib\bootstrap-3.3.1-dist\dist\css\bootstrap.css.map" />
+    <Content Include="app\lib\bootstrap-3.3.1-dist\dist\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="app\lib\bootstrap-3.3.1-dist\dist\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="app\lib\bootstrap-3.3.1-dist\dist\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="server.sh" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -2530,7 +2547,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="app\img\" />
     <Folder Include="app\lib\angular-1.3.8\i18n\ngLocale\" />
   </ItemGroup>
   <PropertyGroup>
