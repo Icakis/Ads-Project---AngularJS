@@ -1,7 +1,5 @@
 ﻿'use strict';
-app.controller('mainController', ['$scope', function ($scope) {
-    $scope.filter = {
-        category: '',
-        town: ''
-    };
+app.controller('mainController', ['$scope', 'userData', function ($scope) {
+
+
 }]);

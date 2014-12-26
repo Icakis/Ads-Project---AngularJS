@@ -151,7 +151,8 @@ app.factory('userAdsData', function ($resource, baseUrl, userData) {
     }
 });
 
-app.factory('adsData', function ($resource, baseUrl, userData) {
+app.factory('adsData',  function ($resource, baseUrl) {
+    
     function getAllPublishedAdsByFilter(categoryId, townId, startPage, pageSize) {
         return $resource(baseUrl + '/api/Ads?CategoryId=:categoryId&TownId=:townId&StartPage=:startPage&PageSize=:pageSize',
         {
@@ -174,5 +175,5 @@ app.factory('adsData', function ($resource, baseUrl, userData) {
         getAllPublishedAdsByFilter: getAllPublishedAdsByFilter,
         getAllCategories: getAllCategories,
         getAllTowns: getAllTowns,
-    }
+    };
 });

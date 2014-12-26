@@ -1,4 +1,4 @@
-﻿<div>
+﻿<div ng-controller="AllAdsController">
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
         <h1 id="navHeading">Ads Home</h1>
     </nav>
@@ -9,8 +9,8 @@
         </aside>
         <!--/left-->
         <!--center-->
-        <main class="col-sm-6" data-ng-controller="AllAdsController" id="middleContainer">
-            <div data-ng-repeat="add in allAdsData.ads">
+        <main class="col-sm-6" id="middleContainer">
+            <div data-ng-repeat="add in allAds">
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="addHedingTitleContainer">
@@ -36,7 +36,7 @@
                 </div>
                 <hr data-ng-if="!$last">
             </div>
-            <div data-ng-if='allAdsData.ads.length < 1'> No ads found with that filter.</div>
+            <div data-ng-if='allAds.length < 1'> No ads found with that filter.</div>
         </main>
         <!--/center-->
         <!--right-->

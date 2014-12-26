@@ -1,4 +1,4 @@
-﻿app.controller('FilterController', function ($scope, $route, adsData) {
+﻿app.controller('FilterController', function ($scope, $route, $rootScope, adsData) {
     adsData.getAllCategories()
         .$promise
         .then(function (categories) {
@@ -18,12 +18,13 @@
 
     $scope.changeCategoryFilter = function (id) {
         $scope.filter.category = id;
-        $route.reload();
-        console.log(id);
+        $scope.reloadAllads();
+        //console.log(id);
     }
 
     $scope.changeTownFilter = function (id) {
         $scope.filter.town = id;
-        $route.reload();
+        $scope.reloadAllads();
+        //$route.reload();
     };
 });
