@@ -67,9 +67,9 @@
     <Content Include="app\js\app.js" />
     <Content Include="app\js\controllers\addVideoController.js" />
     <Content Include="app\js\controllers\allAdsController.js" />
+    <Content Include="app\js\controllers\filterController.js" />
     <Content Include="app\js\controllers\contoller.js" />
     <Content Include="app\js\controllers\controllers.js" />
-    <Content Include="app\js\controllers\filterController.js" />
     <Content Include="app\js\controllers\loginRegisterController.js" />
     <Content Include="app\js\controllers\mainController.js" />
     <Content Include="app\js\controllers\sortContainer.js" />
