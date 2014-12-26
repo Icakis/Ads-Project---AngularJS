@@ -63,13 +63,13 @@ app.factory('userData', function ($resource, $cookieStore) {
         resource.update({ id: id }, updatedUser).success(function (user) {
             var loggedUser = getLoggedUser();
             var updatedLoggedUser = {
-                "username": username,
-                "name": name,
-                "email": email,
-                "phone": phone,
-                "townId": townId,
-                "access_token": loggedUser.access_token,
+                "username": user.username,
+                "name": user.name,
+                "email": user.email,
+                "phone": user.phone,
+                "townId": user.townId,
 
+                "access_token": loggedUser.access_token,
                 "token_type": "bearer",
                 "expires_in": parseInt(getLoggedUser().expires_in),
                 ".issued": getLoggedUser()[".issued"],
