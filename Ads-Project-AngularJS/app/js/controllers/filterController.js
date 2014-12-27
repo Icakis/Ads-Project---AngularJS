@@ -21,7 +21,7 @@
         $scope.reloadAllads();
         //console.log(id);
     }
-
+    
     $scope.changeTownFilter = function (id) {
         $scope.filter.town = id;
         $scope.reloadAllads();

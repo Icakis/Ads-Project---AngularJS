@@ -4,7 +4,10 @@
 var app = angular.module('adsApp', ['ngResource', 'ngRoute', 'ngCookies'])
 .config(function ($routeProvider) {
     $routeProvider.when('/', {
-        templateUrl: './partials/adsViewPartials/addView.html',
+        templateUrl: './partials/adsViewPartials/homeView.html',
         controller: 'loginRegisterController'
+    }).when('/login', {
+        templateUrl: './partials/loginView/loginView.html',
+        controller: 'loginController'
     });
 });

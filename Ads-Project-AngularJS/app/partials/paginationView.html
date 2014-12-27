@@ -1,0 +1,13 @@
+﻿<div class="row" id="paginationContainer" data-ng-controller="paginationController">
+    <div class="col-md-12">
+        <ul class="pagination">
+            <li data-ng-if="allAdsData.numPages.length > 1"><a href="" data-ng-click="changePage(1)">First</a></li>
+
+            <!-- TODO: add limitTo:10 + add prev-next page button + add range(startPage,toPage)-->
+            <li data-ng-if="allAdsData.numPages.length > 1" data-ng-repeat="i in allAdsData.numPages"><a href="" data-ng-click="changePage($index + 1)">{{$index + 1}}</a></li>
+
+            <li data-ng-if="allAdsData.numPages.length > 1"><a href="" data-ng-click="changePage(allAdsData.numPages.length)">Last</a></li>
+
+        </ul>
+    </div>
+</div>
