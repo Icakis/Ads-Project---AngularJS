@@ -1,6 +1,5 @@
 ﻿app.controller('FilterController', function ($scope, $route, $rootScope, adsData) {
     adsData.getAllCategories()
-        .$promise
         .then(function (categories) {
             $scope.allCategories = categories;
         }, function (error) {
@@ -8,7 +7,6 @@
         });
 
     adsData.getAllTowns()
-        .$promise
         .then(function (towns) {
             $scope.allTowns = towns;
         }, function (error) {

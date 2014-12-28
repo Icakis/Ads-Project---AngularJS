@@ -3,7 +3,7 @@
 
 app.constant('baseUrl', 'http://localhost:1337');
 
-app.factory('userData', function ($resource, $cookieStore, baseUrl) {
+app.factory('userData', function ($resource, $http, $cookieStore, $q, baseUrl) {
     function request(url, accessToken) {
         $http.defaults.headers.common['Authorization'] = 'Bearer ' + accessToken;
 
@@ -18,11 +18,17 @@ app.factory('userData', function ($resource, $cookieStore, baseUrl) {
     }
 
     function login(username, password) {
-        return $resource(baseUrl + '/api/user/login', {
+        return $resource(baseUrl + '/api/user/Login').save({
             "username": username,
             "password": password
-        }).save().success(function (user) {
+        }).$promise.then(function (user) {
+            console.log('Set logged user');
             setLoggedUser(user);
+            return user.$promise;
+        }, function (error) {
+            console.log('Error in service');
+            console.log(error);
+            return $q.reject(error);
         });
     }
 
@@ -151,8 +157,8 @@ app.factory('userAdsData', function ($resource, baseUrl, userData) {
     }
 });
 
-app.factory('adsData',  function ($resource, baseUrl) {
-    
+app.factory('adsData', function ($resource, baseUrl) {
+
     function getAllPublishedAdsByFilter(categoryId, townId, startPage, pageSize) {
         return $resource(baseUrl + '/api/Ads?CategoryId=:categoryId&TownId=:townId&StartPage=:startPage&PageSize=:pageSize',
         {
@@ -164,11 +170,11 @@ app.factory('adsData',  function ($resource, baseUrl) {
     }
 
     function getAllCategories() {
-        return $resource(baseUrl + '/api/Categories').query();
+        return $resource(baseUrl + '/api/Categories').query().$promise;
     }
 
     function getAllTowns() {
-        return $resource(baseUrl + '/api/Towns').query();
+        return $resource(baseUrl + '/api/Towns').query().$promise;
     }
 
     return {

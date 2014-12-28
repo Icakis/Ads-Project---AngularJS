@@ -71,6 +71,7 @@
     <Content Include="app\js\controllers\loginRegisterController.js" />
     <Content Include="app\js\controllers\mainController.js" />
     <Content Include="app\js\controllers\paginationController.js" />
+    <Content Include="app\js\controllers\registerController.js" />
     <Content Include="app\js\controllers\sortContainer.js" />
     <Content Include="app\js\derectives\dateFieldDerective.js" />
     <Content Include="app\js\filters\filters.js" />
@@ -2301,6 +2302,8 @@
     <Content Include="app\partials\loginView\loginForm.html" />
     <Content Include="app\partials\loginView\loginView.html" />
     <Content Include="app\partials\paginationView.html" />
+    <Content Include="app\partials\registerView\registerForm.html" />
+    <Content Include="app\partials\registerView\registerView.html" />
     <Content Include="scripts\web-server.js" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -2539,9 +2542,11 @@
     <Content Include="server.sh" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </None>
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </None>
   </ItemGroup>
   <ItemGroup>

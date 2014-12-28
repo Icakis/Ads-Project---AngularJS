@@ -9,5 +9,8 @@ var app = angular.module('adsApp', ['ngResource', 'ngRoute', 'ngCookies'])
     }).when('/login', {
         templateUrl: './partials/loginView/loginView.html',
         controller: 'loginController'
+    }).when('/register', {
+        templateUrl: './partials/registerView/registerView.html',
+        controller: 'registerController'
     });
 });
