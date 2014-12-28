@@ -19,14 +19,20 @@ app.controller('registerController', ['$scope', '$location', 'adsData', 'userDat
 
     $scope.register = function () {
         alert('Register clicked.');
-        //userData.register($scope.loginData.username, $scope.loginData.password).then(function (response) {
-        //    alert('Successfuly logged.');
-        //    console.log('Success in LoginController');
-        //    console.log(response);
-        //}, function (error) {
-        //    console.log('Error in LoginController');
-        //    console.log(error);
-        //});
+        //username, password, confirmPassword, name, email, phone, townId
+        if ($scope.newUser.town) {
+            $scope.newUser.town = parseInt($scope.newUser.town);
+        }
+
+        userData.register($scope.newUser.username, $scope.newUser.password1, $scope.newUser.password2, $scope.newUser.name, $scope.newUser.email, $scope.newUser.phone, $scope.newUser.town)
+        .then(function (response) {
+            alert('Successfuly logged.');
+            console.log('Success in LoginController');
+            console.log(response);
+        }, function (error) {
+            console.log('Error in LoginController');
+            console.log(error);
+        });
     };
 
 }

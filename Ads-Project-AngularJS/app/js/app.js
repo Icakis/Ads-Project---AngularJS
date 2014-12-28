@@ -12,5 +12,8 @@ var app = angular.module('adsApp', ['ngResource', 'ngRoute', 'ngCookies'])
     }).when('/register', {
         templateUrl: './partials/registerView/registerView.html',
         controller: 'registerController'
+    }).when('/#/user/home', {
+        templateUrl: './partials/registerView/registerView.html',
+        controller: 'registerController'
     });
 });

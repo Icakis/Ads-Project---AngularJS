@@ -13,16 +13,35 @@
             $log.error(error);
         });
 
+    $scope.isSelectedCategory = function (category) {
+        return $scope.filter.selectedCategory === category;
+    };
 
-    $scope.changeCategoryFilter = function (id) {
-        $scope.filter.category = id;
+    $scope.changeCategoryFilter = function (slectedCategory) {
+        $scope.filter.selectedCategory = slectedCategory;
+        if (slectedCategory) {
+            $scope.filter.category = slectedCategory.id;
+        } else {
+            $scope.filter.category = '';
+        }
+
+        $scope.pagination.startPage = '';
         $scope.reloadAllads();
-        //console.log(id);
     }
-    
-    $scope.changeTownFilter = function (id) {
-        $scope.filter.town = id;
+
+    $scope.isSelectedTown = function (town) {
+        return $scope.filter.selectedTown === town;
+    };
+
+    $scope.changeTownFilter = function (selectedTown) {
+        $scope.filter.selectedTown = selectedTown;
+        if (selectedTown) {
+            $scope.filter.town = selectedTown.id;
+        } else {
+            $scope.filter.town = '';
+        }
+
+        $scope.pagination.startPage = '';
         $scope.reloadAllads();
-        //$route.reload();
     };
 });

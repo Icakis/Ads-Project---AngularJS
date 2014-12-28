@@ -1,11 +1,11 @@
-﻿<div ng-controller="AllAdsController" >
+﻿<div ng-controller="AllAdsController">
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
         <h1 id="navHeading">Ads Home</h1>
     </nav>
     <div class="container-fluid">
         <!--left-->
-        <aside id="leftAside" class="col-sm-3" data-ng-controller="loginRegisterController">
-            <div data-ng-include="'partials/adsViewPartials/loginRegisterView.html'"></div>
+        <aside id="leftAside" class="col-sm-3" data-ng-controller="loginRegisterController" >
+            <div data-ng-if="$scope.isUserLogged()" data-ng-include="'partials/adsViewPartials/loginRegisterView.html'"></div>
         </aside>
         <!--/left-->
         <!--center-->
@@ -21,20 +21,20 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Categories</div>
                 <div class="panel-body">
-                    <ul>
-                        <li><a href="#/" data-ng-click="changeCategoryFilter('')">All</a></li>
-                        <li data-ng-repeat="category in allCategories"><a href="" data-ng-click="changeCategoryFilter(category.id)">{{category.name}}</a></li>
-                    </ul>
+                    <div class="list-group">
+                        <a href="#/" class="list-group-item" ng-class="{active : isSelectedCategory(category)}" data-ng-click="changeCategoryFilter(category)">All</a>
+                        <a href="" class="list-group-item" ng-class="{active : isSelectedCategory(category)}" data-ng-repeat="category in allCategories" data-ng-click="changeCategoryFilter(category)">{{category.name}}</a>
+                    </div>
                 </div>
             </div>
             <hr>
             <div class="panel panel-default">
                 <div class="panel-heading">Towns</div>
                 <div class="panel-body">
-                    <ul>
-                        <li><a href="#/" data-ng-click="changeTownFilter('')">All</a></li>
-                        <li data-ng-repeat="town in allTowns"><a href="" data-ng-click="changeTownFilter(town.id)">{{town.name}}</a></li>
-                    </ul>
+                    <div class="list-group">
+                        <a href="#/" class="list-group-item" ng-class="{active : isSelectedTown(town)}" data-ng-click="changeTownFilter(town)">All</a>
+                        <a class="list-group-item" ng-class="{active : isSelectedTown(town)}" href="" data-ng-repeat="town in allTowns" data-ng-click="changeTownFilter(town)">{{town.name}}</a>
+                    </div>
                 </div>
             </div>
         </aside>

@@ -33,7 +33,7 @@ app.factory('userData', function ($resource, $http, $cookieStore, $q, baseUrl) {
     }
 
     function register(username, password, confirmPassword, name, email, phone, townId) {
-        return $resource(baseUrl + '/api/user/register', {
+        return $resource(baseUrl + '/api/user/register').save({
             "username": username,
             "password": password,
             "confirmPassword": confirmPassword,
@@ -41,13 +41,19 @@ app.factory('userData', function ($resource, $http, $cookieStore, $q, baseUrl) {
             "email": email,
             "phone": phone,
             "townId": townId
-        }).save().success(function (user) {
+        }).$promise.then(function (user) {
+            console.log('Set logged user in registration');
             setLoggedUser(user);
+            return user.$promise;
+        }, function (error) {
+            console.log('Error in register service');
+            console.log(error);
+            return $q.reject(error);
         });
     }
 
     function getLoggedUser() {
-        $cookieStore.get('loggedUser');
+        return $cookieStore.get('loggedUser');
     }
 
     function setLoggedUser(user) {
@@ -55,7 +61,7 @@ app.factory('userData', function ($resource, $http, $cookieStore, $q, baseUrl) {
     }
 
     function logout() {
-        $cookieStore.put('loggedUser', null);
+        $cookieStore.remove('loggedUser');
     }
 
     function editUser(name, email, phoneNumber, townId) {

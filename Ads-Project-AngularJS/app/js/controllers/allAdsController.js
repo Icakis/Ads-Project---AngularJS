@@ -1,4 +1,14 @@
-﻿app.controller('AllAdsController', function ($scope, $route, $http, adsData) {
+﻿app.controller('AllAdsController', function ($scope, $route, $http, adsData, userData) {
+
+    $scope.isUserLogged = function () {
+        console.log('CHECKING');
+        if (userData.getLoggedUser()) {
+            return true;
+        }
+
+        return false;
+    }
+
     $scope.filter = {
         category: '',
         town: ''
