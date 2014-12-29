@@ -1,0 +1,11 @@
+﻿<div class="panel panel-default">
+    <div class="panel-heading">Navigation</div>
+    <div class="panel-body">
+        <div class="list-group">
+            <a href="#/user/home" class="list-group-item" ng-class="{active : isUserSectionSelected('home')}" data-ng-click="changeUserSection('home')">Home</a>
+            <a href="#/user/ads" class="list-group-item" ng-class="{active : isUserSectionSelected('myAds')}" data-ng-click="changeUserSection('myAds')">My Ads</a>
+            <a href="#/user/ads/publish" class="list-group-item" ng-class="{active : isUserSectionSelected('newAd')}" data-ng-click="changeUserSection('newAd')">Publish New Ad</a>
+            <a href="#/user/profile" class="list-group-item" ng-class="{active : isUserSectionSelected('editProfile')}" data-ng-click="changeUserSection('editProfile')">Edit Progile</a>
+        </div>
+    </div>
+</div>

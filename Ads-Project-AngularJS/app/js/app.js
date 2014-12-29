@@ -1,3 +1,5 @@
+/// <reference path="../partials/userView/publishNewAdView.html" />
+/// <reference path="../partials/userView/userHomeView.html" />
 /// <reference path="../partials/adsView partials/loginRegisterView.html" />
 'use strict';
 
@@ -12,8 +14,17 @@ var app = angular.module('adsApp', ['ngResource', 'ngRoute', 'ngCookies'])
     }).when('/register', {
         templateUrl: './partials/registerView/registerView.html',
         controller: 'registerController'
-    }).when('/#/user/home', {
-        templateUrl: './partials/registerView/registerView.html',
-        controller: 'registerController'
+    }).when('/logout', {
+        templateUrl: './partials/adsViewPartials/homeView.html',
+        controller: 'logoutController'
+    }).when('/user/home', {
+        templateUrl: './partials/userView/userHomeView.html',
+        controller: 'userController'
+    }).when('/user/ads/publish', {
+        templateUrl: './partials/userView/publishNewAdView.html',
+        controller: 'userController'
+    }).otherwise({
+        templateUrl: './partials/loginView/loginView.html',
+        controller: 'loginController'
     });
 });

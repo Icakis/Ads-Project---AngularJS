@@ -1,13 +1,15 @@
 ﻿app.controller('AllAdsController', function ($scope, $route, $http, adsData, userData) {
+    //console.log(userData.getLoggedUser().username);
 
     $scope.isUserLogged = function () {
-        console.log('CHECKING');
         if (userData.getLoggedUser()) {
             return true;
         }
 
         return false;
     }
+
+    $scope.getLoggedUser = userData.getLoggedUser();
 
     $scope.filter = {
         category: '',

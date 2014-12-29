@@ -66,3 +66,7 @@ aside {
     float: right;
     /*vertical-align: top;*/
 }
+#publishAdImagePreviewContainer {
+    width: 10%;
+    display: inline-block;
+}

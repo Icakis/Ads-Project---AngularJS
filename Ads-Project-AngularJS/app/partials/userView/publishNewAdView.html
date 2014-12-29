@@ -1,0 +1,19 @@
+﻿<div data-ng-controller="AllAdsController">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <h1 id="navHeading">Ads - Publish New Ad </h1>
+        <h4>{{getLoggedUser.username}} <a href="#/logout">Logout</a></h4>
+    </nav>
+    <div class="container-fluid">
+        <!--left-->
+        <aside id="leftAside" class="col-sm-3" data-ng-controller="userController">
+            <div data-ng-if="!$scope.isUserLogged()" data-ng-include="'partials/userView/userNavigationPanelView.html'"></div>
+        </aside>
+        <!--/left-->
+        <!--center-->
+        <main class="col-sm-9" id="middleContainer">
+            <div data-ng-include="'partials/userView/publishNewAdForm.html'"></div>
+        </main>
+        <!--/center-->
+    </div>
+    <!--/container-fluid-->
+</div>

@@ -1,8 +1,8 @@
 ﻿'use strict';
 
 app.controller('loginController', ['$scope', '$location', 'userData', function ($scope, $location, userData) {
-    //$scope.isDisabledLoginButton = false;
-        console.log(userData);
+    $scope.isDisabledLoginButton = false;
+    console.log(userData);
     if (userData.getLoggedUser()) {
         alert('You are already logged in');
         $location.path("/");

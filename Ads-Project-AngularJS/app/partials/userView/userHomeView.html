@@ -1,11 +1,12 @@
 ﻿<div data-ng-controller="AllAdsController">
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <h1 id="navHeading">Ads Home <a href="#/user/home">USER</a></h1>
+        <h1 id="navHeading">Ads Home </h1>
+        <h4>{{getLoggedUser.username}} <a href="#/logout">Logout</a></h4>
     </nav>
     <div class="container-fluid">
         <!--left-->
-        <aside id="leftAside" class="col-sm-3" data-ng-controller="loginRegisterController">
-            <div data-ng-if="!$scope.isUserLogged()" data-ng-include="'partials/adsViewPartials/loginRegisterView.html'"></div>
+        <aside id="leftAside" class="col-sm-3" data-ng-controller="userController">
+            <div data-ng-if="!$scope.isUserLogged()" data-ng-include="'partials/userView/userNavigationPanelView.html'"></div>
         </aside>
         <!--/left-->
         <!--center-->
