@@ -1,6 +1,7 @@
 /// <reference path="../partials/userView/publishNewAdView.html" />
 /// <reference path="../partials/userView/userHomeView.html" />
 /// <reference path="../partials/adsView partials/loginRegisterView.html" />
+/// <reference path="../partials/userView/userAdsView.html" />
 'use strict';
 
 var app = angular.module('adsApp', ['ngResource', 'ngRoute', 'ngCookies'])
@@ -22,6 +23,9 @@ var app = angular.module('adsApp', ['ngResource', 'ngRoute', 'ngCookies'])
         controller: 'userController'
     }).when('/user/ads/publish', {
         templateUrl: './partials/userView/publishNewAdView.html',
+        controller: 'userController'
+    }).when('/user/ads', {
+        templateUrl: './partials/userView/userAdsView.html',
         controller: 'userController'
     }).otherwise({
         templateUrl: './partials/loginView/loginView.html',

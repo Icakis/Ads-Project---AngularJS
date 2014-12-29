@@ -133,14 +133,23 @@ app.factory('userAdsData', function ($resource, $http, baseUrl, userData) {
 		    }
 		});
 
+    function setHeaders() {
+        console.log(userData.getLoggedUser.access_token);
+        $http.defaults.headers.common['Authorization'] = 'Bearer ' + userData.getLoggedUser().access_token;
+    }
+
     function getAllAds() {
-        setHeaders();
-        return resource.get();
+        return $resource(baseUrl + '/api/ads').get();
     }
 
     function createNewAd(ad) {
         setHeaders();
         return resource.save(ad);
+    }
+
+    function getAllUserAds() {
+        setHeaders();
+        return resource.get();
     }
 
     function getAdById(id) {
@@ -158,14 +167,12 @@ app.factory('userAdsData', function ($resource, $http, baseUrl, userData) {
         return resource.delete({ id: id });
     }
 
-    function setHeaders() {
-        console.log(userData.getLoggedUser.access_token);
-        $http.defaults.headers.common['Authorization'] = 'Bearer ' + userData.getLoggedUser().access_token;
-    }
+
 
     return {
         getAll: getAllAds,
         createNewAd: createNewAd,
+        getAllUserAds: getAllUserAds,
         getById: getAdById,
         edit: editAd,
         delete: deleteAd

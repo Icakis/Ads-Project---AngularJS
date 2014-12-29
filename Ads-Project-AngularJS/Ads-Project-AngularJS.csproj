@@ -73,7 +73,6 @@
     <Content Include="app\js\controllers\mainController.js" />
     <Content Include="app\js\controllers\paginationController.js" />
     <Content Include="app\js\controllers\registerController.js" />
-    <Content Include="app\js\controllers\sortContainer.js" />
     <Content Include="app\js\controllers\userController.js" />
     <Content Include="app\js\derectives\dateFieldDerective.js" />
     <Content Include="app\js\filters\filters.js" />
@@ -2307,8 +2306,10 @@
     <Content Include="app\partials\paginationView.html" />
     <Content Include="app\partials\registerView\registerForm.html" />
     <Content Include="app\partials\registerView\registerView.html" />
+    <Content Include="app\partials\userView\myAdFilterPanel.html" />
     <Content Include="app\partials\userView\publishNewAdForm.html" />
     <Content Include="app\partials\userView\publishNewAdView.html" />
+    <Content Include="app\partials\userView\userAdsView.html" />
     <Content Include="app\partials\userView\userHomeView.html" />
     <Content Include="app\partials\userView\userNavigationPanelView.html" />
     <Content Include="scripts\web-server.js" />

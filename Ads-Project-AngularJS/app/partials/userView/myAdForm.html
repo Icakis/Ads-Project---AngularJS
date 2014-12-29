@@ -1,0 +1,27 @@
+﻿<div class="row" data-useradid="{{ad.id}}">
+    <div class="col-md-9">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="addHedingTitleContainer">
+                    <h2>{{ad.title}}</h2>
+                    <span class="adDateSpan">{{ad.date | date:'d-MMM-yyyy'}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <img data-ng-src="{{ad.imageDataUrl?ad.imageDataUrl:'./img/No_Image_Available.png'}}" class="adImageContainer" />
+            </div>
+            <div class="col-md-8">
+                <p>{{ad.text}}</p>
+                <span>Category:</span><p>{{ad.categoryName}}</p>
+                <span>Town:</span><p>{{ad.townName}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <p>Status:</p>
+        <p>{{ad.status}}</p>
+    </div>
+    <hr data-ng-if="!$last">
+</div>

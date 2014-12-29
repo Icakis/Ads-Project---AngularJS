@@ -3,7 +3,10 @@
 app.controller('userController', ['$scope', '$rootScope', 'adsData', 'userAdsData', function ($scope, $rootScope, adsData, userAdsData) {
     //alert('YEEEEs');
     $scope.newAd = {};
-    $scope.userSection = 'home';
+    if (!$rootScope.userSection) {
+        $rootScope.userSection = 'home';
+    }
+
     adsData.getAllCategories()
         .then(function (categories) {
             if (categories.length > 0) {
@@ -29,11 +32,11 @@ app.controller('userController', ['$scope', '$rootScope', 'adsData', 'userAdsDat
     //$scope.newAd.category = $scope.allCategories[0];
     $scope.isUserSectionSelected = function (selectedA) {
         //console.log(selectedA);
-        return $scope.userSection === selectedA;
+        return $rootScope.userSection === selectedA;
     }
 
     $scope.changeUserSection = function (section) {
-        $scope.userSection = section;
+        $rootScope.userSection = section;
         //console.log($scope.userSection);
         $scope.pagination.startPage = '';
     }
@@ -70,4 +73,27 @@ app.controller('userController', ['$scope', '$rootScope', 'adsData', 'userAdsDat
             console.log(error);
         });
     };
+
+    if (!$rootScope.myAdFilter) {
+        $rootScope.myAdFilter = 'all';
+    }
+
+    //$scope.newAd.category = $scope.allCategories[0];
+    $scope.isThisMyAdFilterSelected = function (selectedA) {
+        //console.log(selectedA);
+        return $rootScope.myAdFilter === selectedA;
+    }
+
+    $scope.changeMyAdFilter = function (section) {
+        $rootScope.myAdFilter = section;
+        //console.log($scope.userSection);
+        $scope.pagination.startPage = '';
+    }
+
+    userAdsData.getAllUserAds().$promise.then(function (allUserAds) {
+        $scope.allUserAds = allUserAds;
+        console.log(allUserAds);
+    }, function (error) {
+        console.log(error);
+    });
 }]);
