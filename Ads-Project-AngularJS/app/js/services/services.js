@@ -125,31 +125,59 @@ app.factory('userData', function ($resource, $http, $cookieStore, $q, baseUrl) {
 
 app.factory('userAdsData', function ($resource, $http, baseUrl, userData) {
 
-    var resource = $resource(baseUrl + '/api/user/ads/:id',
-		{ id: '@id' },
-		{
-		    update: {
-		        method: 'PUT'
-		    }
-		});
+    function generateResourceByUrl(url) {
+        return $resource(url,
+            { id: '@id' },
+            {
+                update: {
+                    method: 'PUT'
+                }
+            });
+    }
+
+    //var resource = $resource(baseUrl + '/api/user/ads/:id',
+    //	{ id: '@id' },
+    //	{
+    //	    update: {
+    //	        method: 'PUT'
+    //	    }
+    //	});
 
     function setHeaders() {
-        console.log(userData.getLoggedUser.access_token);
+        //console.log(userData.getLoggedUser().access_token);
         $http.defaults.headers.common['Authorization'] = 'Bearer ' + userData.getLoggedUser().access_token;
     }
 
     function getAllAds() {
-        return $resource(baseUrl + '/api/ads').get();
+        return generateResourceByUrl(baseUrl + '/api/ads').get();
+        //return $resource(baseUrl + '/api/ads').get();
     }
 
     function createNewAd(ad) {
         setHeaders();
-        return resource.save(ad);
+        return generateResourceByUrl(baseUrl + '/api/user/ads').save(ad);
+        //return resource.save(ad);
     }
 
-    function getAllUserAds() {
+    function getAllUserAds(startPage, pageSize) {
         setHeaders();
-        return resource.get();
+        //return resource.get();
+
+        return $resource(baseUrl + '/api/user/ads?StartPage=:startPage&PageSize=:pageSize',
+        {
+            startPage: startPage,
+            pageSize: pageSize
+        }).get();
+    }
+
+    function deactivateAd(id) {
+        setHeaders();
+        return generateResourceByUrl(baseUrl + '/api/user/ads/deactivate/:id').update({ id: id });
+    }
+
+    function publishAdAgain(id) {
+        setHeaders();
+        return generateResourceByUrl(baseUrl + '/api/user/ads/publishagain/:id').update({ id: id });
     }
 
     function getAdById(id) {
@@ -164,7 +192,8 @@ app.factory('userAdsData', function ($resource, $http, baseUrl, userData) {
 
     function deleteAd(id) {
         setHeaders();
-        return resource.delete({ id: id });
+        return generateResourceByUrl(baseUrl + '/api/user/ads/:id').delete({ id: id });
+        //return resource.delete({ id: id });
     }
 
 
@@ -173,9 +202,11 @@ app.factory('userAdsData', function ($resource, $http, baseUrl, userData) {
         getAll: getAllAds,
         createNewAd: createNewAd,
         getAllUserAds: getAllUserAds,
+        deactivateAd: deactivateAd,
+        publishAdAgain: publishAdAgain,
         getById: getAdById,
         edit: editAd,
-        delete: deleteAd
+        deleteAd: deleteAd
     }
 });
 
@@ -203,5 +234,21 @@ app.factory('adsData', function ($resource, baseUrl) {
         getAllPublishedAdsByFilter: getAllPublishedAdsByFilter,
         getAllCategories: getAllCategories,
         getAllTowns: getAllTowns,
+    };
+});
+
+app.factory('serviceFunctions', function ($resource, baseUrl) {
+
+    function pageNumbersArray(data) {
+        var pageArray = [];
+        for (var i = 0; i < data.numPages; i++) {
+            pageArray[i] = i + 1;
+        }
+
+        return pageArray;
+    }
+
+    return {
+        pageNumbersArray: pageNumbersArray,
     };
 });

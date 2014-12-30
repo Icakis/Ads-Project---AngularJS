@@ -1,4 +1,4 @@
-﻿app.controller('AllAdsController', function ($scope, $route, $http, adsData, userData) {
+﻿app.controller('AllAdsController', function ($scope, $route, $http, adsData, userData, serviceFunctions) {
     //console.log(userData.getLoggedUser().username);
 
     $scope.isUserLogged = function () {
@@ -30,14 +30,10 @@
         adsData.getAllPublishedAdsByFilter($scope.filter.category, $scope.filter.town, $scope.pagination.startPage, $scope.pagination.pageSize)
             .$promise
             .then(function (data) {
-                var pageArray = [];
-                for (var i = 0; i < data.numPages; i++) {
-                    pageArray[i] = i + 1;
-                }
-
-                data.numPages = pageArray;
                 $scope.allAdsData = data;
+                $scope.paginationData = serviceFunctions.pageNumbersArray(data);
                 //console.log(data);
+                console.log($scope.paginationData);
             }, function (error) {
                 $log.error(error);
             });

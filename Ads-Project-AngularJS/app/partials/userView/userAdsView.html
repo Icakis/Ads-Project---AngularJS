@@ -1,4 +1,4 @@
-﻿<div data-ng-controller="AllAdsController">
+﻿<div data-ng-controller="userController">
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
         <h1 id="navHeading">Ads - My Ads </h1>
         <h4>{{getLoggedUser.username}} <a href="#/logout">Logout</a></h4>
@@ -13,6 +13,9 @@
         <!--center-->
         <main class="col-sm-9" id="middleContainer">
             <div data-ng-include="'partials/userView/myAdForm.html'" data-ng-repeat="ad in allUserAds.ads"></div>
+            <!-- paging -->
+            <div data-ng-include="'partials/paginationView.html'"></div>
+            <!-- paging -->
         </main>
         <!--/center-->
     </div>

@@ -3,7 +3,7 @@
 app.controller('registerController', ['$scope', '$location', 'adsData', 'userData', function ($scope, $location, adsData, userData) {
     if (userData.getLoggedUser()) {
         alert('You are logged in. Please logout first.');
-        $location.path("/");
+        $location.path('/user/home');
     }
 
     $scope.newUser = {};

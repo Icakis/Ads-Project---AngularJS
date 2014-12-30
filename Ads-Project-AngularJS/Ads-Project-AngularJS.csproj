@@ -66,6 +66,7 @@
     <Content Include="app\index.html" />
     <Content Include="app\js\app.js" />
     <Content Include="app\js\controllers\allAdsController.js" />
+    <Content Include="app\js\controllers\editAdController.js" />
     <Content Include="app\js\controllers\filterController.js" />
     <Content Include="app\js\controllers\loginController.js" />
     <Content Include="app\js\controllers\loginRegisterController.js" />
@@ -2306,7 +2307,9 @@
     <Content Include="app\partials\paginationView.html" />
     <Content Include="app\partials\registerView\registerForm.html" />
     <Content Include="app\partials\registerView\registerView.html" />
+    <Content Include="app\partials\userView\editAdView.html" />
     <Content Include="app\partials\userView\myAdFilterPanel.html" />
+    <Content Include="app\partials\userView\myAdForm.html" />
     <Content Include="app\partials\userView\publishNewAdForm.html" />
     <Content Include="app\partials\userView\publishNewAdView.html" />
     <Content Include="app\partials\userView\userAdsView.html" />

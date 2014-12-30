@@ -20,13 +20,16 @@ var app = angular.module('adsApp', ['ngResource', 'ngRoute', 'ngCookies'])
         controller: 'logoutController'
     }).when('/user/home', {
         templateUrl: './partials/userView/userHomeView.html',
+        controller: 'AllAdsController'
+    }).when('/user/ads', {
+        templateUrl: './partials/userView/userAdsView.html',
         controller: 'userController'
     }).when('/user/ads/publish', {
         templateUrl: './partials/userView/publishNewAdView.html',
         controller: 'userController'
-    }).when('/user/ads', {
-        templateUrl: './partials/userView/userAdsView.html',
-        controller: 'userController'
+    }).when('/user/ads/edit/:editedAdId*', {
+        templateUrl: './partials/userView/editAdView.html',
+        controller: 'editAdController'
     }).otherwise({
         templateUrl: './partials/loginView/loginView.html',
         controller: 'loginController'

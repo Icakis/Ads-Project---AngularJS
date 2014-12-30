@@ -5,7 +5,7 @@ app.controller('loginController', ['$scope', '$location', 'userData', function (
     console.log(userData);
     if (userData.getLoggedUser()) {
         alert('You are already logged in');
-        $location.path("/");
+        $location.path('/user/home');
     }
 
     $scope.loginData = {};
@@ -15,7 +15,8 @@ app.controller('loginController', ['$scope', '$location', 'userData', function (
             alert('Successfuly logged.');
             console.log('Success in LoginController');
             console.log(response);
-            $scope.isDisabledLoginButton = false;
+            //$scope.isDisabledLoginButton = false;
+            $location.path('/user/home');
 
         }, function (error) {
             console.log('Error in LoginController');

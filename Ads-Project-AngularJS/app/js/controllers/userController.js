@@ -1,8 +1,13 @@
 ﻿'use strict';
 
-app.controller('userController', ['$scope', '$rootScope', 'adsData', 'userAdsData', function ($scope, $rootScope, adsData, userAdsData) {
+app.controller('userController', ['$scope', '$rootScope', 'adsData', 'userAdsData', 'serviceFunctions', function ($scope, $rootScope, adsData, userAdsData, serviceFunctions) {
     //alert('YEEEEs');
     $scope.newAd = {};
+    $scope.pagination = {
+        startPage: 1,
+        pageSize: 1,
+    };
+
     if (!$rootScope.userSection) {
         $rootScope.userSection = 'home';
     }
@@ -87,13 +92,42 @@ app.controller('userController', ['$scope', '$rootScope', 'adsData', 'userAdsDat
     $scope.changeMyAdFilter = function (section) {
         $rootScope.myAdFilter = section;
         //console.log($scope.userSection);
-        $scope.pagination.startPage = '';
+        $scope.pagination.startPage = 1;
     }
 
-    userAdsData.getAllUserAds().$promise.then(function (allUserAds) {
-        $scope.allUserAds = allUserAds;
-        console.log(allUserAds);
-    }, function (error) {
-        console.log(error);
-    });
+    $scope.reloadAllads = function () {
+        userAdsData.getAllUserAds($scope.pagination.startPage, $scope.pagination.pageSize).$promise.then(function (allUserAds) {
+            $scope.allUserAds = allUserAds;
+            $scope.paginationData = serviceFunctions.pageNumbersArray(allUserAds);
+            //console.log($scope.paginationData);
+        }, function (error) {
+            console.log(error);
+        });
+    }
+
+    $scope.reloadAllads();
+
+    $scope.deactivateAd = function (id) {
+        console.log(id);
+        userAdsData.deactivateAd(id)
+            .$promise
+            .then(function (data) {
+                console.log(data);
+                $scope.reloadAllads();
+            }, function (error) {
+                console.log(error);
+            });
+    };
+
+    $scope.publishAdAgain = function (id) {
+        console.log(id);
+        userAdsData.publishAdAgain(id)
+            .$promise
+            .then(function (data) {
+                console.log(data);
+                $scope.reloadAllads();
+            }, function (error) {
+                console.log(error);
+            });
+    };
 }]);
