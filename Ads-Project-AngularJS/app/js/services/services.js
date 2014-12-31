@@ -150,19 +150,15 @@ app.factory('userAdsData', function ($resource, $http, baseUrl, userData) {
 
     function getAllAds() {
         return generateResourceByUrl(baseUrl + '/api/ads').get();
-        //return $resource(baseUrl + '/api/ads').get();
     }
 
     function createNewAd(ad) {
         setHeaders();
         return generateResourceByUrl(baseUrl + '/api/user/ads').save(ad);
-        //return resource.save(ad);
     }
 
     function getAllUserAds(startPage, pageSize) {
         setHeaders();
-        //return resource.get();
-
         return $resource(baseUrl + '/api/user/ads?StartPage=:startPage&PageSize=:pageSize',
         {
             startPage: startPage,
@@ -182,7 +178,7 @@ app.factory('userAdsData', function ($resource, $http, baseUrl, userData) {
 
     function getAdById(id) {
         setHeaders();
-        return resource.get({ id: id });
+        return generateResourceByUrl(baseUrl + '/api/user/ads/:id').get({ id: id });
     }
 
     function editAd(id, ad) {
@@ -204,7 +200,7 @@ app.factory('userAdsData', function ($resource, $http, baseUrl, userData) {
         getAllUserAds: getAllUserAds,
         deactivateAd: deactivateAd,
         publishAdAgain: publishAdAgain,
-        getById: getAdById,
+        getAdById: getAdById,
         edit: editAd,
         deleteAd: deleteAd
     }

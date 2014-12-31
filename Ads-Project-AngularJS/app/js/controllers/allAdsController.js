@@ -1,4 +1,4 @@
-﻿app.controller('AllAdsController', function ($scope, $route, $http, adsData, userData, serviceFunctions) {
+﻿app.controller('AllAdsController', function ($scope, $route, $http, adsData, userData, serviceFunctions, $rootScope) {
     //console.log(userData.getLoggedUser().username);
 
     $scope.isUserLogged = function () {
@@ -16,10 +16,16 @@
         town: ''
     };
 
-    $scope.pagination = {
-        startPage: 1,
-        pageSize: 1,
-    };
+    if (!$rootScope.pagination) {
+        $rootScope.pagination = {
+            startPage: 1,
+            pageSize: 1,
+        };
+    } else {
+        $rootScope.pagination.startPage = 1;
+        console.log($rootScope.pagination.pageSize);
+
+    }
 
     //console.log(adsData);
     $scope.range = function (n) {
@@ -33,7 +39,7 @@
                 $scope.allAdsData = data;
                 $scope.paginationData = serviceFunctions.pageNumbersArray(data);
                 //console.log(data);
-                console.log($scope.paginationData);
+                //console.log($scope.paginationData);
             }, function (error) {
                 $log.error(error);
             });

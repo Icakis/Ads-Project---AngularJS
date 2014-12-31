@@ -1,12 +1,18 @@
 ﻿'use strict';
 
-app.controller('userController', ['$scope', '$rootScope', 'adsData', 'userAdsData', 'serviceFunctions', function ($scope, $rootScope, adsData, userAdsData, serviceFunctions) {
+app.controller('userController', ['$scope', '$rootScope', 'adsData', 'userAdsData', 'serviceFunctions', '$location', function ($scope, $rootScope, adsData, userAdsData, serviceFunctions, $location) {
     //alert('YEEEEs');
     $scope.newAd = {};
-    $scope.pagination = {
-        startPage: 1,
-        pageSize: 1,
-    };
+
+    if (!$rootScope.pagination) {
+        $rootScope.pagination = {
+            startPage: 1,
+            pageSize: 1,
+        };
+    } else {
+        $rootScope.pagination.startPage = 1;
+        console.log($rootScope.pagination.pageSize);
+    }
 
     if (!$rootScope.userSection) {
         $rootScope.userSection = 'home';
@@ -72,11 +78,14 @@ app.controller('userController', ['$scope', '$rootScope', 'adsData', 'userAdsDat
         var sendNewAd = $scope.newAd;
         sendNewAd.categoryId = parseInt(sendNewAd.category.id);
         sendNewAd.townId = parseInt(sendNewAd.town.id);
-        userAdsData.createNewAd(sendNewAd).$promise.then(function (data) {
-            console.log(data);
-        }, function (error) {
-            console.log(error);
-        });
+        userAdsData.createNewAd(sendNewAd)
+            .$promise
+            .then(function (data) {
+                console.log(data);
+                $location.path('/user/ads');
+            }, function (error) {
+                console.log(error);
+            });
     };
 
     if (!$rootScope.myAdFilter) {

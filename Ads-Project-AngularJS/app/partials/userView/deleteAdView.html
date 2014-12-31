@@ -1,25 +1,17 @@
-﻿<div data-ng-controller="userController">
+﻿<div>
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <h1 id="navHeading">Ads - My Ads </h1>
+        <h1 id="navHeading">Ads - Delete Ad </h1>
         <h4>{{getLoggedUser.username}} <a href="#/logout">Logout</a></h4>
     </nav>
     <div class="container-fluid">
         <!--left-->
         <aside id="leftAside" class="col-sm-3" data-ng-controller="userController">
             <div data-ng-if="!$scope.isUserLogged()" data-ng-include="'partials/userView/userNavigationPanelView.html'"></div>
-            <div data-ng-if="!$scope.isUserLogged()" data-ng-include="'partials/userView/myAdFilterPanel.html'"></div>
         </aside>
         <!--/left-->
         <!--center-->
         <main class="col-sm-9" id="middleContainer">
-            <div data-ng-include="'partials/changeAdCountOnPage.html'"></div>
-
-            <div data-ng-include="'partials/userView/myAdForm.html'" data-ng-repeat="ad in allUserAds.ads"></div>
-            
-            <!-- paging -->
-            <div data-ng-include="'partials/paginationView.html'"></div>
-            <!-- paging -->
-     
+            <div data-ng-include="'partials/userView/deleteAdForm.html'"></div>
         </main>
         <!--/center-->
     </div>
