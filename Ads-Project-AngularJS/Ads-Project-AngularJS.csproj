@@ -2313,6 +2313,7 @@
     <Content Include="app\partials\userView\deleteAdForm.html" />
     <Content Include="app\partials\userView\deleteAdView.html" />
     <Content Include="app\partials\userView\editAdView.html" />
+    <Content Include="app\partials\userView\editUserAd.html" />
     <Content Include="app\partials\userView\editUserProfileForms.html" />
     <Content Include="app\partials\userView\editUserProfileView.html" />
     <Content Include="app\partials\userView\myAdFilterPanel.html" />

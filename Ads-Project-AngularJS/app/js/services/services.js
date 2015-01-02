@@ -5,11 +5,11 @@ app.constant('baseUrl', 'http://localhost:1337');
 
 app.factory('userData', function ($resource, $http, $cookieStore, $q, baseUrl) {
     function setHeaders() {
-        console.log(getLoggedUser().access_token);
+        //console.log(getLoggedUser().access_token);
         $http.defaults.headers.common['Authorization'] = 'Bearer ' + getLoggedUser().access_token;
     }
 
-    function request(url, accessToken) {
+    function request(url) {
         //$http.defaults.headers.common['Authorization'] = 'Bearer ' + accessToken;
         setHeaders();
         var resource = $resource(baseUrl + url,
@@ -74,34 +74,24 @@ app.factory('userData', function ($resource, $http, $cookieStore, $q, baseUrl) {
         return $resource(baseUrl + '/api/user/profile').get();
     }
 
-    function editUser(name, email, phoneNumber, townId) {
-        var resource = request('/api/user/profile', getLoggedUser().access_token);
+    function editUser(user) {
+        setHeaders();
+        var resource = request('/api/user/profile');
         var updatedUser = {
-            "username": username,
-            "name": name,
-            "email": email,
-            "phone": phone,
-            "townId": townId
+            "name": user.name,
+            "email": user.email,
+            "phoneNumber": user.phoneNumber,
         };
 
-        resource.update({ id: id }, updatedUser).success(function (user) {
-            var loggedUser = getLoggedUser();
-            var updatedLoggedUser = {
-                "username": user.username,
-                "name": user.name,
-                "email": user.email,
-                "phone": user.phone,
-                "townId": user.townId,
 
-                "access_token": loggedUser.access_token,
-                "token_type": "bearer",
-                "expires_in": parseInt(getLoggedUser().expires_in),
-                ".issued": getLoggedUser()[".issued"],
-                ".expires": getLoggedUser()[".expires"]
-            };
+        if (user.town) {
+            var townIdInteger = parseInt(user.town.id);
+            if (!isNaN(townIdInteger)) {
+                updatedUser.townId = townIdInteger;
+            }
+        }
 
-            setLoggedUser(updatedLoggedUser);
-        });
+        return resource.update(updatedUser);
     }
 
     //function deleteUser(userId) {
@@ -114,8 +104,8 @@ app.factory('userData', function ($resource, $http, $cookieStore, $q, baseUrl) {
 
 
     function changeUserPassword(oldPassword, newPassword, confirmPassword) {
-        var resource = request('/api/user/changePassword', getLoggedUser().access_token);
-        resource.update({
+        setHeaders();
+        return request('/api/user/changePassword').update({
             "oldPassword": oldPassword,
             "newPassword": newPassword,
             "confirmPassword": confirmPassword

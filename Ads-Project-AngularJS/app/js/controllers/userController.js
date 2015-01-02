@@ -102,6 +102,7 @@ app.controller('userController', ['$scope', '$rootScope', 'adsData', 'userAdsDat
         console.log($rootScope.myAdFilter);
         $scope.pagination.startPage = 1;
         $scope.reloadAllads();
+        //$route.reload();
     }
 
     $scope.reloadAllads = function () {

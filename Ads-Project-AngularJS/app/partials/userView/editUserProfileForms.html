@@ -18,7 +18,9 @@
                     </div>
                     <div>
                         <label>Town:</label>
-                        <select data-ng-model="user.townId" data-ng-options="town.name for town in allTowns"></select>
+                        <select data-ng-model="user.town" data-ng-options="town.name for town in allTowns">
+                            <option value="">No Town</option>
+                        </select>
                     </div>
                 </div>
             </div>
@@ -38,15 +40,15 @@
                 <div class="col-md-12">
                     <div>
                         <label for="oldPasswordInput">Old Password:</label>
-                        <input type="text" id="oldPasswordInput" required="required" data-ng-model="password.old" />
+                        <input type="password" id="oldPasswordInput" required="required" data-ng-model="userPasswords.oldPassword" />
                     </div>
                     <div>
                         <label for="newPassWord1">New Password:</label>
-                        <input type="password" id="newPassWord1" name="newPassWord1" required="required" data-ng-model="user.password1" />
+                        <input type="password" id="newPassWord1" name="newPassWord1" required="required" data-ng-model="userPasswords.newPassword" pattern=".{2,100}" title="Password length should be inclusive between 2 and 100." />
                     </div>
                     <div>
                         <label for="newPassWord2">Confirm New Password:</label>
-                        <input type="password" id="newPassWord2" name="newPassWord1" required="required" data-ng-model="user.password2" />
+                        <input type="password" id="newPassWord2" name="newPassWord1" required="required" data-ng-model="userPasswords.confirmPassword" pattern=".{2,100}" title="Password length should be inclusive between 2 and 100." />
                     </div>
                 </div>
             </div>
