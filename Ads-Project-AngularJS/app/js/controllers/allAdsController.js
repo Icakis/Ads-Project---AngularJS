@@ -23,8 +23,7 @@
         };
     } else {
         $rootScope.pagination.startPage = 1;
-        console.log($rootScope.pagination.pageSize);
-
+        //console.log($rootScope.pagination.pageSize);
     }
 
     //console.log(adsData);

@@ -4,9 +4,14 @@
 app.constant('baseUrl', 'http://localhost:1337');
 
 app.factory('userData', function ($resource, $http, $cookieStore, $q, baseUrl) {
-    function request(url, accessToken) {
-        $http.defaults.headers.common['Authorization'] = 'Bearer ' + accessToken;
+    function setHeaders() {
+        console.log(getLoggedUser().access_token);
+        $http.defaults.headers.common['Authorization'] = 'Bearer ' + getLoggedUser().access_token;
+    }
 
+    function request(url, accessToken) {
+        //$http.defaults.headers.common['Authorization'] = 'Bearer ' + accessToken;
+        setHeaders();
         var resource = $resource(baseUrl + url,
             { id: '@id' },
             {
@@ -64,6 +69,11 @@ app.factory('userData', function ($resource, $http, $cookieStore, $q, baseUrl) {
         $cookieStore.remove('loggedUser');
     }
 
+    function getUserProfile() {
+        setHeaders();
+        return $resource(baseUrl + '/api/user/profile').get();
+    }
+
     function editUser(name, email, phoneNumber, townId) {
         var resource = request('/api/user/profile', getLoggedUser().access_token);
         var updatedUser = {
@@ -102,6 +112,7 @@ app.factory('userData', function ($resource, $http, $cookieStore, $q, baseUrl) {
     //    // TODO:
     //}
 
+
     function changeUserPassword(oldPassword, newPassword, confirmPassword) {
         var resource = request('/api/user/changePassword', getLoggedUser().access_token);
         resource.update({
@@ -116,6 +127,7 @@ app.factory('userData', function ($resource, $http, $cookieStore, $q, baseUrl) {
         register: register,
         getLoggedUser: getLoggedUser,
         logout: logout,
+        getUserProfile: getUserProfile,
         editUser: editUser,
         //deleteUser: deleteUser,
         //getUserById: getUserById,
@@ -157,10 +169,11 @@ app.factory('userAdsData', function ($resource, $http, baseUrl, userData) {
         return generateResourceByUrl(baseUrl + '/api/user/ads').save(ad);
     }
 
-    function getAllUserAds(startPage, pageSize) {
+    function getAllUserAds(startPage, pageSize, status) {
         setHeaders();
-        return $resource(baseUrl + '/api/user/ads?StartPage=:startPage&PageSize=:pageSize',
+        return $resource(baseUrl + '/api/user/ads',
         {
+            status: status,
             startPage: startPage,
             pageSize: pageSize
         }).get();

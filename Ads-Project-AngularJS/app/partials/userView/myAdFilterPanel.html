@@ -2,10 +2,11 @@
     <div class="panel-heading">My Ads</div>
     <div class="panel-body">
         <div class="list-group">
-            <a href="" class="list-group-item" ng-class="{active : isThisMyAdFilterSelected('all')}" data-ng-click="changeMyAdFilter('all')">All</a>
-            <a href="" class="list-group-item" ng-class="{active : isThisMyAdFilterSelected('published')}" data-ng-click="changeMyAdFilter('published')">Published</a>
-            <a href="" class="list-group-item" ng-class="{active : isThisMyAdFilterSelected('waitingApproval')}" data-ng-click="changeMyAdFilter('waitingApproval')">Waiting Approval</a>
-            <a href="" class="list-group-item" ng-class="{active : isThisMyAdFilterSelected('inactive')}" data-ng-click="changeMyAdFilter('inactive')">Inactive</a>
+            <a href="" class="list-group-item" ng-class="{active : isThisMyAdFilterSelected('')}" data-ng-click="changeMyAdFilter('')">All</a>
+            <a href="" class="list-group-item" ng-class="{active : isThisMyAdFilterSelected('Published')}" data-ng-click="changeMyAdFilter('Published')">Published</a>
+            <a href="" class="list-group-item" ng-class="{active : isThisMyAdFilterSelected('WaitingApproval')}" data-ng-click="changeMyAdFilter('WaitingApproval')">Waiting Approval</a>
+            <a href="" class="list-group-item" ng-class="{active : isThisMyAdFilterSelected('Inactive')}" data-ng-click="changeMyAdFilter('Inactive')">Inactive</a>
+            <a href="" class="list-group-item" ng-class="{active : isThisMyAdFilterSelected('Rejected')}" data-ng-click="changeMyAdFilter('Rejected')">Rejected</a>
         </div>
     </div>
 </div>

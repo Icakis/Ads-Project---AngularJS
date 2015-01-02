@@ -1,0 +1,34 @@
+﻿<form class="panel panel-default" id="addNewAdForm" name="addNewAdForm" data-ng-submit="editAd()">
+    <div class="panel-heading">Edit User Ad</div>
+    <div class="panel-body row" id="publishNewAdFormInputsContainer">
+        <div class="col-md-12">
+            <div>
+                <label for="titleInput">Title:</label>
+                <input type="text" id="titleInput" required="required" data-ng-model="newAd.title" />
+            </div>
+            <div>
+                <label for="textInput">Text:</label>
+                <input type="text" id="textInput" name="textInput" required="required" data-ng-model="newAd.text" />
+            </div>
+            <div>
+                <input type="text" id="fileTextInput" name="fileTextInput" data-ng-model="newAd.imageDataUrl"  pattern="^data:image/.*$"/>-->
+                <div id="publishAdImagePreviewContainer">
+                    <img data-ng-src="{{newAd.imageDataUrl?newAd.imageDataUrl:'./img/No_Image_Available.png'}}" class="adImageContainer" />
+                </div>
+                <input type="file" id="imageInput" data-ng-model="newAd.imageDataUrl" accept="image/*" onchange="angular.element(this).scope().changeUploadImage(this)" />
+                <input type="button" id="deleteImageInput" data-ng-click="deleteImageDataUrl()" value="Delete Image" />
+            </div>
+            <div>
+                <label>Category:</label>
+                <select data-ng-model="newAd.category" data-ng-options="category.name for category in allCategories"></select>
+                <label>Town:</label>
+                <select data-ng-model="newAd.town" data-ng-options="town.name for town in allTowns"></select>
+            </div>
+        </div>
+
+    </div>
+    <div id="buttonContainer">
+        <input type="submit" class="btn btn-default btn-lg" value="Edit" />
+        <a href="#/user/home" class="btn btn-default btn-lg">Cancel</a>
+    </div>
+</form>

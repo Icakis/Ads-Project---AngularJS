@@ -1,7 +1,6 @@
 ﻿'use strict';
 
 app.controller('userController', ['$scope', '$rootScope', 'adsData', 'userAdsData', 'serviceFunctions', '$location', function ($scope, $rootScope, adsData, userAdsData, serviceFunctions, $location) {
-    //alert('YEEEEs');
     $scope.newAd = {};
 
     if (!$rootScope.pagination) {
@@ -11,7 +10,7 @@ app.controller('userController', ['$scope', '$rootScope', 'adsData', 'userAdsDat
         };
     } else {
         $rootScope.pagination.startPage = 1;
-        console.log($rootScope.pagination.pageSize);
+        //console.log($rootScope.pagination.pageSize);
     }
 
     if (!$rootScope.userSection) {
@@ -89,7 +88,7 @@ app.controller('userController', ['$scope', '$rootScope', 'adsData', 'userAdsDat
     };
 
     if (!$rootScope.myAdFilter) {
-        $rootScope.myAdFilter = 'all';
+        $rootScope.myAdFilter = '';
     }
 
     //$scope.newAd.category = $scope.allCategories[0];
@@ -98,20 +97,24 @@ app.controller('userController', ['$scope', '$rootScope', 'adsData', 'userAdsDat
         return $rootScope.myAdFilter === selectedA;
     }
 
-    $scope.changeMyAdFilter = function (section) {
-        $rootScope.myAdFilter = section;
-        //console.log($scope.userSection);
+    $scope.changeMyAdFilter = function (filter) {
+        $rootScope.myAdFilter = filter;
+        console.log($rootScope.myAdFilter);
         $scope.pagination.startPage = 1;
+        $scope.reloadAllads();
     }
 
     $scope.reloadAllads = function () {
-        userAdsData.getAllUserAds($scope.pagination.startPage, $scope.pagination.pageSize).$promise.then(function (allUserAds) {
-            $scope.allUserAds = allUserAds;
-            $scope.paginationData = serviceFunctions.pageNumbersArray(allUserAds);
-            //console.log($scope.paginationData);
-        }, function (error) {
-            console.log(error);
-        });
+        userAdsData.getAllUserAds($scope.pagination.startPage, $scope.pagination.pageSize, $rootScope.myAdFilter)
+            .$promise
+            .then(function (allUserAds) {
+                $scope.allUserAds = allUserAds;
+                $scope.paginationData = serviceFunctions.pageNumbersArray(allUserAds);
+                //console.log(allUserAds);
+                //console.log($scope.paginationData);
+            }, function (error) {
+                console.log(error);
+            });
     }
 
     $scope.reloadAllads();

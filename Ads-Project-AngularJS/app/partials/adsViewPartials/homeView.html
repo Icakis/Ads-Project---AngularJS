@@ -12,7 +12,7 @@
         <main class="col-sm-6" id="middleContainer">
             <div data-ng-include="'partials/changeAdCountOnPage.html'"></div>
 
-            <div data-ng-include="'partials/adsViewPartials/allAdsView.html'"></div>
+            <div data-ng-include="'partials/adsViewPartials/allAdsView.html'" data-ng-repeat="add in allAdsData.ads"></div>
             <!-- paging -->
             <div data-ng-include="'partials/paginationView.html'"></div>
             <!-- paging -->

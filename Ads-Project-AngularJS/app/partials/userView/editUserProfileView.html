@@ -1,6 +1,6 @@
-﻿<div data-ng-controller="AllAdsController">
+﻿<div>
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <h1 id="navHeading">Ads - Publish New Ad </h1>
+        <h1 id="navHeading">Ads - Edit User Profile </h1>
         <h4>{{getLoggedUser.username}} <a href="#/logout">Logout</a></h4>
     </nav>
     <div class="container-fluid">
@@ -11,8 +11,7 @@
         <!--/left-->
         <!--center-->
         <main class="col-sm-9" id="middleContainer">
-            <p>Edit Ad View</p>
-            <div data-ng-include="'partials/userView/publishNewAdForm.html'"></div>
+            <div data-ng-include="'partials/userView/editUserProfileForms.html'"></div>
         </main>
         <!--/center-->
     </div>

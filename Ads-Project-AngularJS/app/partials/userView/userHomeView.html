@@ -1,4 +1,4 @@
-﻿<div data-ng-controller="AllAdsController">
+﻿<div >
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
         <h1 id="navHeading">Ads Home </h1>
         <h4>{{getLoggedUser.username}} <a href="#/logout">Logout</a></h4>
@@ -12,8 +12,7 @@
         <!--center-->
         <main class="col-sm-6" id="middleContainer">
             <div data-ng-include="'partials/changeAdCountOnPage.html'"></div>
-
-            <div data-ng-include="'partials/adsViewPartials/allAdsView.html'"></div>
+            <div data-ng-include="'partials/adsViewPartials/allAdsView.html'" data-ng-repeat="add in allAdsData.ads"></div>
             <!-- paging -->
             <div data-ng-include="'partials/paginationView.html'"></div>
             <!-- paging -->
