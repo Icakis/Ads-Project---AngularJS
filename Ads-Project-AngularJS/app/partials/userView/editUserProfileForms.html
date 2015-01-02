@@ -13,7 +13,7 @@
                         <input type="email" id="emailInput" name="emailInput" required="required" data-ng-model="user.email" />
                     </div>
                     <div>
-                        <label for="phoneInput">Email:</label>
+                        <label for="phoneInput">Phone:</label>
                         <input type="text" id="phoneInput" name="phoneInput" data-ng-model="user.phoneNumber" />
                     </div>
                     <div>
@@ -26,7 +26,7 @@
             </div>
             <div id="buttonContainer">
                 <input type="submit" class="btn btn-default btn-lg" value="Update" />
-                <a href="#/user/home" class="btn btn-default btn-lg">Cancel</a>
+                <a data-ng-href="#/user/home" class="btn btn-default btn-lg">Cancel</a>
             </div>
         </form>
     </div>

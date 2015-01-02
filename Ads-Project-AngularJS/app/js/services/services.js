@@ -184,9 +184,9 @@ app.factory('userAdsData', function ($resource, $http, baseUrl, userData) {
         return generateResourceByUrl(baseUrl + '/api/user/ads/:id').get({ id: id });
     }
 
-    function editAd(id, ad) {
+    function editAdById(id, ad) {
         setHeaders();
-        return resource.update({ id: id }, ad);
+        return generateResourceByUrl(baseUrl + '/api/user/ads/:id').update({ id: id }, ad);
     }
 
     function deleteAd(id) {
@@ -204,7 +204,7 @@ app.factory('userAdsData', function ($resource, $http, baseUrl, userData) {
         deactivateAd: deactivateAd,
         publishAdAgain: publishAdAgain,
         getAdById: getAdById,
-        edit: editAd,
+        editAdById: editAdById,
         deleteAd: deleteAd
     }
 });

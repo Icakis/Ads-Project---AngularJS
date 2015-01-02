@@ -1,6 +1,6 @@
 ﻿<div data-ng-controller="AllAdsController">
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <h1 id="navHeading">Ads Home <a href="#/user/home">USER</a></h1>
+        <h1 id="navHeading">Ads Home</h1>
     </nav>
     <div class="container-fluid">
         <!--left-->
@@ -13,6 +13,8 @@
             <div data-ng-include="'partials/changeAdCountOnPage.html'"></div>
 
             <div data-ng-include="'partials/adsViewPartials/allAdsView.html'" data-ng-repeat="add in allAdsData.ads"></div>
+
+            <div data-ng-if='allAdsData.ads.length < 1'> No ads found with that filter.</div>
             <!-- paging -->
             <div data-ng-include="'partials/paginationView.html'"></div>
             <!-- paging -->

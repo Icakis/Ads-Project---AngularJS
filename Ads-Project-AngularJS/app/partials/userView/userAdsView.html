@@ -15,6 +15,8 @@
             <div data-ng-include="'partials/changeAdCountOnPage.html'"></div>
 
             <div data-ng-include="'partials/userView/myAdForm.html'" data-ng-repeat="ad in allUserAds.ads"></div>
+
+            <div data-ng-if='allUserAds.ads.length < 1'> No ads found with that filter.</div>
             
             <!-- paging -->
             <div data-ng-include="'partials/paginationView.html'"></div>
