@@ -1,8 +1,10 @@
 ﻿'use strict';
 
-app.controller('userController', ['$scope', '$rootScope', 'adsData', 'userAdsData', 'serviceFunctions', '$location', function ($scope, $rootScope, adsData, userAdsData, serviceFunctions, $location) {
-    $scope.newAd = {};
+app.controller('userController', ['$scope', '$rootScope', 'adsData', 'userAdsData', 'serviceFunctions', '$location', 'userData', function ($scope, $rootScope, adsData, userAdsData, serviceFunctions, $location, userData) {
+    $scope.heading = 'Ads - My Ads';
+    $rootScope.userSection = 'myAds';
 
+    $scope.newAd = {};
     if (!$rootScope.pagination) {
         $rootScope.pagination = {
             startPage: 1,
@@ -11,10 +13,6 @@ app.controller('userController', ['$scope', '$rootScope', 'adsData', 'userAdsDat
     } else {
         $rootScope.pagination.startPage = 1;
         //console.log($rootScope.pagination.pageSize);
-    }
-
-    if (!$rootScope.userSection) {
-        $rootScope.userSection = 'home';
     }
 
     adsData.getAllCategories()
@@ -40,16 +38,6 @@ app.controller('userController', ['$scope', '$rootScope', 'adsData', 'userAdsDat
         });
 
     //$scope.newAd.category = $scope.allCategories[0];
-    $scope.isUserSectionSelected = function (selectedA) {
-        //console.log(selectedA);
-        return $rootScope.userSection === selectedA;
-    }
-
-    $scope.changeUserSection = function (section) {
-        $rootScope.userSection = section;
-        //console.log($scope.userSection);
-        $scope.pagination.startPage = '';
-    }
 
     $scope.changeUploadImage = function (element) {
         console.log(element.value);

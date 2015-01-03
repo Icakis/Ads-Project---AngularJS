@@ -1,1 +1,4 @@
-﻿
+﻿<nav class="navbar navbar-default navbar-fixed-top row" role="navigation">
+    <h1 id="navHeading" class="col-md-11">{{heading}}</h1>
+    <h4 data-ng-if="isUserLogged()" class="col-md-1">{{getLoggedUser.username}} <a data-ng-href="#/logout">Logout</a></h4>
+</nav>

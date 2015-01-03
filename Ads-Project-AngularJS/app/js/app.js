@@ -1,11 +1,10 @@
-/// <reference path="../partials/userView/editUserProfileView.html" />
 'use strict';
 
 var app = angular.module('adsApp', ['ngResource', 'ngRoute', 'ngCookies'])
 .config(function ($routeProvider) {
     $routeProvider.when('/', {
         templateUrl: './partials/adsViewPartials/homeView.html',
-        controller: 'loginRegisterController'
+        controller: 'mainController'
     }).when('/login', {
         templateUrl: './partials/loginView/loginView.html',
         controller: 'loginController'
@@ -23,7 +22,7 @@ var app = angular.module('adsApp', ['ngResource', 'ngRoute', 'ngCookies'])
         controller: 'userController'
     }).when('/user/ads/publish', {
         templateUrl: './partials/userView/publishNewAdView.html',
-        controller: 'userController'
+        controller: 'publishNewAdController'
     }).when('/user/ads/edit/:editedAdId*', {
         templateUrl: './partials/userView/editAdView.html',
         controller: 'editAdController'
@@ -34,7 +33,7 @@ var app = angular.module('adsApp', ['ngResource', 'ngRoute', 'ngCookies'])
         templateUrl: './partials/userView/editUserProfileView.html',
         controller: 'editUserProfileController'
     }).otherwise({
-        templateUrl: './partials/loginView/loginView.html',
-        controller: 'loginController'
+        templateUrl: './partials/adsViewPartials/homeView.html',
+        controller: 'mainController'
     });
 });

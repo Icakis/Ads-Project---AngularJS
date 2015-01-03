@@ -71,12 +71,13 @@
     <Content Include="app\js\controllers\editUserProfileController.js" />
     <Content Include="app\js\controllers\filterController.js" />
     <Content Include="app\js\controllers\loginController.js" />
-    <Content Include="app\js\controllers\loginRegisterController.js" />
     <Content Include="app\js\controllers\logutController.js" />
     <Content Include="app\js\controllers\mainController.js" />
     <Content Include="app\js\controllers\paginationController.js" />
+    <Content Include="app\js\controllers\publishNewAdController.js" />
     <Content Include="app\js\controllers\registerController.js" />
     <Content Include="app\js\controllers\userController.js" />
+    <Content Include="app\js\controllers\userNavigationController.js" />
     <Content Include="app\js\derectives\dateFieldDerective.js" />
     <Content Include="app\js\filters\filters.js" />
     <Content Include="app\js\services\services.js" />

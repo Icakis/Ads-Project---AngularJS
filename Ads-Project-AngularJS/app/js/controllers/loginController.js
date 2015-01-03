@@ -1,6 +1,7 @@
 ﻿'use strict';
 
 app.controller('loginController', ['$scope', '$location', 'userData', function ($scope, $location, userData) {
+    $scope.heading = 'Ads Login';
     $scope.isDisabledLoginButton = false;
     //console.log(userData);
     if (userData.getLoggedUser()) {
@@ -12,9 +13,9 @@ app.controller('loginController', ['$scope', '$location', 'userData', function (
     $scope.login = function () {
         $scope.isDisabledLoginButton = true;
         userData.login($scope.loginData.username, $scope.loginData.password).then(function (response) {
-            alert('Successfuly logged.');
-            console.log('Success in LoginController');
-            console.log(response);
+            //alert('Successfuly logged.');
+            //console.log('Success in LoginController');
+            //console.log(response);
             //$scope.isDisabledLoginButton = false;
             $location.path('/user/home');
 

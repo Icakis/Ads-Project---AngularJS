@@ -27,7 +27,7 @@ app.factory('userData', function ($resource, $http, $cookieStore, $q, baseUrl) {
             "username": username,
             "password": password
         }).$promise.then(function (user) {
-            console.log('Set logged user');
+            //console.log('Set logged user');
             setLoggedUser(user);
             return user.$promise;
         }, function (error) {
@@ -66,7 +66,7 @@ app.factory('userData', function ($resource, $http, $cookieStore, $q, baseUrl) {
     }
 
     function logout() {
-        $cookieStore.remove('loggedUser');
+        return $cookieStore.remove('loggedUser');
     }
 
     function getUserProfile() {
@@ -136,14 +136,6 @@ app.factory('userAdsData', function ($resource, $http, baseUrl, userData) {
                 }
             });
     }
-
-    //var resource = $resource(baseUrl + '/api/user/ads/:id',
-    //	{ id: '@id' },
-    //	{
-    //	    update: {
-    //	        method: 'PUT'
-    //	    }
-    //	});
 
     function setHeaders() {
         //console.log(userData.getLoggedUser().access_token);

@@ -5,6 +5,8 @@ app.controller('deleteAdController', ['$scope', 'userData', '$location', '$route
         $location.path('/user/home');
     }
 
+    $scope.heading = 'Ads - Delete Ad';
+
     //console.log(userAdsData);
     //console.log($routeParams);
     userAdsData.getAdById($routeParams.deleteAdId)

@@ -5,8 +5,9 @@ app.controller('editAdController', ['$scope', 'userData', '$routeParams', 'userA
         $location.path('/user/home');
     }
 
-    console.log($routeParams);
+    $scope.heading = 'Ads - Edit Ad';
 
+    //console.log($routeParams);
     $scope.editedAd = {};
     $scope.editedAd.ChangeImage = false;
 

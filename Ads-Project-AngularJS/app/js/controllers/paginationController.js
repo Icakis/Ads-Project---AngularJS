@@ -8,6 +8,7 @@ app.controller('paginationController', ['$scope', 'userData', function ($scope, 
 
     $scope.changePageSize = function () {
         //console.log($scope.pagination.pageSize);
+        $scope.pagination.startPage = 1;
         $scope.reloadAllads();
     }
 

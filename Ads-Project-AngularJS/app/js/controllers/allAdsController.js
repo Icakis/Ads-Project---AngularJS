@@ -1,15 +1,7 @@
-﻿app.controller('AllAdsController', function ($scope, $route, $http, adsData, userData, serviceFunctions, $rootScope) {
-    //console.log(userData.getLoggedUser().username);
+﻿'use strict';
 
-    $scope.isUserLogged = function () {
-        if (userData.getLoggedUser()) {
-            return true;
-        }
-
-        return false;
-    }
-
-    $scope.getLoggedUser = userData.getLoggedUser();
+app.controller('AllAdsController', function ($scope, $route, $http, adsData, userData, serviceFunctions, $rootScope) {
+    $scope.heading = 'Ads Home';
 
     $scope.filter = {
         category: '',
@@ -26,7 +18,6 @@
         //console.log($rootScope.pagination.pageSize);
     }
 
-    //console.log(adsData);
     $scope.range = function (n) {
         return new Array(n);
     };

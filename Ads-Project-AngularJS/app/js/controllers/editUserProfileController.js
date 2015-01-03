@@ -1,9 +1,12 @@
 ﻿'use strict';
 
-app.controller('editUserProfileController', ['$scope', 'userData', '$location', 'adsData', function ($scope, userData, $location, adsData) {
+app.controller('editUserProfileController', ['$scope', 'userData', '$location', 'adsData', '$rootScope', function ($scope, userData, $location, adsData, $rootScope) {
     if (!userData.getLoggedUser()) {
         $location.path('/user/home');
     }
+
+    $scope.heading = 'Ads - Edit User Profile';
+    $rootScope.userSection = 'editProfile';
 
     $scope.user = {};
     $scope.userPasswords = {};
