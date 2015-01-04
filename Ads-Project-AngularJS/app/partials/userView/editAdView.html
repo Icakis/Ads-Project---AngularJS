@@ -2,7 +2,7 @@
     <div data-ng-include="'partials/headingView.html'"></div>
     <div class="container-fluid">
         <!--left-->
-        <aside id="leftAside" class="col-sm-3" data-ng-controller="userController">
+        <aside id="leftAside" class="col-sm-3" data-ng-controller="userNavigationController">
             <div data-ng-if="!$scope.isUserLogged()" data-ng-include="'partials/userView/userNavigationPanelView.html'"></div>
         </aside>
         <!--/left-->

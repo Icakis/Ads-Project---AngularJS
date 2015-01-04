@@ -1,11 +1,12 @@
 ﻿'use strict';
 
-app.controller('editAdController', ['$scope', 'userData', '$routeParams', 'userAdsData', 'adsData', function ($scope, userData, $routeParams, userAdsData, adsData) {
+app.controller('editAdController', ['$scope', 'userData', '$routeParams', 'userAdsData', 'adsData', '$rootScope', function ($scope, userData, $routeParams, userAdsData, adsData, $rootScope) {
     if (!userData.getLoggedUser()) {
         $location.path('/user/home');
     }
 
     $scope.heading = 'Ads - Edit Ad';
+    $rootScope.userSection = 'myAds';
 
     //console.log($routeParams);
     $scope.editedAd = {};

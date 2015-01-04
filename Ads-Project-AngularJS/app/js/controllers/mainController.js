@@ -21,4 +21,29 @@ app.controller('mainController', ['$scope', '$location', '$rootScope', 'userData
         startPage: 2,
         pageSize: 2,
     };
+
+    $scope.Messages = [];
+    $scope.deleteFirstMessageIfMaxLengthReached = function () {
+        if ($scope.Messages.length > 2) {
+            $scope.Messages.splice(0, 1);
+        }
+    };
+
+    //[{
+    //    type: "Error",
+    //    text: "Hello there!",
+    //    messageClass: 'alert-warning',
+    //    date: new Date()
+    //},
+    //{
+    //    type: "Success",
+    //    text: "Hello there!",
+    //    messageClass: 'alert-success'
+    //}];
+
+    //{
+    //    type: "Error",
+    //    text: "Hello there!",
+    //    messageClass:'alert-success'
+    //}
 }]);

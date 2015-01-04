@@ -1,11 +1,12 @@
 ﻿'use strict';
 
-app.controller('deleteAdController', ['$scope', 'userData', '$location', '$routeParams', 'userAdsData', function ($scope, userData, $location, $routeParams, userAdsData) {
+app.controller('deleteAdController', ['$scope', 'userData', '$location', '$routeParams', 'userAdsData', '$rootScope', function ($scope, userData, $location, $routeParams, userAdsData, $rootScope) {
     if (!userData.getLoggedUser()) {
         $location.path('/user/home');
     }
 
     $scope.heading = 'Ads - Delete Ad';
+    $rootScope.userSection = 'myAds';
 
     //console.log(userAdsData);
     //console.log($routeParams);

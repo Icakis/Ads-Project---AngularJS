@@ -3,18 +3,29 @@
 app.controller('registerController', ['$scope', '$location', 'adsData', 'userData', function ($scope, $location, adsData, userData) {
     $scope.heading = 'Ads Register';
     if (userData.getLoggedUser()) {
-        alert('You are logged in. Please logout first.');
+        //alert('You are logged in. Please logout first.');
+        $scope.deleteFirstMessageIfMaxLengthReached();
+        $scope.Messages.push({
+            type: "Alert",
+            text: "You're logged! If you want to register, please logout first.",
+            messageClass: 'alert-info',
+            date: new Date()
+        });
+
         $location.path('/user/home');
     }
 
     $scope.newUser = {};
     adsData.getAllTowns().then(function (towns) {
         $scope.allTowns = towns;
-        //if (towns.length >= 1) {
-        //    $scope.newUser.town = towns[0];
-        //}
     }, function (error) {
-        console.log(error);
+        //console.log(error);
+        $scope.Messages.push({
+            type: "Warning",
+            text: "Cannot dispalay filter by Towns (Connection lost or something gone wrong).",
+            messageClass: 'alert-info',
+            date: new Date()
+        });
     });
 
 
@@ -26,14 +37,30 @@ app.controller('registerController', ['$scope', '$location', 'adsData', 'userDat
 
         userData.register($scope.newUser.username, $scope.newUser.password1, $scope.newUser.password2, $scope.newUser.name, $scope.newUser.email, $scope.newUser.phone, $scope.newUser.town)
         .then(function (response) {
-            alert('Successfuly register.');
-            console.log(response);
+            //alert('Successfuly register.');
+            //console.log(response);
+            $scope.deleteFirstMessageIfMaxLengthReached();
+            $scope.Messages.push({
+                type: "Success",
+                text: "You're registered!",
+                messageClass: 'alert-success',
+                date: new Date()
+            });
+
             $location.path('/user/home');
         }, function (error) {
-            console.log('Error in LoginController');
+            //console.log('Error in LoginController');
             console.log(error);
+            for (var errorIndex in error.data.modelState) {
+                $scope.deleteFirstMessageIfMaxLengthReached();
+                $scope.Messages.push({
+                    type: "Error",
+                    text: error.data.modelState[errorIndex].join(' / '),
+                    messageClass: 'alert-danger',
+                    date: new Date()
+                });
+            }
         });
     };
-
 }
 ]);

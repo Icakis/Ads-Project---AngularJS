@@ -26,15 +26,17 @@ app.factory('userData', function ($resource, $http, $cookieStore, $q, baseUrl) {
         return $resource(baseUrl + '/api/user/Login').save({
             "username": username,
             "password": password
-        }).$promise.then(function (user) {
-            //console.log('Set logged user');
-            setLoggedUser(user);
-            return user.$promise;
-        }, function (error) {
-            console.log('Error in service');
-            console.log(error);
-            return $q.reject(error);
-        });
+        })
+            .$promise
+            .then(function (user) {
+                //console.log('Set logged user');
+                setLoggedUser(user);
+                return user.$promise;
+            }, function (error) {
+                //console.log('Error in service');
+                //console.log(error);
+                return $q.reject(error);
+            });
     }
 
     function register(username, password, confirmPassword, name, email, phone, townId) {

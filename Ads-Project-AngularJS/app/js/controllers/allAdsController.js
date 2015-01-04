@@ -2,21 +2,12 @@
 
 app.controller('AllAdsController', function ($scope, $route, $http, adsData, userData, serviceFunctions, $rootScope) {
     $scope.heading = 'Ads Home';
+    $scope.pagination.startPage = 1;
 
     $scope.filter = {
         category: '',
         town: ''
     };
-
-    if (!$rootScope.pagination) {
-        $rootScope.pagination = {
-            startPage: 1,
-            pageSize: 1,
-        };
-    } else {
-        $rootScope.pagination.startPage = 1;
-        //console.log($rootScope.pagination.pageSize);
-    }
 
     $scope.range = function (n) {
         return new Array(n);

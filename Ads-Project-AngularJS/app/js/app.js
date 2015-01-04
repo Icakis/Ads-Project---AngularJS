@@ -4,7 +4,7 @@ var app = angular.module('adsApp', ['ngResource', 'ngRoute', 'ngCookies'])
 .config(function ($routeProvider) {
     $routeProvider.when('/', {
         templateUrl: './partials/adsViewPartials/homeView.html',
-        controller: 'mainController'
+        controller: 'AllAdsController'
     }).when('/login', {
         templateUrl: './partials/loginView/loginView.html',
         controller: 'loginController'
@@ -34,6 +34,6 @@ var app = angular.module('adsApp', ['ngResource', 'ngRoute', 'ngCookies'])
         controller: 'editUserProfileController'
     }).otherwise({
         templateUrl: './partials/adsViewPartials/homeView.html',
-        controller: 'mainController'
+        controller: 'AllAdsController'
     });
 });

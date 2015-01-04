@@ -5,15 +5,7 @@ app.controller('userController', ['$scope', '$rootScope', 'adsData', 'userAdsDat
     $rootScope.userSection = 'myAds';
 
     $scope.newAd = {};
-    if (!$rootScope.pagination) {
-        $rootScope.pagination = {
-            startPage: 1,
-            pageSize: 1,
-        };
-    } else {
-        $rootScope.pagination.startPage = 1;
-        //console.log($rootScope.pagination.pageSize);
-    }
+    $scope.pagination.startPage = 1;
 
     adsData.getAllCategories()
         .then(function (categories) {
@@ -36,8 +28,6 @@ app.controller('userController', ['$scope', '$rootScope', 'adsData', 'userAdsDat
         }, function (error) {
             $log.error(error);
         });
-
-    //$scope.newAd.category = $scope.allCategories[0];
 
     $scope.changeUploadImage = function (element) {
         console.log(element.value);
@@ -79,7 +69,6 @@ app.controller('userController', ['$scope', '$rootScope', 'adsData', 'userAdsDat
         $rootScope.myAdFilter = '';
     }
 
-    //$scope.newAd.category = $scope.allCategories[0];
     $scope.isThisMyAdFilterSelected = function (selectedA) {
         //console.log(selectedA);
         return $rootScope.myAdFilter === selectedA;
@@ -87,26 +76,10 @@ app.controller('userController', ['$scope', '$rootScope', 'adsData', 'userAdsDat
 
     $scope.changeMyAdFilter = function (filter) {
         $rootScope.myAdFilter = filter;
-        console.log($rootScope.myAdFilter);
+        //console.log($rootScope.myAdFilter);
         $scope.pagination.startPage = 1;
         $scope.reloadAllads();
-        //$route.reload();
     }
-
-    $scope.reloadAllads = function () {
-        userAdsData.getAllUserAds($scope.pagination.startPage, $scope.pagination.pageSize, $rootScope.myAdFilter)
-            .$promise
-            .then(function (allUserAds) {
-                $scope.allUserAds = allUserAds;
-                $scope.paginationData = serviceFunctions.pageNumbersArray(allUserAds);
-                //console.log(allUserAds);
-                //console.log($scope.paginationData);
-            }, function (error) {
-                console.log(error);
-            });
-    }
-
-    $scope.reloadAllads();
 
     $scope.deactivateAd = function (id) {
         console.log(id);
@@ -131,4 +104,19 @@ app.controller('userController', ['$scope', '$rootScope', 'adsData', 'userAdsDat
                 console.log(error);
             });
     };
+
+    $scope.reloadAllads = function () {
+        userAdsData.getAllUserAds($scope.pagination.startPage, $scope.pagination.pageSize, $rootScope.myAdFilter)
+            .$promise
+            .then(function (allUserAds) {
+                $scope.allUserAds = allUserAds;
+                $scope.paginationData = serviceFunctions.pageNumbersArray(allUserAds);
+                //console.log(allUserAds);
+                //console.log($scope.paginationData);
+            }, function (error) {
+                console.log(error);
+            });
+    }
+
+    $scope.reloadAllads();
 }]);
