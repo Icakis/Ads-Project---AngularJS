@@ -17,6 +17,7 @@ app.controller('editUserProfileController', ['$scope', 'userData', '$location', 
             $scope.user = user;
             //console.log(user);
             adsData.getAllTowns()
+                .$promise
                 .then(function (towns) {
                     if (towns.length > 0 && user.townId) {
                         for (var i = 0; i < towns.length; i++) {

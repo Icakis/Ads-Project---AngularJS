@@ -12,43 +12,48 @@ app.controller('editAdController', ['$scope', 'userData', '$routeParams', 'userA
     $scope.editedAd = {};
     $scope.editedAd.ChangeImage = false;
 
-    userAdsData.getAdById($routeParams.editedAdId).$promise.then(function (data) {
-        //console.log(data);
-        $scope.editedAd = data;
+    userAdsData.getAdById($routeParams.editedAdId)
+        .$promise
+        .then(function (data) {
+            console.log(data);
+            $scope.editedAd = data;
 
-        adsData.getAllCategories()
-         .then(function (categories) {
-             //console.log(categories);
-             for (var i = 0; i < categories.length; i++) {
-                 if (categories[i].id == data.categoryId && categories[i].name == data.categoryName) {
-                     $scope.editedAd.category = categories[i];
-                     break;
+            adsData.getAllCategories()
+                .$promise
+             .then(function (categories) {
+                 //console.log(categories);
+                 for (var categoryIndex in categories) {
+                     if (categories[categoryIndex].id == data.categoryId && categories[categoryIndex].name == data.categoryName) {
+                         //console.log(categories[categoryIndex]);
+                         $scope.editedAd.category = categories[categoryIndex];
+                         break;
+                     }
                  }
-             }
 
-             $scope.allCategories = categories;
-         }, function (error) {
-             $log.error(error);
-         });
+                 $scope.allCategories = categories;
+             }, function (error) {
+                 $log.error(error);
+             });
 
-        adsData.getAllTowns()
-            .then(function (towns) {
-                //console.log(towns);
-                for (var i = 0; i < towns.length; i++) {
-                    if (towns[i].id == data.townId && towns[i].name == data.townName) {
-                        $scope.editedAd.town = towns[i];
-                        break;
+            adsData.getAllTowns()
+                .$promise
+                .then(function (towns) {
+                    for (var townIndex in towns) {
+                        //console.log(towns[townIndex].id);
+                        if (towns[townIndex].id == data.townId && towns[townIndex].name == data.townName) {
+                            $scope.editedAd.town = towns[townIndex];
+                            break;
+                        }
                     }
-                }
 
-                $scope.allTowns = towns;
-            }, function (error) {
-                $log.error(error);
-            });
+                    $scope.allTowns = towns;
+                }, function (error) {
+                    console.log(error);
+                });
 
-    }, function (error) {
-        console.log(error);
-    });
+        }, function (error) {
+            console.log(error);
+        });
 
     $scope.changeUploadImage = function (element) {
         console.log(element.value);
@@ -75,6 +80,14 @@ app.controller('editAdController', ['$scope', 'userData', '$routeParams', 'userA
 
     $scope.editAd = function () {
         console.log($scope.editedAd);
+        if ($scope.editedAd.category) {
+            $scope.editedAd.categoryId = $scope.editedAd.category.id;
+        }
+
+        if ($scope.editedAd.town) {
+            $scope.editedAd.townId = $scope.editedAd.town.id;
+        }
+
         userAdsData.editAdById($routeParams.editedAdId, $scope.editedAd)
             .$promise
             .then(function (data) {

@@ -216,11 +216,11 @@ app.factory('adsData', function ($resource, baseUrl) {
     }
 
     function getAllCategories() {
-        return $resource(baseUrl + '/api/Categories').query().$promise;
+        return $resource(baseUrl + '/api/Categories').query();
     }
 
     function getAllTowns() {
-        return $resource(baseUrl + '/api/Towns').query().$promise;
+        return $resource(baseUrl + '/api/Towns').query();
     }
 
     return {

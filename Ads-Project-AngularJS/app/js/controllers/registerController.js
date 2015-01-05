@@ -16,17 +16,19 @@ app.controller('registerController', ['$scope', '$location', 'adsData', 'userDat
     }
 
     $scope.newUser = {};
-    adsData.getAllTowns().then(function (towns) {
-        $scope.allTowns = towns;
-    }, function (error) {
-        //console.log(error);
-        $scope.Messages.push({
-            type: "Warning",
-            text: "Cannot dispalay filter by Towns (Connection lost or something gone wrong).",
-            messageClass: 'alert-info',
-            date: new Date()
+    adsData.getAllTowns()
+        .$promise
+        .then(function (towns) {
+            $scope.allTowns = towns;
+        }, function (error) {
+            //console.log(error);
+            $scope.Messages.push({
+                type: "Warning",
+                text: "Cannot dispalay filter by Towns (Connection lost or something gone wrong).",
+                messageClass: 'alert-info',
+                date: new Date()
+            });
         });
-    });
 
 
     $scope.register = function () {

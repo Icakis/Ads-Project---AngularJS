@@ -8,6 +8,7 @@ app.controller('userController', ['$scope', '$rootScope', 'adsData', 'userAdsDat
     $scope.pagination.startPage = 1;
 
     adsData.getAllCategories()
+        .$promise
         .then(function (categories) {
             if (categories.length > 0) {
                 $scope.newAd.category = categories[0];
@@ -19,6 +20,7 @@ app.controller('userController', ['$scope', '$rootScope', 'adsData', 'userAdsDat
         });
 
     adsData.getAllTowns()
+        .$promise
         .then(function (towns) {
             if (towns.length > 0) {
                 $scope.newAd.town = towns[0];
