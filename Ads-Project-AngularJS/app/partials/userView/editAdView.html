@@ -8,6 +8,8 @@
         <!--/left-->
         <!--center-->
         <main class="col-sm-9" id="middleContainer">
+            <div id="messagesContainer" data-ng-repeat="message in Messages" data-ng-include="'partials/messageView.html'"></div>
+            
             <div data-ng-include="'partials/userView/editUserAdForm.html'"></div>
         </main>
         <!--/center-->

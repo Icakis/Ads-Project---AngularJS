@@ -29,6 +29,16 @@ app.controller('mainController', ['$scope', '$location', '$rootScope', 'userData
         }
     };
 
+    $scope.removeMessage = function(deleteMessage) {
+        //console.log(deleteMessage);
+        for (var message in $scope.Messages) {
+            if ($scope.Messages[message].$$hashKey === deleteMessage.$$hashKey) {
+                $scope.Messages.splice(message, 1);
+                break;
+            }
+        }
+    };
+
     //[{
     //    type: "Error",
     //    text: "Hello there!",

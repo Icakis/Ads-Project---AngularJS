@@ -13,7 +13,7 @@ app.controller('editAdController', ['$scope', 'userData', '$routeParams', 'userA
     $scope.editedAd.ChangeImage = false;
 
     userAdsData.getAdById($routeParams.editedAdId).$promise.then(function (data) {
-        console.log(data);
+        //console.log(data);
         $scope.editedAd = data;
 
         adsData.getAllCategories()
@@ -33,7 +33,7 @@ app.controller('editAdController', ['$scope', 'userData', '$routeParams', 'userA
 
         adsData.getAllTowns()
             .then(function (towns) {
-                console.log(towns);
+                //console.log(towns);
                 for (var i = 0; i < towns.length; i++) {
                     if (towns[i].id == data.townId && towns[i].name == data.townName) {
                         $scope.editedAd.town = towns[i];
@@ -74,12 +74,27 @@ app.controller('editAdController', ['$scope', 'userData', '$routeParams', 'userA
     };
 
     $scope.editAd = function () {
+        console.log($scope.editedAd);
         userAdsData.editAdById($routeParams.editedAdId, $scope.editedAd)
             .$promise
             .then(function (data) {
-                console.log(data);
+                //console.log(data);
+                $scope.deleteFirstMessageIfMaxLengthReached();
+                $scope.Messages.push({
+                    type: "Success",
+                    text: "Add was successfuly edited.",
+                    messageClass: 'alert-success',
+                    date: new Date()
+                });
             }, function (error) {
                 console.log(error);
+                $scope.deleteFirstMessageIfMaxLengthReached();
+                $scope.Messages.push({
+                    type: "Error",
+                    text: error.data.error_description,
+                    messageClass: 'alert-danger',
+                    date: new Date()
+                });
             });
     };
 }

@@ -58,10 +58,27 @@ app.controller('userController', ['$scope', '$rootScope', 'adsData', 'userAdsDat
         userAdsData.createNewAd(sendNewAd)
             .$promise
             .then(function (data) {
-                console.log(data);
+                //console.log(data);
+                $scope.deleteFirstMessageIfMaxLengthReached();
+                $scope.Messages.push(
+                    {
+                        type: "Success",
+                        text: "Advertisement created and submitted for approval!",
+                        messageClass: 'alert-success',
+                        date: new Date()
+                    }
+                );
                 $location.path('/user/ads');
             }, function (error) {
-                console.log(error);
+                //console.log(error);
+                $scope.deleteFirstMessageIfMaxLengthReached();
+                $scope.Messages.push(
+                {
+                    type: "Error",
+                    text: "Your ad cannot be created (Connection lost or somthing gone wrong). Try again!",
+                    messageClass: 'alert-danger',
+                    date: new Date()
+                });
             });
     };
 
@@ -82,26 +99,59 @@ app.controller('userController', ['$scope', '$rootScope', 'adsData', 'userAdsDat
     }
 
     $scope.deactivateAd = function (id) {
-        console.log(id);
+        //console.log(id);
         userAdsData.deactivateAd(id)
             .$promise
             .then(function (data) {
-                console.log(data);
+                //console.log(data);
+                $scope.deleteFirstMessageIfMaxLengthReached();
+                $scope.Messages.push(
+                    {
+                        type: "Success",
+                        text: "Advertisement deactivated.",
+                        messageClass: 'alert-success',
+                        date: new Date()
+                    }
+                );
                 $scope.reloadAllads();
             }, function (error) {
-                console.log(error);
+                //console.log(error);
+                $scope.deleteFirstMessageIfMaxLengthReached();
+                $scope.Messages.push(
+                {
+                    type: "Error",
+                    text: "Your ad was not deactivated. (Connection lost or somthing gone wrong)!",
+                    messageClass: 'alert-danger',
+                    date: new Date()
+                });
             });
     };
 
     $scope.publishAdAgain = function (id) {
-        console.log(id);
+        //console.log(id);
         userAdsData.publishAdAgain(id)
             .$promise
             .then(function (data) {
-                console.log(data);
+                //console.log(data);
+                $scope.deleteFirstMessageIfMaxLengthReached();
+                $scope.Messages.push(
+                {
+                    type: "Success",
+                    text: "Advertisement submitted for approval!",
+                    messageClass: 'alert-success',
+                    date: new Date()
+                });
                 $scope.reloadAllads();
             }, function (error) {
-                console.log(error);
+                //console.log(error);
+                $scope.deleteFirstMessageIfMaxLengthReached();
+                $scope.Messages.push(
+                {
+                    type: "Error",
+                    text: "Your ad was not publish. (Connection lost or somthing gone wrong)!",
+                    messageClass: 'alert-danger',
+                    date: new Date()
+                });
             });
     };
 
@@ -115,6 +165,14 @@ app.controller('userController', ['$scope', '$rootScope', 'adsData', 'userAdsDat
                 //console.log($scope.paginationData);
             }, function (error) {
                 console.log(error);
+                $scope.deleteFirstMessageIfMaxLengthReached();
+                $scope.Messages.push(
+                {
+                    type: "Error",
+                    text: "Cannot load ads. (Connection lost or somthing gone wrong) Try again!",
+                    messageClass: 'alert-danger',
+                    date: new Date()
+                });
             });
     }
 

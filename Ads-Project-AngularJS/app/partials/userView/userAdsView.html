@@ -9,6 +9,8 @@
         <!--/left-->
         <!--center-->
         <main class="col-sm-9" id="middleContainer">
+            <div id="messagesContainer" data-ng-repeat="message in Messages" data-ng-include="'partials/messageView.html'"></div>
+            
             <div data-ng-include="'partials/changeAdCountOnPage.html'"></div>
 
             <div data-ng-include="'partials/userView/myAdForm.html'" data-ng-repeat="ad in allUserAds.ads"></div>
