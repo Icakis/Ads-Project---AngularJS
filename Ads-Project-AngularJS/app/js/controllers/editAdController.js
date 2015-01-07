@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-app.controller('editAdController', ['$scope', 'userData', '$routeParams', 'userAdsData', 'adsData', '$rootScope', function ($scope, userData, $routeParams, userAdsData, adsData, $rootScope) {
+app.controller('editAdController', ['$scope', 'userData', '$routeParams', 'userAdsData', 'adsData', '$rootScope', 'serviceFunctions', '$location', function ($scope, userData, $routeParams, userAdsData, adsData, $rootScope, serviceFunctions, $location) {
     if (!userData.getLoggedUser()) {
         $location.path('/user/home');
     }
@@ -12,70 +12,50 @@ app.controller('editAdController', ['$scope', 'userData', '$routeParams', 'userA
     $scope.editedAd = {};
     $scope.editedAd.ChangeImage = false;
 
+    adsData.getAllCategories()
+        .$promise
+        .then(function (categories) {
+            $scope.allCategories = categories;
+        }, function (error) {
+            console.log(error);
+        });
+
+    adsData.getAllTowns()
+        .$promise
+        .then(function (towns) {
+            $scope.allTowns = towns;
+        }, function (error) {
+            console.log(error);
+        });
+
     userAdsData.getAdById($routeParams.editedAdId)
         .$promise
         .then(function (data) {
-            console.log(data);
+            //console.log(data);
             $scope.editedAd = data;
-
-            adsData.getAllCategories()
-                .$promise
-             .then(function (categories) {
-                 //console.log(categories);
-                 for (var categoryIndex in categories) {
-                     if (categories[categoryIndex].id == data.categoryId && categories[categoryIndex].name == data.categoryName) {
-                         //console.log(categories[categoryIndex]);
-                         $scope.editedAd.category = categories[categoryIndex];
-                         break;
-                     }
-                 }
-
-                 $scope.allCategories = categories;
-             }, function (error) {
-                 $log.error(error);
-             });
-
-            adsData.getAllTowns()
-                .$promise
-                .then(function (towns) {
-                    for (var townIndex in towns) {
-                        //console.log(towns[townIndex].id);
-                        if (towns[townIndex].id == data.townId && towns[townIndex].name == data.townName) {
-                            $scope.editedAd.town = towns[townIndex];
-                            break;
-                        }
-                    }
-
-                    $scope.allTowns = towns;
-                }, function (error) {
-                    console.log(error);
-                });
 
         }, function (error) {
             console.log(error);
         });
 
-    $scope.changeUploadImage = function (element) {
-        console.log(element.value);
-
-        var photofile = element.files[0];
-        var reader = new FileReader();
-        reader.onload = function (e) {
-            $scope.$apply(function () {
-                var pattern = /^data:image\/.*$/;
-                if (pattern.test(e.target.result)) {
-                    $scope.editedAd.imageDataUrl = e.target.result;
-                    $scope.editedAd.ChangeImage = true;
-                } else {
-                    alert('Invalid Image file type');
-                }
+    $scope.changeUploadImage = function (inputElement) {
+        serviceFunctions.convertImageToBase64(inputElement, $scope.editedAd)
+            .then(function (data) {
+                //console.log(data);
+            }, function (error) {
+                $scope.deleteFirstMessageIfMaxLengthReached();
+                $scope.Messages.push({
+                    type: "Warning",
+                    text: error,
+                    messageClass: 'alert-info',
+                    date: new Date()
+                });
             });
-        };
-        reader.readAsDataURL(photofile);
-    };
+    }
 
     $scope.deleteImageDataUrl = function () {
         $scope.editedAd.imageDataUrl = '';
+        $scope.editedAd.ChangeImage = true;
     };
 
     $scope.editAd = function () {
@@ -99,6 +79,8 @@ app.controller('editAdController', ['$scope', 'userData', '$routeParams', 'userA
                     messageClass: 'alert-success',
                     date: new Date()
                 });
+
+                $location.path('/user/ads');
             }, function (error) {
                 console.log(error);
                 $scope.deleteFirstMessageIfMaxLengthReached();

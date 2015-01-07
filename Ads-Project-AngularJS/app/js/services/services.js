@@ -48,15 +48,17 @@ app.factory('userData', function ($resource, $http, $cookieStore, $q, baseUrl) {
             "email": email,
             "phone": phone,
             "townId": townId
-        }).$promise.then(function (user) {
-            console.log('Set logged user in registration');
-            setLoggedUser(user);
-            return user.$promise;
-        }, function (error) {
-            console.log('Error in register service');
-            console.log(error);
-            return $q.reject(error);
-        });
+        })
+            .$promise
+            .then(function (user) {
+                console.log('Set logged user in registration');
+                setLoggedUser(user);
+                return user.$promise;
+            }, function (error) {
+                console.log('Error in register service');
+                console.log(error);
+                return $q.reject(error);
+            });
     }
 
     function getLoggedUser() {
@@ -230,7 +232,7 @@ app.factory('adsData', function ($resource, baseUrl) {
     };
 });
 
-app.factory('serviceFunctions', function ($resource, baseUrl) {
+app.factory('serviceFunctions', function ($resource, baseUrl, $q) {
 
     function pageNumbersArray(data) {
         var pageArray = [];
@@ -241,7 +243,27 @@ app.factory('serviceFunctions', function ($resource, baseUrl) {
         return pageArray;
     }
 
+    function convertImageToBase64(inputTypeFileElement, containingImageDataObject) {
+        var deferred = $q.defer();
+        var photofile = inputTypeFileElement.files[0];
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            var pattern = /^data:image\/.*$/;
+            if (pattern.test(e.target.result)) {
+                containingImageDataObject.imageDataUrl = e.target.result;
+                containingImageDataObject.ChangeImage = true;
+                deferred.resolve(containingImageDataObject);
+            } else {
+                deferred.reject('Invalid image file type');
+            }
+        };
+        reader.readAsDataURL(photofile);
+
+        return deferred.promise;
+
+    }
     return {
         pageNumbersArray: pageNumbersArray,
+        convertImageToBase64: convertImageToBase64,
     };
 });

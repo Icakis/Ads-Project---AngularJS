@@ -15,13 +15,13 @@ app.controller('registerController', ['$scope', '$location', 'adsData', 'userDat
         $location.path('/user/home');
     }
 
-    $scope.newUser = {};
+    $scope.newUser = { townId: null };
     adsData.getAllTowns()
         .$promise
         .then(function (towns) {
             $scope.allTowns = towns;
         }, function (error) {
-            //console.log(error);
+            console.log(error);
             $scope.Messages.push({
                 type: "Warning",
                 text: "Cannot dispalay filter by Towns (Connection lost or something gone wrong).",

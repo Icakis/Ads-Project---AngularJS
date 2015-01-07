@@ -4,7 +4,7 @@ app.controller('mainController', ['$scope', '$location', '$rootScope', 'userData
     if (!userData.getLoggedUser()) {
         $location.path('/');
     } else {
-        $scope.getLoggedUser = userData.getLoggedUser();
+        $scope.getLoggedUsername = userData.getLoggedUser().username;
     }
 
     $scope.heading = 'Ads Home';
@@ -29,7 +29,7 @@ app.controller('mainController', ['$scope', '$location', '$rootScope', 'userData
         }
     };
 
-    $scope.removeMessage = function(deleteMessage) {
+    $scope.removeMessage = function (deleteMessage) {
         //console.log(deleteMessage);
         for (var message in $scope.Messages) {
             if ($scope.Messages[message].$$hashKey === deleteMessage.$$hashKey) {
@@ -56,4 +56,10 @@ app.controller('mainController', ['$scope', '$location', '$rootScope', 'userData
     //    text: "Hello there!",
     //    messageClass:'alert-success'
     //}
+
+    $scope.isShown = {
+        isAllAdsShown: false,
+        isAllTownsShown: false,
+        isAllCategoriesShown: false,
+    };
 }]);

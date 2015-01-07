@@ -13,6 +13,8 @@
 
             <div data-ng-include="'partials/changeAdCountOnPage.html'"></div>
 
+            <img data-ng-src="./img/LoadingWheel.gif" data-ng-hide="isShown.isAllAdsShown" />
+
             <div data-ng-include="'partials/adsViewPartials/allAdsView.html'" data-ng-repeat="add in allAdsData.ads"></div>
 
             <div data-ng-if='allAdsData.ads.length < 1'> No ads found with that filter.</div>

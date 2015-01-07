@@ -19,14 +19,18 @@
                 <input type="button" id="deleteImageInput" data-ng-click="deleteImageDataUrl()" value="Delete Image" />
             </div>
             <div>
-                <label>Category:</label>
-                <select data-ng-model="editedAd.category" data-ng-options="category.name for category in allCategories">
-                    <option value="">No Category</option>
-                </select>
-                <label>Town:</label>
-                <select data-ng-model="editedAd.town" data-ng-options="town.name for town in allTowns">
-                    <option value="">No Town</option>
-                </select>
+                <p>
+                    <label>Category:</label>
+                    <select data-ng-model="editedAd.categoryId" data-ng-options="category.id as category.name for category in allCategories ">
+                        <option value="">No Category</option>
+                    </select>
+                </p>
+                <p>
+                    <label>Town:</label>
+                    <select data-ng-model="editedAd.townId" data-ng-options="town.id as town.name for town in allTowns ">
+                        <option value="">No Town</option>
+                    </select>
+                </p>
             </div>
         </div>
 

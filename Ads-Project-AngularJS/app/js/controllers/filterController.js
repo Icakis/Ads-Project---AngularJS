@@ -1,18 +1,39 @@
 ﻿app.controller('FilterController', function ($scope, $route, $rootScope, adsData) {
+    $scope.isShown.isAllCategoriesShown = false;
+    $scope.isShown.isAllTownsShown = false;
+
     adsData.getAllCategories()
         .$promise
         .then(function (categories) {
             $scope.allCategories = categories;
+            $scope.isShown.isAllCategoriesShown = true;
         }, function (error) {
-            $log.error(error);
+            $scope.isShown.isAllCategoriesShown = true;
+            $scope.deleteFirstMessageIfMaxLengthReached();
+            $scope.Messages.push({
+                type: "Warning!",
+                text: 'Cannot get Category filter (connection lost or somthing gone wrong). Try again...',
+                messageClass: 'alert-warning',
+                date: new Date()
+            });
+            //console.log(error);
         });
 
     adsData.getAllTowns()
         .$promise
         .then(function (towns) {
             $scope.allTowns = towns;
+            $scope.isShown.isAllTownsShown = true;
         }, function (error) {
-            $log.error(error);
+            $scope.deleteFirstMessageIfMaxLengthReached();
+            $scope.Messages.push({
+                type: "Warning!",
+                text: 'Cannot get Town filter (connection lost or somthing gone wrong). Try again...',
+                messageClass: 'alert-warning',
+                date: new Date()
+            });
+            $scope.isShown.isAllTownsShown = true;
+            //console.log(error);
         });
 
     $scope.isSelectedCategory = function (category) {

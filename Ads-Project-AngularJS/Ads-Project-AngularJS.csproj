@@ -60,6 +60,8 @@
     <Content Include="app\css\bootstrap.min.css" />
     <Content Include="app\css\myStyles.css" />
     <Content Include="app\css\styles.css" />
+    <Content Include="app\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="app\img\LoadingWheel.gif" />
     <Content Include="app\img\No_Image_Available.png" />
     <Content Include="app\index-async.html" />
     <Content Include="app\index-seed.html" />
@@ -2561,6 +2563,9 @@
     <Content Include="app\lib\bootstrap-3.3.1-dist\dist\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="app\lib\bootstrap-3.3.1-dist\dist\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="server.sh" />
+    <Content Include="app\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="app\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="app\fonts\glyphicons-halflings-regular.woff" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>
