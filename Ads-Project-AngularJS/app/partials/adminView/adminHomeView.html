@@ -12,6 +12,8 @@
             <div id="messagesContainer" data-ng-repeat="message in Messages" data-ng-include="'partials/messageView.html'"></div>
 
             <div data-ng-include="'partials/changeAdCountOnPage.html'"></div>
+            <div data-ng-include="'partials/adminView/sortByView.html'"></div>
+
             <div data-ng-include="'partials/adminView/adminAdForm.html'" data-ng-repeat="ad in allFilteredAdsData.ads"></div>
 
             <div data-ng-if='allFilteredAdsData.ads.length < 1'> No ads found with that filter.</div>

@@ -1,1 +1,12 @@
-﻿
+﻿<div>
+    <label for="pageSize">Sort by:</label>
+    <select id="pageSize" data-ng-model="sortBy" data-ng-change="changeSortCreteria(sortBy)">
+        <option value="">No Sort</option>
+        <option value="Title">Title ascending &#9660;</option>
+        <option value="-Title">Title descending &#9650;</option>
+        <option value="Owner.Name">Owner Name ascending &#9660;</option>
+        <option value="-Owner.Name">Owner Name descending &#9650;</option>
+        <option value="Date">Date ascending &#9660;</option>
+        <option value="-Date">Date descending &#9650;</option>
+    </select>
+</div>

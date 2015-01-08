@@ -32,7 +32,7 @@ var app = angular.module('adsApp', ['ngResource', 'ngRoute', 'ngCookies', 'chief
     }).when('/user/profile', {
         templateUrl: './partials/userView/editUserProfileView.html',
         controller: 'editUserProfileController'
-    }).when('/admin/ads', {
+    }).when('/admin/home', {
         templateUrl: './partials/adminView/adminHomeView.html',
         controller: 'adminAllAdsController',
         //resolve: { isLoggedAdmin: isLoggedAdmin }
@@ -44,15 +44,19 @@ var app = angular.module('adsApp', ['ngResource', 'ngRoute', 'ngCookies', 'chief
         templateUrl: './partials/adminView/adminEditAdView.html',
         controller: 'adminEditAdController',
         //resolve: { isLoggedAdmin: isLoggedAdmin }
-    }).when('/admin/users', {
+    }).when('/admin/users/list', {
         templateUrl: './partials/adminView/adminUsersView.html',
         controller: 'adminUsersController',
         //resolve: { isLoggedAdmin: isLoggedAdmin }
-    }).when('/admin/categories', {
+    }).when('/admin/users/edit/:userId', {
+        templateUrl: './partials/adminView/adminEditUserView.html',
+        controller: 'adminEditUserController'
+        //resolve: { isLoggedAdmin: isLoggedAdmin }
+    }).when('/admin/categories/list', {
         templateUrl: './partials/adminView/adminCategoriesView.html',
         controller: 'adminCategoriesController',
         //resolve: { isLoggedAdmin: isLoggedAdmin }
-    }).when('/admin/towns', {
+    }).when('/admin/towns/list', {
         templateUrl: './partials/adminView/adminTownsView.html',
         controller: 'adminTownsController',
         //resolve: { isLoggedAdmin: isLoggedAdmin }

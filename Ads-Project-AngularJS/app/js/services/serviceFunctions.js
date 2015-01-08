@@ -57,6 +57,6 @@ app.factory('serviceFunctions', function ($resource, baseUrl, $q) {
     return {
         pageNumbersArray: pageNumbersArray,
         convertImageToBase64: convertImageToBase64,
-        messageServerErrors: messageServerErrors
+        messageServerErrors: messageServerErrors,
     };
 });

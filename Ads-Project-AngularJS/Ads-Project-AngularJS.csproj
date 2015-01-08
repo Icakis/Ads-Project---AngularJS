@@ -69,6 +69,8 @@
     <Content Include="app\js\controllers\adminControllers\adminCategoriesController.js" />
     <Content Include="app\js\controllers\adminControllers\adminDeleteAdController.js" />
     <Content Include="app\js\controllers\adminControllers\adminEditAdController.js" />
+    <Content Include="app\js\controllers\adminControllers\adminEditUserController.js" />
+    <Content Include="app\partials\adminView\adminEditUserView.html" />
     <Content Include="app\js\controllers\adminControllers\adminNavigationController.js" />
     <Content Include="app\js\controllers\adminControllers\adminTownsController.js" />
     <Content Include="app\js\controllers\adminControllers\adminUsersController.js" />

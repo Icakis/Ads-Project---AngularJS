@@ -14,6 +14,8 @@ app.controller('adminAllAdsController', function ($scope, $route, $http, adsData
         town: ''
     };
 
+    $scope.sortBy = '';
+
     if (!$rootScope.myAdFilter) {
         $rootScope.myAdFilter = '';
     }
@@ -31,12 +33,17 @@ app.controller('adminAllAdsController', function ($scope, $route, $http, adsData
         $scope.reloadAllads();
     }
 
+    $scope.changeSortCreteria = function (sortBy) {
+        $scope.sortBy = sortBy;
+        $scope.reloadAllads();
+    };
+
     $scope.range = function (n) {
         return new Array(n);
     };
 
     $scope.reloadAllads = function () {
-        adminAdsDataServices.getAllAdsByFilter($scope.filter.category, $scope.filter.town, $rootScope.myAdFilter, $scope.pagination.startPage, $scope.pagination.pageSize)
+        adminAdsDataServices.getAllAdsByFilter($scope.filter.category, $scope.filter.town, $rootScope.myAdFilter, $scope.pagination.startPage, $scope.pagination.pageSize, $scope.sortBy)
             .$promise
             .then(function (data) {
                 $scope.allFilteredAdsData = data;

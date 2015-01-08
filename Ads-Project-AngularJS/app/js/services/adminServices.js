@@ -49,9 +49,38 @@ app.factory('adminServices', function ($resource, $http, $cookieStore, $q, baseU
         }).get();
     }
 
+    function editUserByUsername(editedUser) {
+        setHeaders();
+        console.log(editedUser);
+        var resource = request('/api/admin/User/:username');
+        var updatedUser = {
+            "name": editedUser.name,
+            "email": editedUser.email,
+            "phoneNumber": editedUser.phoneNumber,
+            "username": editedUser.username,
+        };
 
 
+        if (user.townId) {
+            var townIdInteger = parseInt(user.townId);
+            if (!isNaN(townIdInteger)) {
+                updatedUser.townId = townIdInteger;
+            } else {
+                return reject('Invalid town.');
+            }
+        }
 
+        return resource.update(updatedUser);
+    }
+
+    function getUserById(username) {
+        setHeaders();
+        console.log(username);
+        return $resource(baseUrl + '/api/admin/User/:username',
+        {
+            username: username,
+        }).get();
+    }
 
 
 
@@ -169,9 +198,9 @@ app.factory('adminServices', function ($resource, $http, $cookieStore, $q, baseU
         getAllUsersSortedBy: getAllUsersSortedBy,
         getAllCategoriesSortedBy: getAllCategoriesSortedBy,
         getAllTownsSortedBy: getAllTownsSortedBy,
+        editUserByUsername: editUserByUsername,
 
-
-
+        getUserById: getUserById,
 
 
         login: login,

@@ -1,0 +1,16 @@
+﻿<div>
+    <div data-ng-include="'partials/headingView.html'"></div>
+    <div class="container-fluid">
+        <!--left-->
+        <aside id="leftAside" class="col-sm-3" data-ng-controller="adminNavigationController">
+            <div data-ng-include="'partials/adminView/adminNavigationPanelView.html'"></div>
+        </aside>
+        <!--/left-->
+        <!--center-->
+        <main class="col-sm-9" id="middleContainer" data-ng-controller="paginationController">
+            <div id="messagesContainer" data-ng-repeat="message in Messages" data-ng-include="'partials/messageView.html'"></div>
+            <div data-ng-include="'partials/userView/editUserProfileForms.html'"></div>
+        </main>
+        <!--/center-->
+    </div>
+</div>

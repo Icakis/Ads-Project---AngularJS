@@ -23,10 +23,10 @@ app.controller('mainController', ['$scope', '$location', '$rootScope', 'userData
         if ($scope.isUserLogged()) {
             if (userData.getLoggedUser().isAdmin === 'true') {
                 deferred.resolve();
-                $location.path('/admin/ads');
+                $location.path('/admin/home');
             } else {
                 deferred.reject();
-                $location.path('/user/home');
+                //$location.path('/user/home');
             }
 
             $scope.getLoggedUsername = userData.getLoggedUser().username;
@@ -38,6 +38,16 @@ app.controller('mainController', ['$scope', '$location', '$rootScope', 'userData
     }
 
     $scope.isLoggedAdmin();
+
+    $scope.isAdmin = function () {
+        if ($scope.isUserLogged()) {
+            if (userData.getLoggedUser().isAdmin === 'true') {
+                return true;
+            }
+        };
+
+        return false;
+    }
 
     $rootScope.userSection = 'home';
     $rootScope.adminSection = 'home-admin';
