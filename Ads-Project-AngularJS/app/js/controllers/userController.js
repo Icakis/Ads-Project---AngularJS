@@ -3,7 +3,7 @@
 app.controller('userController', ['$scope', '$rootScope', 'adsData', 'userAdsData', 'serviceFunctions', '$location', 'userData', function ($scope, $rootScope, adsData, userAdsData, serviceFunctions, $location, userData) {
     $scope.heading = 'Ads - My Ads';
     $rootScope.userSection = 'myAds';
-
+    $scope.isLoggedAdmin();
     $scope.newAd = {};
     $scope.pagination.startPage = 1;
 

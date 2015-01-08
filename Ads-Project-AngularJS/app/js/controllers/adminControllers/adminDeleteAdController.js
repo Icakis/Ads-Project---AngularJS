@@ -1,16 +1,18 @@
 ﻿'use strict';
 
-app.controller('deleteAdController', ['$scope', 'userData', '$location', '$routeParams', 'userAdsData', '$rootScope', function ($scope, userData, $location, $routeParams, userAdsData, $rootScope) {
-    if (!userData.getLoggedUser()) {
-        $location.path('/user/home');
-    }
+app.controller('adminDeleteAdController', ['$scope', 'userData', '$location', '$routeParams', 'adminAdsDataServices', '$rootScope', function ($scope, userData, $location, $routeParams, adminAdsDataServices, $rootScope) {
+    //if (!userData.getLoggedUser()) {
+    //    $location.path('/user/home');
+    //}
 
-    $scope.heading = 'Ads - Delete Ad';
-    $rootScope.userSection = 'myAds';
+    //$scope.isLoggedAdmin();
+
+    $scope.heading = 'Ads Administration - Delete Ad';
+    $rootScope.userSection = '';
 
     //console.log(userAdsData);
     //console.log($routeParams);
-    userAdsData.getAdById($routeParams.deleteAdId)
+    adminAdsDataServices.getAdById($routeParams.deleteAdId)
         .$promise
         .then(function (data) {
             //console.log(data);
@@ -18,7 +20,7 @@ app.controller('deleteAdController', ['$scope', 'userData', '$location', '$route
         }, function (error) {
             $scope.deleteFirstMessageIfMaxLengthReached();
             $scope.Messages.push({
-                type: "Error",
+                type: "Error! ",
                 text: "Cannot get ad for Delete",
                 messageClass: 'alert-danger',
                 date: new Date()
@@ -29,13 +31,13 @@ app.controller('deleteAdController', ['$scope', 'userData', '$location', '$route
     $scope.deleteAd = function () {
         if ($scope.ad) {
             //console.log($routeParams.deleteAdId);
-            userAdsData.deleteAd($routeParams.deleteAdId)
+            adminAdsDataServices.deleteAdById($routeParams.deleteAdId)
                 .$promise
                 .then(function (data) {
                     //console.log(data);
                     $scope.deleteFirstMessageIfMaxLengthReached();
                     $scope.Messages.push({
-                        type: "Success",
+                        type: "Success! ",
                         text: "Add was successfuly deleted.",
                         messageClass: 'alert-success',
                         date: new Date()
@@ -45,7 +47,7 @@ app.controller('deleteAdController', ['$scope', 'userData', '$location', '$route
                     //console.log(error);
                     $scope.deleteFirstMessageIfMaxLengthReached();
                     $scope.Messages.push({
-                        type: "Error",
+                        type: "Error! ",
                         text: "Cannot delete the ad (Connection lost or somthing gone wrong)",
                         messageClass: 'alert-danger',
                         date: new Date()
@@ -54,7 +56,7 @@ app.controller('deleteAdController', ['$scope', 'userData', '$location', '$route
         } else {
             $scope.deleteFirstMessageIfMaxLengthReached();
             $scope.Messages.push({
-                type: "Error",
+                type: "Error! ",
                 text: "Cannot delete the ad (Connection lost or somthing gone wrong)",
                 messageClass: 'alert-danger',
                 date: new Date()

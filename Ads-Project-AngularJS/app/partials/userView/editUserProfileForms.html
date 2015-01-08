@@ -17,8 +17,12 @@
                         <input type="text" id="phoneInput" name="phoneInput" data-ng-model="user.phoneNumber" />
                     </div>
                     <div>
-                        <label>Town:</label>
+                        <!--<label>Town:</label>
                         <select data-ng-model="user.town" data-ng-options="town.name for town in allTowns">
+                            <option value="">No Town</option>
+                        </select>-->
+                        <label>Town:</label>
+                        <select data-ng-model="user.townId" data-ng-options="town.id as town.name for town in allTowns ">
                             <option value="">No Town</option>
                         </select>
                     </div>
@@ -31,7 +35,7 @@
         </form>
     </div>
     <div class="col-md-1">
-        
+
     </div>
     <div class="col-md-5">
         <form class="panel panel-default" id="addNewAdForm" name="addNewAdForm" data-ng-submit="changeUserPassword()">

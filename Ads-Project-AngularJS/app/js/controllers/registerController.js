@@ -1,9 +1,8 @@
 ﻿'use strict';
 
-app.controller('registerController', ['$scope', '$location', 'adsData', 'userData', function ($scope, $location, adsData, userData) {
+app.controller('registerController', ['$scope', '$location', 'adsData', 'userData', 'serviceFunctions', function ($scope, $location, adsData, userData, serviceFunctions) {
     $scope.heading = 'Ads Register';
     if (userData.getLoggedUser()) {
-        //alert('You are logged in. Please logout first.');
         $scope.deleteFirstMessageIfMaxLengthReached();
         $scope.Messages.push({
             type: "Alert",
@@ -32,37 +31,28 @@ app.controller('registerController', ['$scope', '$location', 'adsData', 'userDat
 
 
     $scope.register = function () {
-        //username, password, confirmPassword, name, email, phone, townId
-        if ($scope.newUser.town) {
-            $scope.newUser.town = parseInt($scope.newUser.town);
-        }
-
         userData.register($scope.newUser.username, $scope.newUser.password1, $scope.newUser.password2, $scope.newUser.name, $scope.newUser.email, $scope.newUser.phone, $scope.newUser.town)
-        .then(function (response) {
-            //alert('Successfuly register.');
-            //console.log(response);
-            $scope.deleteFirstMessageIfMaxLengthReached();
-            $scope.Messages.push({
-                type: "Success",
-                text: "You're registered!",
-                messageClass: 'alert-success',
-                date: new Date()
-            });
-
-            $location.path('/user/home');
-        }, function (error) {
-            //console.log('Error in LoginController');
-            console.log(error);
-            for (var errorIndex in error.data.modelState) {
+            .then(function (response) {
+                //console.log(response);
                 $scope.deleteFirstMessageIfMaxLengthReached();
                 $scope.Messages.push({
-                    type: "Error",
-                    text: error.data.modelState[errorIndex].join(' / '),
+                    type: "Success",
+                    text: "You're registered!",
+                    messageClass: 'alert-success',
+                    date: new Date()
+                });
+                $location.path('/user/home');
+            }, function (error) {
+                //console.log(error);
+                var messageText = serviceFunctions.messageServerErrors('Uneble to cahnge your password ', error.data);
+                $scope.deleteFirstMessageIfMaxLengthReached();
+                $scope.Messages.push({
+                    type: "Error!",
+                    text: messageText,
                     messageClass: 'alert-danger',
                     date: new Date()
                 });
-            }
-        });
+            });
     };
 }
 ]);

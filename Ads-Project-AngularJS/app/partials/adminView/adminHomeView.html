@@ -1,0 +1,32 @@
+﻿<div>
+    <div data-ng-include="'partials/headingView.html'"></div>
+    <div class="container-fluid">
+        <!--left-->
+        <aside id="leftAside" class="col-sm-3" data-ng-controller="adminNavigationController">
+            <div data-ng-include="'partials/adminView/adminNavigationPanelView.html'"></div>
+            <div data-ng-include="'partials/userView/myAdFilterPanel.html'"></div>
+        </aside>
+        <!--/left-->
+        <!--center-->
+        <main class="col-sm-6" id="middleContainer">
+            <div id="messagesContainer" data-ng-repeat="message in Messages" data-ng-include="'partials/messageView.html'"></div>
+
+            <div data-ng-include="'partials/changeAdCountOnPage.html'"></div>
+            <div data-ng-include="'partials/adminView/adminAdForm.html'" data-ng-repeat="ad in allFilteredAdsData.ads"></div>
+
+            <div data-ng-if='allFilteredAdsData.ads.length < 1'> No ads found with that filter.</div>
+
+            <!-- paging -->
+            <div data-ng-include="'partials/paginationView.html'"></div>
+            <!-- paging -->
+        </main>
+        <!--/center-->
+        <!--right-->
+        <aside class="col-sm-3" data-ng-controller="FilterController">
+            <div data-ng-include="'partials/filterView.html'"></div>
+        </aside>
+        <!--/right-->
+        <hr>
+    </div>
+    <!--/container-fluid-->
+</div>

@@ -1,6 +1,6 @@
 ﻿<div class="alert" data-ng-class="message.messageClass">
     <a data-ng-href="" class="close" data-dismiss="alert" data-ng-click="removeMessage(message)">&times;</a>
-    <strong>{{message.type}}</strong> {{message.text}}.
-    <span>Date: {{message.date | date:'HH:mm:ss dd-MMM-yyyy'}}</span>
+    <strong>{{message.type}}</strong><span ng-bind-html="message.text"></span>
+    <time>Date: {{message.date | date:'HH:mm:ss dd-MMM-yyyy'}}</time>
 </div>
 

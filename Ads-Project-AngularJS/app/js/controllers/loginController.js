@@ -1,11 +1,9 @@
 ﻿'use strict';
 
-app.controller('loginController', ['$scope', '$location', 'userData', function ($scope, $location, userData) {
+app.controller('loginController', ['$scope', '$location', 'userData', 'serviceFunctions', function ($scope, $location, userData, serviceFunctions) {
     $scope.heading = 'Ads Login';
     $scope.isDisabledLoginButton = false;
-    //console.log(userData);
     if (userData.getLoggedUser()) {
-        //alert('You are already logged in');
         $scope.deleteFirstMessageIfMaxLengthReached();
         $scope.Messages.push({
             type: "Alert",
@@ -21,11 +19,7 @@ app.controller('loginController', ['$scope', '$location', 'userData', function (
     $scope.login = function () {
         $scope.isDisabledLoginButton = true;
         userData.login($scope.loginData.username, $scope.loginData.password).then(function (response) {
-            //alert('Successfuly logged.');
-            //console.log('Success in LoginController');
-            //console.log(response);
-            //$scope.isDisabledLoginButton = false;
-
+            console.log(response);
             $scope.deleteFirstMessageIfMaxLengthReached();
             $scope.Messages.push({
                 type: "Success",
@@ -33,19 +27,17 @@ app.controller('loginController', ['$scope', '$location', 'userData', function (
                 messageClass: 'alert-success',
                 date: new Date()
             });
-
             $location.path('/user/home');
-
         }, function (error) {
+            var messageText = serviceFunctions.messageServerErrors('Uneble to cahnge your password ', error.data);
             $scope.deleteFirstMessageIfMaxLengthReached();
             $scope.Messages.push({
-                type: "Error",
-                text: error.data.error_description,
+                type: "Error!",
+                text: messageText,
                 messageClass: 'alert-danger',
                 date: new Date()
             });
 
-            //console.log('Error in LoginController');
             //console.log(error);
             $scope.isDisabledLoginButton = false;
         });

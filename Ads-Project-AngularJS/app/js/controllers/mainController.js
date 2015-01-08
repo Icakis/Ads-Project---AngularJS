@@ -1,11 +1,12 @@
 ﻿'use strict';
 
-app.controller('mainController', ['$scope', '$location', '$rootScope', 'userData', function ($scope, $location, $rootScope, userData) {
-    if (!userData.getLoggedUser()) {
-        $location.path('/');
-    } else {
-        $scope.getLoggedUsername = userData.getLoggedUser().username;
-    }
+app.controller('mainController', ['$scope', '$location', '$rootScope', 'userData', '$q', function ($scope, $location, $rootScope, userData, $q) {
+    //if (!userData.getLoggedUser()) {
+    //    $location.path('/');
+    //} else {
+    //    $scope.getLoggedUsername = userData.getLoggedUser().username;
+    //    $location.path('/user/home');
+    //}
 
     $scope.heading = 'Ads Home';
     $scope.isUserLogged = function () {
@@ -16,7 +17,30 @@ app.controller('mainController', ['$scope', '$location', '$rootScope', 'userData
         return false;
     }
 
+    $scope.isLoggedAdmin = function () {
+        var deferred = $q.defer();
+        //console.log(userData.getLoggedUser());
+        if ($scope.isUserLogged()) {
+            if (userData.getLoggedUser().isAdmin === 'true') {
+                deferred.resolve();
+                $location.path('/admin/ads');
+            } else {
+                deferred.reject();
+                $location.path('/user/home');
+            }
+
+            $scope.getLoggedUsername = userData.getLoggedUser().username;
+        } else {
+            deferred.reject();
+            $location.path('/');
+        }
+        return deferred.promise;
+    }
+
+    $scope.isLoggedAdmin();
+
     $rootScope.userSection = 'home';
+    $rootScope.adminSection = 'home-admin';
     $scope.pagination = {
         startPage: 2,
         pageSize: 2,

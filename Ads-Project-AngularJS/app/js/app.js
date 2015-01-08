@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('adsApp', ['ngResource', 'ngRoute', 'ngCookies'])
+var app = angular.module('adsApp', ['ngResource', 'ngRoute', 'ngCookies', 'chieffancypants.loadingBar', 'ngAnimate', 'ngSanitize'])
 .config(function ($routeProvider) {
     $routeProvider.when('/', {
         templateUrl: './partials/adsViewPartials/homeView.html',
@@ -32,8 +32,24 @@ var app = angular.module('adsApp', ['ngResource', 'ngRoute', 'ngCookies'])
     }).when('/user/profile', {
         templateUrl: './partials/userView/editUserProfileView.html',
         controller: 'editUserProfileController'
-    }).otherwise({
-        templateUrl: './partials/adsViewPartials/homeView.html',
-        controller: 'mainController'
+    }).when('/admin/ads', {
+        templateUrl: './partials/adminView/adminHomeView.html',
+        controller: 'adminAllAdsController',
+        //resolve: { isLoggedAdmin: isLoggedAdmin }
+    }).when('/admin/ads/delete/:deleteAdId*', {
+        templateUrl: './partials/userView/deleteAdView.html',
+        controller: 'adminDeleteAdController',
+        //resolve: { isLoggedAdmin: isLoggedAdmin }
+    }).when('/admin/ads/edit/:editedAdId*', {
+        templateUrl: './partials/userView/editAdView.html',
+        controller: 'adminEditAdController',
+        //resolve: { isLoggedAdmin: isLoggedAdmin }
     });
+
+    //    .otherwise({
+    //    templateUrl: './partials/adsViewPartials/homeView.html',
+    //    controller: 'mainController'
+    //});
 });
+
+app.constant('baseUrl', 'http://localhost:1337');

@@ -24,19 +24,31 @@
             </div>
             <div>
                 <p>
-                    <label for="category">Category:</label>
-                    <select id="category" ng-model="newAd.categoryId">
-                        <option value="null">(No Category)</option>
-                        <option ng-repeat="category in allCategories" value="{{category.id}}">{{category.name}}</option>
+                    <label>Category:</label>
+                    <select data-ng-model="newAd.categoryId" data-ng-options="category.id as category.name for category in allCategories ">
+                        <option value="">No Category</option>
                     </select>
                 </p>
                 <p>
-                    <label for="town">Town:</label>
-                    <select id="town" ng-model="newAd.townId">
-                        <option value="null">(No Town)</option>
-                        <option ng-repeat="town in allTowns" value="{{town.id}}">{{town.name}}</option>
+                    <label>Town:</label>
+                    <select data-ng-model="newAd.townId" data-ng-options="town.id as town.name for town in allTowns ">
+                        <option value="">No Town</option>
                     </select>
                 </p>
+                <!--<p>
+                        <label for="category">Category:</label>
+                        <select id="category" ng-model="newAd.categoryId">
+                            <option value="null">(No Category)</option>
+                            <option ng-repeat="category in allCategories" value="{{category.id}}">{{category.name}}</option>
+                        </select>
+                    </p>
+                    <p>
+                        <label for="town">Town:</label>
+                        <select id="town" ng-model="newAd.townId">
+                            <option value="null">(No Town)</option>
+                            <option ng-repeat="town in allTowns" value="{{town.id}}">{{town.name}}</option>
+                        </select>
+                    </p>-->
             </div>
         </div>
 
