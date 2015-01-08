@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('adsApp', ['ngResource', 'ngRoute', 'ngCookies', 'chieffancypants.loadingBar', 'ngAnimate', 'ngSanitize'])
+var app = angular.module('adsApp', ['ngResource', 'ngRoute', 'ngCookies', 'chieffancypants.loadingBar', 'ngAnimate', 'ngSanitize', 'ui.bootstrap'])
 .config(function ($routeProvider) {
     $routeProvider.when('/', {
         templateUrl: './partials/adsViewPartials/homeView.html',
@@ -37,12 +37,24 @@ var app = angular.module('adsApp', ['ngResource', 'ngRoute', 'ngCookies', 'chief
         controller: 'adminAllAdsController',
         //resolve: { isLoggedAdmin: isLoggedAdmin }
     }).when('/admin/ads/delete/:deleteAdId*', {
-        templateUrl: './partials/userView/deleteAdView.html',
+        templateUrl: './partials/adminView/deleteAdView.html',
         controller: 'adminDeleteAdController',
         //resolve: { isLoggedAdmin: isLoggedAdmin }
     }).when('/admin/ads/edit/:editedAdId*', {
-        templateUrl: './partials/userView/editAdView.html',
+        templateUrl: './partials/adminView/adminEditAdView.html',
         controller: 'adminEditAdController',
+        //resolve: { isLoggedAdmin: isLoggedAdmin }
+    }).when('/admin/users', {
+        templateUrl: './partials/adminView/adminUsersView.html',
+        controller: 'adminUsersController',
+        //resolve: { isLoggedAdmin: isLoggedAdmin }
+    }).when('/admin/categories', {
+        templateUrl: './partials/adminView/adminCategoriesView.html',
+        controller: 'adminCategoriesController',
+        //resolve: { isLoggedAdmin: isLoggedAdmin }
+    }).when('/admin/towns', {
+        templateUrl: './partials/adminView/adminTownsView.html',
+        controller: 'adminTownsController',
         //resolve: { isLoggedAdmin: isLoggedAdmin }
     });
 

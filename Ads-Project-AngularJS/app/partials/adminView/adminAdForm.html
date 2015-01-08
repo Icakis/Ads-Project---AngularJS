@@ -29,7 +29,7 @@
                 <p>Status: <span>{{ad.status}}</span></p>
             </div>
             <div class="col-md-8">
-                <a href="" class="btn btn-default btn-lg" data-ng-click="adminApproveAd(ad.id)">Approve</a>
+                <a href="" data-ng-if="ad.status != 'Published'" class="btn btn-default btn-lg" data-ng-click="adminApproveAd(ad.id)">Approve</a>
                 <a ng-href="#/admin/ads/edit/{{ad.id}}" class="btn btn-default btn-lg">Edit</a>
                 <a ng-href="#/admin/ads/delete/{{ad.id}}" class="btn btn-default btn-lg">Delete</a>
             </div>

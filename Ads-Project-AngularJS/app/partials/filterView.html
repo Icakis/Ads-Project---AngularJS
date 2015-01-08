@@ -3,7 +3,7 @@
     <div class="panel-body">
         <div class="list-group">
             <a href="" class="list-group-item" data-ng-class="{active : isSelectedCategory(category)}" data-ng-click="changeCategoryFilter(category)">All</a>
-            <a href="" class="list-group-item" ng-class="{active : isSelectedCategory(category)}" data-ng-repeat="category in allCategories" data-ng-click="changeCategoryFilter(category)">{{category.name}}</a>
+            <a href="" class="list-group-item" ng-class="{active : isSelectedCategory(category)}" data-ng-repeat="category in allCategories | orderBy: 'id'" data-ng-click="changeCategoryFilter(category)">{{category.name}}</a>
             <img data-ng-src="./img/LoadingWheel.gif" data-ng-hide="isShown.isAllCategoriesShown" />
         </div>
     </div>
@@ -14,7 +14,7 @@
     <div class="panel-body">
         <div class="list-group">
             <a href="" class="list-group-item" ng-class="{active : isSelectedTown(town)}" data-ng-click="changeTownFilter(town)">All</a>
-            <a href="" class="list-group-item" ng-class="{active : isSelectedTown(town)}" data-ng-repeat="town in allTowns" data-ng-click="changeTownFilter(town)">{{town.name}}</a>
+            <a href="" class="list-group-item" ng-class="{active : isSelectedTown(town)}" data-ng-repeat="town in allTowns | orderBy: 'name' : reverse" data-ng-click="changeTownFilter(town)">{{town.name}}</a>
             <img data-ng-src="./img/LoadingWheel.gif" data-ng-hide="isShown.isAllTownsShown" />
         </div>
     </div>

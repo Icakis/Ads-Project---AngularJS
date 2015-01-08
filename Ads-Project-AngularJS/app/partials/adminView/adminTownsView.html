@@ -1,0 +1,43 @@
+﻿<div>
+    <div data-ng-include="'partials/headingView.html'"></div>
+    <div class="container-fluid">
+        <!--left-->
+        <aside id="leftAside" class="col-sm-3" data-ng-controller="adminNavigationController">
+            <div data-ng-include="'partials/adminView/adminNavigationPanelView.html'"></div>
+        </aside>
+        <!--/left-->
+        <!--center-->
+        <main class="col-sm-9" id="middleContainer" data-ng-controller="paginationController">
+            <div id="messagesContainer" data-ng-repeat="message in Messages" data-ng-include="'partials/messageView.html'"></div>
+            <div data-ng-include="'partials/changeAdCountOnPage.html'"></div>
+            <table>
+                <thead>
+                    <tr>
+                        <th data-ng-click="changeSortBy('Id')">
+                            Id<span data-ng-if="sortBy == 'Id'">&#9660;</span><span data-ng-if="sortBy == '-Id'">&#9650;</span>
+                        </th>
+                        <th data-ng-click="changeSortBy('Name')">
+                            Town<span data-ng-if="sortBy == 'Name'">&#9660;</span><span data-ng-if="sortBy == '-Name'">&#9650;</span>
+                        </th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-ng-repeat="town in allTowns">
+                        <td>{{town.id}}</td>
+                        <td>{{town.username}}</td>
+                        <td>
+                            <a data-ng-href="#/admin/towns/{{town.id}}">Edit</a>
+                            <a data-ng-href="#/admin/towns/{{town.id}}">Delete</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- paging -->
+            <div data-ng-include="'partials/paginationView.html'"></div>
+            <!-- paging -->
+        </main>
+        <!--/center-->
+    </div>
+    <!--/container-fluid-->
+</div>

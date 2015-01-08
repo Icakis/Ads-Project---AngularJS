@@ -1,0 +1,76 @@
+﻿<form class="panel panel-default" id="addNewAdForm" name="admindEditAdForm" data-ng-submit="editAd()">
+    <div class="panel-heading">Edit User Ad</div>
+    <div class="panel-body row" id="publishNewAdFormInputsContainer">
+        <div class="col-md-12">
+            <div>
+                <label for="titleInput">Title:</label>
+                <input type="text" id="titleInput" required="required" data-ng-model="editedAd.title" />
+            </div>
+            <div>
+                <label for="textInput">Text:</label>
+                <textarea id="textInput" name="textInput" required="required" data-ng-model="editedAd.text"></textarea>
+            </div>
+            <div>
+                <!--<input type="text" id="fileTextInput" name="fileTextInput" data-ng-model="editedAd.imageDataUrl" pattern="^data:image/.*$" />-->
+                <div id="publishAdImagePreviewContainer">
+                    <img data-ng-src="{{editedAd.imageDataUrl?editedAd.imageDataUrl:'./img/No_Image_Available.png'}}" class="adImageContainer" />
+                </div>
+                <input type="file" id="imageInput" data-ng-model="editedAd.imageDataUrl" accept="image/*" onchange="angular.element(this).scope().changeUploadImage(this)" />
+                <input type="button" id="deleteImageInput" data-ng-click="deleteImageDataUrl()" value="Delete Image" />
+            </div>
+            <div>
+                <p>
+                    <label>Category:</label>
+                    <select data-ng-model="editedAd.categoryId" data-ng-options="category.id as category.name for category in allCategories ">
+                        <option value="">No Category</option>
+                    </select>
+                </p>
+                <p>
+                    <label>Town:</label>
+                    <select data-ng-model="editedAd.townId" data-ng-options="town.id as town.name for town in allTowns ">
+                        <option value="">No Town</option>
+                    </select>
+                </p>
+            </div>
+            <div>
+                <label for="usernameInput">Username:</label>
+                <input type="text" id="usernameInput" name="usernameInput" required="required" data-ng-model="editedAd.ownerUsername" />
+            </div>
+            <div ng-controller="DatepickerDemoCtrl">
+                Published Date:
+                <div class="row">
+                    <div class="col-md-6">
+                        <p class="input-group">
+                            <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="editedAd.date" is-open="opened" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Format:</label> <select class="form-control" ng-model="format" ng-options="f for f in formats"></select>
+                    </div>
+                </div>
+                <hr />
+                <button type="button" class="btn btn-sm btn-info" ng-click="today()">Today</button>
+                <button type="button" class="btn btn-sm btn-danger" ng-click="clear()">Clear</button>
+            </div>
+            <p>
+                <label>Status:</label>
+                <select data-ng-model="editedAd.status">
+                    <option value="Inactive">Inactive</option>
+                    <option value="WaitingApproval">Waiting Approval</option>
+                    <option value="Published">Published</option>
+                    <option value="Rejected">Rejected</option>
+                </select>
+            </p>
+        </div>
+
+    </div>
+    <div id="buttonContainer">
+        <input type="submit" class="btn btn-default btn-lg" value="Edit" />
+        <a data-ng-href="#/admin/ads" class="btn btn-default btn-lg">Cancel</a>
+    </div>
+</form>

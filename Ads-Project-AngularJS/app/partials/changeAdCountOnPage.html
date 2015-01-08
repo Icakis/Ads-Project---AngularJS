@@ -1,5 +1,5 @@
 ﻿<div data-ng-controller="paginationController">
-    <label for="pageSize">Show number ads on page:</label>
+    <label for="pageSize">Show number {{itemsLabel}} on page:</label>
     <select id="pageSize" data-ng-model="pagination.pageSize" data-ng-change="changePageSize()">
         <option value="1">1</option>
         <option value="2">2</option>

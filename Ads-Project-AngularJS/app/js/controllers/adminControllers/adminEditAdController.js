@@ -1,14 +1,24 @@
 ﻿'use strict';
 
-app.controller('adminEditAdController', ['$scope', 'userData', '$routeParams', 'userAdsData', 'adsData', '$rootScope', 'serviceFunctions', '$location', function ($scope, userData, $routeParams, userAdsData, adsData, $rootScope, serviceFunctions, $location) {
+app.controller('adminEditAdController', ['$scope', 'userData', '$routeParams', 'adminAdsDataServices', 'adsData', '$rootScope', 'serviceFunctions', '$location', function ($scope, userData, $routeParams, adminAdsDataServices, adsData, $rootScope, serviceFunctions, $location) {
 
-     
-    $scope.heading = 'Ads - Edit Ad';
-    $rootScope.userSection = 'myAds';
+
+    $scope.heading = 'Ads Administration - Edit Ad';
+    $rootScope.userSection = ''; // myAds
 
     //console.log($routeParams);
     $scope.editedAd = {};
     $scope.editedAd.ChangeImage = false;
+
+    // Change Date event
+    $scope.changeDate = function (date) {
+        var newDate = Date.parse(date);
+        if (!isNaN(newDate)) {
+            $scope.filter.fromDateValue = new Date(newDate);
+        } else {
+            $scope.filter.fromDateValue = '';
+        }
+    };
 
     adsData.getAllCategories()
         .$promise
@@ -40,11 +50,12 @@ app.controller('adminEditAdController', ['$scope', 'userData', '$routeParams', '
             });
         });
 
-    userAdsData.getAdById($routeParams.editedAdId)
+    adminAdsDataServices.getAdById($routeParams.editedAdId)
         .$promise
         .then(function (data) {
             //console.log(data);
             $scope.editedAd = data;
+            $scope.dt = data.date;
         }, function (error) {
             console.log(error);
             $scope.deleteFirstMessageIfMaxLengthReached();
@@ -77,29 +88,46 @@ app.controller('adminEditAdController', ['$scope', 'userData', '$routeParams', '
     };
 
     $scope.editAd = function () {
-        userAdsData.editAdById($routeParams.editedAdId, $scope.editedAd)
-            .$promise
-            .then(function (data) {
-                //console.log(data);
-                $scope.deleteFirstMessageIfMaxLengthReached();
-                $scope.Messages.push({
-                    type: "Success",
-                    text: "Add was successfuly edited.",
-                    messageClass: 'alert-success',
-                    date: new Date()
-                });
+        var str = window.JSON.stringify({ date: $scope.editedAd.date });
+        // str == "{"myDate":"2010-12-27T11:59:18.119Z"}"
+        var todayDate = window.JSON.parse(str);
+        //console.log(todayDate);
 
-                $location.path('/user/ads');
-            }, function (error) {
-                console.log(error);
-                $scope.deleteFirstMessageIfMaxLengthReached();
-                $scope.Messages.push({
-                    type: "Error",
-                    text: error.data.error_description,
-                    messageClass: 'alert-danger',
-                    date: new Date()
+        if (todayDate.date) {
+            $scope.editedAd.date = todayDate.date;
+            adminAdsDataServices.editAdById($routeParams.editedAdId, $scope.editedAd)
+                .$promise
+                .then(function (data) {
+                    //console.log(data);
+                    $scope.deleteFirstMessageIfMaxLengthReached();
+                    $scope.Messages.push({
+                        type: "Success",
+                        text: "Add was successfuly edited.",
+                        messageClass: 'alert-success',
+                        date: new Date()
+                    });
+
+                    $location.path('/user/ads');
+                }, function (error) {
+                    console.log(error);
+                    var messageText = serviceFunctions.messageServerErrors('Uneble to edit Ad ', error.data);
+                    $scope.deleteFirstMessageIfMaxLengthReached();
+                    $scope.Messages.push({
+                        type: "Error!",
+                        text: messageText,
+                        messageClass: 'alert-danger',
+                        date: new Date()
+                    });
                 });
+        } else {
+            $scope.deleteFirstMessageIfMaxLengthReached();
+            $scope.Messages.push({
+                type: "Alert! ",
+                text: "Invalid date. Try to choose another one.",
+                messageClass: 'alert-warning',
+                date: new Date()
             });
+        }
     };
 }
 ]);

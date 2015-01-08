@@ -4,3 +4,9 @@ C:\Users\Icakis Nikus\Desktop\AngularJS - My Project\trunk\Ads-Project-AngularJS
 C:\Users\Icakis Nikus\Desktop\AngularJS - My Project\trunk\Ads-Project-AngularJS\obj\Debug\Ads-Project-AngularJS.csprojResolveAssemblyReference.cache
 C:\Users\Icakis Nikus\Desktop\AngularJS - My Project\trunk\Ads-Project-AngularJS\obj\Debug\Ads-Project-AngularJS.dll
 C:\Users\Icakis Nikus\Desktop\AngularJS - My Project\trunk\Ads-Project-AngularJS\obj\Debug\Ads-Project-AngularJS.pdb
+D:\SoftUni\Ниво #2\SPA with AngularJS\AngularJS - My Project\trunk\Ads-Project-AngularJS\bin\Ads-Project-AngularJS.dll.config
+D:\SoftUni\Ниво #2\SPA with AngularJS\AngularJS - My Project\trunk\Ads-Project-AngularJS\bin\Ads-Project-AngularJS.dll
+D:\SoftUni\Ниво #2\SPA with AngularJS\AngularJS - My Project\trunk\Ads-Project-AngularJS\bin\Ads-Project-AngularJS.pdb
+D:\SoftUni\Ниво #2\SPA with AngularJS\AngularJS - My Project\trunk\Ads-Project-AngularJS\obj\Debug\Ads-Project-AngularJS.csprojResolveAssemblyReference.cache
+D:\SoftUni\Ниво #2\SPA with AngularJS\AngularJS - My Project\trunk\Ads-Project-AngularJS\obj\Debug\Ads-Project-AngularJS.dll
+D:\SoftUni\Ниво #2\SPA with AngularJS\AngularJS - My Project\trunk\Ads-Project-AngularJS\obj\Debug\Ads-Project-AngularJS.pdb

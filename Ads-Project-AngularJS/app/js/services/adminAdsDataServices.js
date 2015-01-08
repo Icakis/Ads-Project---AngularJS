@@ -46,6 +46,10 @@ app.factory('adminAdsDataServices', function ($resource, $http, baseUrl, userDat
         //return resource.delete({ id: id });
     }
 
+    function editAdById(id, ad) {
+        setHeaders();
+        return generateResourceByUrl(baseUrl + '/api/admin/Ads/:id').update({ id: id }, ad);
+    }
 
 
 
@@ -87,10 +91,7 @@ app.factory('adminAdsDataServices', function ($resource, $http, baseUrl, userDat
 
 
 
-    function editAdById(id, ad) {
-        setHeaders();
-        return generateResourceByUrl(baseUrl + '/api/user/ads/:id').update({ id: id }, ad);
-    }
+
 
     function deleteAd(id) {
         setHeaders();

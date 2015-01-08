@@ -19,6 +19,58 @@ app.factory('adminServices', function ($resource, $http, $cookieStore, $q, baseU
         return resource;
     }
 
+    function getAllUsersSortedBy(startPage, pageSize, sortBy) {
+        setHeaders();
+        return $resource(baseUrl + '/api/admin/Users?SortBy=:sortBy&StartPage=:startPage&PageSize=:pageSize',
+        {
+            startPage: startPage,
+            pageSize: pageSize,
+            sortBy: sortBy
+        }).get();
+    }
+
+    function getAllCategoriesSortedBy(startPage, pageSize, sortBy) {
+        setHeaders();
+        return $resource(baseUrl + '/api/admin/Categories?SortBy=:sortBy&StartPage=:startPage&PageSize=:pageSize',
+        {
+            startPage: startPage,
+            pageSize: pageSize,
+            sortBy: sortBy
+        }).get();
+    }
+
+    function getAllTownsSortedBy(startPage, pageSize, sortBy) {
+        setHeaders();
+        return $resource(baseUrl + '/api/admin/Towns?SortBy=:sortBy&StartPage=:startPage&PageSize=:pageSize',
+        {
+            startPage: startPage,
+            pageSize: pageSize,
+            sortBy: sortBy
+        }).get();
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     function login(username, password) {
         return $resource(baseUrl + '/api/user/Login').save({
             "username": username,
@@ -114,6 +166,14 @@ app.factory('adminServices', function ($resource, $http, $cookieStore, $q, baseU
     }
 
     return {
+        getAllUsersSortedBy: getAllUsersSortedBy,
+        getAllCategoriesSortedBy: getAllCategoriesSortedBy,
+        getAllTownsSortedBy: getAllTownsSortedBy,
+
+
+
+
+
         login: login,
         register: register,
         getLoggedUser: getLoggedUser,

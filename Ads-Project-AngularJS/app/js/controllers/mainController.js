@@ -45,6 +45,7 @@ app.controller('mainController', ['$scope', '$location', '$rootScope', 'userData
         startPage: 2,
         pageSize: 2,
     };
+    $scope.itemsLabel = 'ads';
 
     $scope.Messages = [];
     $scope.deleteFirstMessageIfMaxLengthReached = function () {
