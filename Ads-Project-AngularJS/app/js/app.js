@@ -68,6 +68,10 @@ var app = angular.module('adsApp', ['ngResource', 'ngRoute', 'ngCookies', 'chief
         templateUrl: './partials/adminView/adminTownsView.html',
         controller: 'adminTownsController',
         //resolve: { isLoggedAdmin: isLoggedAdmin }
+    }).when('/admin/towns/:action/:id?', {
+        templateUrl: './partials/adminView/adminCrUDTownView.html',
+        controller: 'adminCrUDTownController',
+        //resolve: { isLoggedAdmin: isLoggedAdmin }
     });
 
     //    .otherwise({

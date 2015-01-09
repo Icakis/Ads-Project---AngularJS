@@ -68,11 +68,13 @@
     <Content Include="app\js\controllers\adminControllers\adminAllAdsController.js" />
     <Content Include="app\js\controllers\adminControllers\adminCategoriesController.js" />
     <Content Include="app\js\controllers\adminControllers\adminCrUDCategoryController.js" />
+    <Content Include="app\js\controllers\adminControllers\adminCrUDTownController.js" />
     <Content Include="app\js\controllers\adminControllers\adminDeleteAdController.js" />
     <Content Include="app\js\controllers\adminControllers\adminDeleteUserControlle.js" />
     <Content Include="app\js\controllers\adminControllers\adminEditAdController.js" />
     <Content Include="app\js\controllers\adminControllers\adminEditUserController.js" />
     <Content Include="app\partials\adminView\adminCrUDCategoryView.html" />
+    <Content Include="app\partials\adminView\adminCrUDTownView.html" />
     <Content Include="app\partials\adminView\adminDeleteUserView.html" />
     <Content Include="app\partials\adminView\adminEditUserView.html" />
     <Content Include="app\js\controllers\adminControllers\adminNavigationController.js" />

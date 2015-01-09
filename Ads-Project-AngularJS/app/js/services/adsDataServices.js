@@ -24,10 +24,15 @@ app.factory('adsData', function ($resource, baseUrl) {
         return $resource(baseUrl + '/api/Categories/:id').get({id:id});
     }
 
+    function getTownById(id) {
+        return $resource(baseUrl + '/api/towns/:id').get({ id: id });
+    }
+
     return {
         getAllPublishedAdsByFilter: getAllPublishedAdsByFilter,
         getAllCategories: getAllCategories,
         getAllTowns: getAllTowns,
         getCategoryById: getCategoryById,
+        getTownById: getTownById,
     };
 });

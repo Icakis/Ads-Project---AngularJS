@@ -8,15 +8,15 @@
         <!--/left-->
         <!--center-->
         <main class="col-sm-9" id="middleContainer" data-ng-controller="paginationController">
-            <form class="panel panel-default" id="crudCategoryForm" name="crudCategoryForm" data-ng-submit="categoryAction(action, categoryName)">
-                <div class="panel-heading">{{action | capitalize}} Category</div>
+            <form class="panel panel-default" id="crudTownForm" name="crudTownForm" data-ng-submit="townAction(action, townName)">
+                <div class="panel-heading">{{action | capitalize}} Town</div>
                 <div class="panel-body" id="loinFormInputsContainer">
-                    <label for="category">Category:</label>
-                    <input type="text" id="category" required="required" data-ng-model="categoryName" data-ng-disabled="action =='delete' || action =='Delete'" />
+                    <label for="town">Town:</label>
+                    <input type="text" id="town" required="required" data-ng-model="townName" data-ng-disabled="action =='delete' || action =='Delete'" />
                 </div>
                 <div id="buttonContainer">
                     <input type="submit" class="btn btn-default btn-lg" value="{{action | capitalize}}" />
-                    <a data-ng-href="#/admin/categories/list" class="btn btn-default btn-lg">Cancel</a>
+                    <a data-ng-href="#/admin/towns/list" class="btn btn-default btn-lg">Cancel</a>
                 </div>
             </form>
         </main>

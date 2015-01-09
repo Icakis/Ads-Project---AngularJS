@@ -88,84 +88,42 @@ app.factory('adminServices', function ($resource, $http, $cookieStore, $q, baseU
         return resource.delete({ username: username });
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-    function login(username, password) {
-        return $resource(baseUrl + '/api/user/Login').save({
-            "username": username,
-            "password": password
-        })
-            .$promise
-            .then(function (user) {
-                //console.log('Set logged user');
-                setLoggedUser(user);
-                return user.$promise;
-            }, function (error) {
-                //console.log('Error in service');
-                //console.log(error);
-                return $q.reject(error);
-            });
+    function createCategory(categoryName) {
+        setHeaders();
+        return request('/api/admin/Categories').save({ name: categoryName });
     }
 
-    function register(username, password, confirmPassword, name, email, phone, townId) {
-        return $resource(baseUrl + '/api/user/register').save({
-            "username": username,
-            "password": password,
-            "confirmPassword": confirmPassword,
-            "name": name,
-            "email": email,
-            "phone": phone,
-            "townId": townId
-        })
-            .$promise
-            .then(function (user) {
-                console.log('Set logged user in registration');
-                setLoggedUser(user);
-                return user.$promise;
-            }, function (error) {
-                console.log('Error in register service');
-                console.log(error);
-                return $q.reject(error);
-            });
+    function editCategory(id, categoryName) {
+        setHeaders();
+        return request('/api/admin/Categories/:id').update({ id: id, name: categoryName });
     }
+
+    function deleteCategory(id) {
+        setHeaders();
+        return request('/api/admin/Categories/:id').delete({ id: id });
+    }
+
+
+    function createTown(townName) {
+        setHeaders();
+        return request('/api/admin/towns').save({ name: townName });
+    }
+
+    function editTown(id, townName) {
+        setHeaders();
+        return request('/api/admin/towns/:id').update({ id: id, name: townName });
+    }
+
+    function deleteTown(id) {
+        setHeaders();
+        return request('/api/admin/towns/:id').delete({ id: id });
+    }
+
+
 
     function getLoggedUser() {
         return $cookieStore.get('loggedUser');
     }
-
-    function setLoggedUser(user) {
-        $cookieStore.put('loggedUser', user);
-    }
-
-    function logout() {
-        return $cookieStore.remove('loggedUser');
-    }
-
-    function getUserProfile() {
-        setHeaders();
-        return $resource(baseUrl + '/api/user/profile').get();
-    }
-
-
-
-    //function deleteUser(userId) {
-    //    // TODO:
-    //}
-
-    //function getUserById(userId) {
-    //    // TODO:
-    //}
-
 
 
 
@@ -174,23 +132,16 @@ app.factory('adminServices', function ($resource, $http, $cookieStore, $q, baseU
         getAllCategoriesSortedBy: getAllCategoriesSortedBy,
         getAllTownsSortedBy: getAllTownsSortedBy,
         editUser: editUser,
+        changeUserPassword: changeUserPassword,
         deleteUserByUsername: deleteUserByUsername,
-
         getUserById: getUserById,
 
+        createCategory: createCategory,
+        editCategory: editCategory,
+        deleteCategory: deleteCategory,
 
-
-
-
-
-        login: login,
-        register: register,
-        getLoggedUser: getLoggedUser,
-        logout: logout,
-        getUserProfile: getUserProfile,
-
-        //deleteUser: deleteUser,
-        //getUserById: getUserById,
-        changeUserPassword: changeUserPassword
+        createTown: createTown,
+        editTown: editTown,
+        deleteTown: deleteTown
     }
 });
