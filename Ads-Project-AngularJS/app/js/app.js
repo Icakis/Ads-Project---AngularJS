@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('adsApp', ['ngResource', 'ngRoute', 'ngCookies', 'chieffancypants.loadingBar', 'ngAnimate', 'ngSanitize', 'ui.bootstrap'])
+var app = angular.module('adsApp', ['ngResource', 'ngRoute', 'ngCookies', 'chieffancypants.loadingBar', 'ngSanitize', 'ui.bootstrap']) //'ngAnimate',
 .config(function ($routeProvider) {
     $routeProvider.when('/', {
         templateUrl: './partials/adsViewPartials/homeView.html',
@@ -59,6 +59,10 @@ var app = angular.module('adsApp', ['ngResource', 'ngRoute', 'ngCookies', 'chief
     }).when('/admin/categories/list', {
         templateUrl: './partials/adminView/adminCategoriesView.html',
         controller: 'adminCategoriesController',
+        //resolve: { isLoggedAdmin: isLoggedAdmin }
+    }).when('/admin/categories/:action/:id?', {
+        templateUrl: './partials/adminView/adminCrUDCategoryView.html',
+        controller: 'adminCrUDCategoryController',
         //resolve: { isLoggedAdmin: isLoggedAdmin }
     }).when('/admin/towns/list', {
         templateUrl: './partials/adminView/adminTownsView.html',

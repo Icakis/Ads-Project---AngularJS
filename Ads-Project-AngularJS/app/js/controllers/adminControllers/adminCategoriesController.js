@@ -23,7 +23,7 @@ app.controller('adminCategoriesController', ['$scope', '$rootScope', 'adminServi
         adminServices.getAllCategoriesSortedBy($scope.pagination.startPage, $scope.pagination.pageSize, $scope.sortBy)
             .$promise
             .then(function (categoriesData) {
-                console.log(categoriesData);
+                //console.log(categoriesData);
                 $scope.allCategories = categoriesData.categories;
                 $scope.paginationData = serviceFunctions.pageNumbersArray(categoriesData);
             }, function (error) {

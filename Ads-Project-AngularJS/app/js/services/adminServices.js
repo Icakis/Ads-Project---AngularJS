@@ -52,6 +52,11 @@ app.factory('adminServices', function ($resource, $http, $cookieStore, $q, baseU
         }).get();
     }
 
+    function getUserById(id) {
+        setHeaders();
+        return $resource(baseUrl + '/api/admin/Users/:id').get({ id: id });
+    }
+
     function editUser(user) {
         setHeaders();
         var resource = request('/api/admin/User/:username');
@@ -170,6 +175,12 @@ app.factory('adminServices', function ($resource, $http, $cookieStore, $q, baseU
         getAllTownsSortedBy: getAllTownsSortedBy,
         editUser: editUser,
         deleteUserByUsername: deleteUserByUsername,
+
+        getUserById: getUserById,
+
+
+
+
 
 
         login: login,

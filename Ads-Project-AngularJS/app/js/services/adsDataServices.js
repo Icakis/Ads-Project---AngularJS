@@ -20,9 +20,14 @@ app.factory('adsData', function ($resource, baseUrl) {
         return $resource(baseUrl + '/api/Towns').query();
     }
 
+    function getCategoryById(id) {
+        return $resource(baseUrl + '/api/Categories/:id').get({id:id});
+    }
+
     return {
         getAllPublishedAdsByFilter: getAllPublishedAdsByFilter,
         getAllCategories: getAllCategories,
         getAllTowns: getAllTowns,
+        getCategoryById: getCategoryById,
     };
 });

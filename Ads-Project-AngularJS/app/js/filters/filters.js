@@ -1,7 +1,7 @@
 'use strict';
 
-app.filter('newlines', function () {
-    return function (text) {
-        return text.split(/\n/g);
-    };
+app.filter('capitalize', function () {
+    return function (input, all) {
+        return (!!input) ? input.replace(/([^\W_]+[^\s-]*) */g, function (txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); }) : '';
+    }
 });

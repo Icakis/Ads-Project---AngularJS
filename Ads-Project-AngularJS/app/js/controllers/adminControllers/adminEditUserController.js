@@ -6,31 +6,15 @@ app.controller('adminEditUserController', ['$scope', '$routeParams', '$location'
 
     $scope.user = {};
     $scope.userPasswords = {};
+    // TODO: add in view and  editUserProfileControllers.
+    $scope.isEnabledEdit = false;
 
-    adminServices.getAllUsersSortedBy()
+    adminServices.getUserById($routeParams.userId)
         .$promise
         .then(function (data) {
-            //console.log(data);
-            var userFound = false;
-            for (var i = 0; i < data.users.length; i++) {
-                if (data.users[i].username === $routeParams.userId) {
-                    //console.log(data.users[i]);
-                    $scope.user = data.users[i];
-                    userFound = true;
-                    break;
-                }
-            }
-
-            if (!userFound) {
-                $scope.deleteFirstMessageIfMaxLengthReached();
-                $scope.Messages.push({
-                    type: "Error! ",
-                    text: 'No such user.',
-                    messageClass: 'alert-danger',
-                    date: new Date()
-                });
-            }
-
+            console.log(data);
+            $scope.user = data;
+            $scope.isEnabledEdit = true;
         }, function (error) {
             console.log(error);
             $scope.deleteFirstMessageIfMaxLengthReached();
@@ -41,6 +25,41 @@ app.controller('adminEditUserController', ['$scope', '$routeParams', '$location'
                 date: new Date()
             });
         });
+
+    //adminServices.getAllUsersSortedBy()
+    //    .$promise
+    //    .then(function (data) {
+    //        //console.log(data);
+    //        var userFound = false;
+    //        for (var i = 0; i < data.users.length; i++) {
+    //            if (data.users[i].username === $routeParams.userId) {
+    //                //console.log(data.users[i]);
+    //                $scope.user = data.users[i];
+    //                userFound = true;
+    //                break;
+    //            }
+    //        }
+
+    //        if (!userFound) {
+    //            $scope.deleteFirstMessageIfMaxLengthReached();
+    //            $scope.Messages.push({
+    //                type: "Error! ",
+    //                text: 'No such user.',
+    //                messageClass: 'alert-danger',
+    //                date: new Date()
+    //            });
+    //        }
+
+    //    }, function (error) {
+    //        console.log(error);
+    //        $scope.deleteFirstMessageIfMaxLengthReached();
+    //        $scope.Messages.push({
+    //            type: "Error! ",
+    //            text: 'Unable to load user for edit. Try again.',
+    //            messageClass: 'alert-danger',
+    //            date: new Date()
+    //        });
+    //    });
 
     adsData.getAllTowns()
         .$promise

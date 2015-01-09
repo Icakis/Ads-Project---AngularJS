@@ -27,8 +27,8 @@
                         <td>{{category.id}}</td>
                         <td>{{category.username}}</td>
                         <td>
-                            <a data-ng-href="#/admin/categories/{{category.id}}">Edit</a>
-                            <a data-ng-href="#/admin/categories/{{category.id}}">Delete</a>
+                            <a data-ng-href="#/admin/categories/edit/{{category.id}}">Edit</a>
+                            <a data-ng-href="#/admin/categories/delete/{{category.id}}">Delete</a>
                         </td>
                     </tr>
                 </tbody>
@@ -36,6 +36,10 @@
             <!-- paging -->
             <div data-ng-include="'partials/paginationView.html'"></div>
             <!-- paging -->
+            
+            <div>
+                <a data-ng-href="#/admin/categories/create/" class="btn btn-default btn-lg">Create New Category</a>
+            </div>
         </main>
         <!--/center-->
     </div>

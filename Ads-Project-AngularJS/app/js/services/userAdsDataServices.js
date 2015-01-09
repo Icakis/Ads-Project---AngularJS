@@ -47,6 +47,7 @@ app.factory('userAdsData', function ($resource, $http, baseUrl, userData) {
     }
 
     function getAdById(id) {
+        console.log(id);
         setHeaders();
         return generateResourceByUrl(baseUrl + '/api/user/ads/:id').get({ id: id });
     }
