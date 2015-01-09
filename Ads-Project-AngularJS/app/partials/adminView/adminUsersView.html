@@ -39,13 +39,13 @@
                     <tr data-ng-repeat="user in allUsers">
                         <td>{{user.username}}</td>
                         <td>{{user.name}}</td>
-                        <td><a data-ng-href="user.email">{{user.email}}</a> </td>
+                        <td><a data-ng-href='mailto:{{user.email}}'>{{user.email}}</a> </td>
                         <td>{{user.phoneNumber}}</td>
                         <td>{{user.townName}}</td>
                         <td>{{user.isAdmin}}</td>
                         <td>
-                            <a data-ng-href="#/admin/users/edit/{{user.id}}">Edit</a>
-                            <a data-ng-href="#/admin/users/delete/{{user.id}}">Delete</a>
+                            <a data-ng-href="#/admin/users/edit/{{user.username}}">Edit</a>
+                            <a data-ng-href="#/admin/users/delete/{{user.username}}">Delete</a>
                         </td>
                     </tr>
                 </tbody>

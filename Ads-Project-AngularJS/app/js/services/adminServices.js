@@ -10,7 +10,10 @@ app.factory('adminServices', function ($resource, $http, $cookieStore, $q, baseU
         //$http.defaults.headers.common['Authorization'] = 'Bearer ' + accessToken;
         setHeaders();
         var resource = $resource(baseUrl + url,
-            { id: '@id' },
+        {
+            id: '@id',
+            username: '@username',
+        },
             {
                 update: {
                     method: 'PUT'
@@ -49,42 +52,29 @@ app.factory('adminServices', function ($resource, $http, $cookieStore, $q, baseU
         }).get();
     }
 
-    function editUserByUsername(editedUser) {
+    function editUser(user) {
         setHeaders();
-        console.log(editedUser);
         var resource = request('/api/admin/User/:username');
-        var updatedUser = {
-            "name": editedUser.name,
-            "email": editedUser.email,
-            "phoneNumber": editedUser.phoneNumber,
-            "username": editedUser.username,
-        };
-
 
         if (user.townId) {
             var townIdInteger = parseInt(user.townId);
             if (!isNaN(townIdInteger)) {
-                updatedUser.townId = townIdInteger;
-            } else {
-                return reject('Invalid town.');
+                user.townId = townIdInteger;
             }
         }
 
-        return resource.update(updatedUser);
+        return resource.update(user);
     }
 
-    function getUserById(username) {
+    function changeUserPassword(oldPassword, newPassword, confirmPassword, username) {
         setHeaders();
-        console.log(username);
-        return $resource(baseUrl + '/api/admin/User/:username',
-        {
-            username: username,
-        }).get();
+        return request('/api/admin/SetPassword').update({
+            "oldPassword": oldPassword,
+            "NewPassword": newPassword,
+            "ConfirmPassword": confirmPassword,
+            "Username": username
+        });
     }
-
-
-
-
 
 
 
@@ -156,25 +146,7 @@ app.factory('adminServices', function ($resource, $http, $cookieStore, $q, baseU
         return $resource(baseUrl + '/api/user/profile').get();
     }
 
-    function editUser(user) {
-        setHeaders();
-        var resource = request('/api/user/profile');
-        var updatedUser = {
-            "name": user.name,
-            "email": user.email,
-            "phoneNumber": user.phoneNumber,
-        };
 
-
-        if (user.townId) {
-            var townIdInteger = parseInt(user.townId);
-            if (!isNaN(townIdInteger)) {
-                updatedUser.townId = townIdInteger;
-            }
-        }
-
-        return resource.update(updatedUser);
-    }
 
     //function deleteUser(userId) {
     //    // TODO:
@@ -185,22 +157,14 @@ app.factory('adminServices', function ($resource, $http, $cookieStore, $q, baseU
     //}
 
 
-    function changeUserPassword(oldPassword, newPassword, confirmPassword) {
-        setHeaders();
-        return request('/api/user/changePassword').update({
-            "oldPassword": oldPassword,
-            "newPassword": newPassword,
-            "confirmPassword": confirmPassword
-        });
-    }
+
 
     return {
         getAllUsersSortedBy: getAllUsersSortedBy,
         getAllCategoriesSortedBy: getAllCategoriesSortedBy,
         getAllTownsSortedBy: getAllTownsSortedBy,
-        editUserByUsername: editUserByUsername,
+        editUser: editUser,
 
-        getUserById: getUserById,
 
 
         login: login,
@@ -208,7 +172,7 @@ app.factory('adminServices', function ($resource, $http, $cookieStore, $q, baseU
         getLoggedUser: getLoggedUser,
         logout: logout,
         getUserProfile: getUserProfile,
-        editUser: editUser,
+
         //deleteUser: deleteUser,
         //getUserById: getUserById,
         changeUserPassword: changeUserPassword

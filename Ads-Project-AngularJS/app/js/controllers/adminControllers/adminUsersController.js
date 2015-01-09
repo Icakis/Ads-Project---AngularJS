@@ -23,7 +23,7 @@ app.controller('adminUsersController', ['$scope', '$rootScope', 'adminServices',
         adminServices.getAllUsersSortedBy($scope.pagination.startPage, $scope.pagination.pageSize, $scope.sortBy)
             .$promise
             .then(function (usersData) {
-                console.log(usersData);
+                //console.log(usersData);
                 $scope.allUsers = usersData.users;
                 $scope.paginationData = serviceFunctions.pageNumbersArray(usersData);
             }, function (error) {
