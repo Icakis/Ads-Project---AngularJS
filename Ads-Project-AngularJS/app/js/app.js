@@ -52,6 +52,10 @@ var app = angular.module('adsApp', ['ngResource', 'ngRoute', 'ngCookies', 'chief
         templateUrl: './partials/adminView/adminEditUserView.html',
         controller: 'adminEditUserController'
         //resolve: { isLoggedAdmin: isLoggedAdmin }
+    }).when('/admin/users/delete/:userId', {
+        templateUrl: './partials/adminView/adminDeleteUserView.html',
+        controller: 'adminDeleteUserController'
+        //resolve: { isLoggedAdmin: isLoggedAdmin }
     }).when('/admin/categories/list', {
         templateUrl: './partials/adminView/adminCategoriesView.html',
         controller: 'adminCategoriesController',

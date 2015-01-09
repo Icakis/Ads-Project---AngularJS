@@ -44,11 +44,11 @@ app.factory('userData', function ($resource, $http, $cookieStore, $q, baseUrl) {
             "name": name,
             "email": email,
             "phone": phone,
-            "townId": townId
+            "TownId": townId
         })
             .$promise
             .then(function (user) {
-                console.log('Set logged user in registration');
+                //console.log(user);
                 setLoggedUser(user);
                 return user.$promise;
             }, function (error) {

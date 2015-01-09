@@ -67,11 +67,12 @@ app.controller('adminAllAdsController', function ($scope, $route, $http, adsData
     $scope.reloadAllads();
 
     $scope.adminApproveAd = function (id) {
-        console.log(id);
+        //console.log(id);
         adminAdsDataServices.approveAdById(id)
             .$promise
             .then(function (data) {
                 console.log(data);
+                $scope.reloadAllads();
             }, function (error) {
                 console.log(error);
                 $scope.deleteFirstMessageIfMaxLengthReached();

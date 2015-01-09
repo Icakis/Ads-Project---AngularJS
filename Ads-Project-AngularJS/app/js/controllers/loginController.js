@@ -19,7 +19,7 @@ app.controller('loginController', ['$scope', '$location', 'userData', 'serviceFu
     $scope.login = function () {
         $scope.isDisabledLoginButton = true;
         userData.login($scope.loginData.username, $scope.loginData.password).then(function (response) {
-            console.log(response);
+            //console.log(response);
             $scope.deleteFirstMessageIfMaxLengthReached();
             $scope.Messages.push({
                 type: "Success",

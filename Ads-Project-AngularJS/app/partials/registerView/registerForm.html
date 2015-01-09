@@ -24,8 +24,13 @@
             <div>
                 <label for="phoneLabel">Phone:</label>
                 <input type="tel" id="phoneLabel" data-ng-model="newUser.phone" />
-                <label>Town:</label>
+                <!--<label>Town:</label>
                 <select data-ng-model="newUser.town" data-ng-options="town.name for town in allTowns">
+                    <option value="">No Town</option>
+                </select>-->
+
+                <label>Town:</label>
+                <select data-ng-model="newUser.townId" data-ng-options="town.id as town.name for town in allTowns ">
                     <option value="">No Town</option>
                 </select>
             </div>

@@ -76,7 +76,12 @@ app.factory('adminServices', function ($resource, $http, $cookieStore, $q, baseU
         });
     }
 
+    function deleteUserByUsername(username) {
+        setHeaders();
+        var resource = request('/api/admin/User/:username');
 
+        return resource.delete({ username: username });
+    }
 
 
 
@@ -164,7 +169,7 @@ app.factory('adminServices', function ($resource, $http, $cookieStore, $q, baseU
         getAllCategoriesSortedBy: getAllCategoriesSortedBy,
         getAllTownsSortedBy: getAllTownsSortedBy,
         editUser: editUser,
-
+        deleteUserByUsername: deleteUserByUsername,
 
 
         login: login,

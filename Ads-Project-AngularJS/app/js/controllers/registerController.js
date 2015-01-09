@@ -31,7 +31,7 @@ app.controller('registerController', ['$scope', '$location', 'adsData', 'userDat
 
 
     $scope.register = function () {
-        userData.register($scope.newUser.username, $scope.newUser.password1, $scope.newUser.password2, $scope.newUser.name, $scope.newUser.email, $scope.newUser.phone, $scope.newUser.town)
+        userData.register($scope.newUser.username, $scope.newUser.password1, $scope.newUser.password2, $scope.newUser.name, $scope.newUser.email, $scope.newUser.phone, $scope.newUser.townId)
             .then(function (response) {
                 //console.log(response);
                 $scope.deleteFirstMessageIfMaxLengthReached();

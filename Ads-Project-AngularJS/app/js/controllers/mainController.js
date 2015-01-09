@@ -26,7 +26,7 @@ app.controller('mainController', ['$scope', '$location', '$rootScope', 'userData
                 $location.path('/admin/home');
             } else {
                 deferred.reject();
-                $location.path('/user/home');
+                //$location.path('/user/home');
             }
 
             $scope.getLoggedUsername = userData.getLoggedUser().username;

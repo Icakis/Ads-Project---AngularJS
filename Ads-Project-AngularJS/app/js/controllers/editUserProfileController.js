@@ -55,7 +55,7 @@ app.controller('editUserProfileController', ['$scope', 'userData', '$location', 
                     messageClass: 'alert-success',
                     date: new Date()
                 });
-                $location.path('/');
+                $location.path('/user/home');
             }, function (error) {
                 //console.log(error);
                 $scope.deleteFirstMessageIfMaxLengthReached();
