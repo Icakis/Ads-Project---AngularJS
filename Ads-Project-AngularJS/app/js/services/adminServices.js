@@ -11,8 +11,8 @@ app.factory('adminServices', function ($resource, $http, $cookieStore, $q, baseU
         setHeaders();
         var resource = $resource(baseUrl + url,
         {
+            username: '@userName',
             id: '@id',
-            username: '@username',
         },
             {
                 update: {
@@ -58,6 +58,7 @@ app.factory('adminServices', function ($resource, $http, $cookieStore, $q, baseU
     }
 
     function editUser(user) {
+        //console.log(user);
         setHeaders();
         var resource = request('/api/admin/User/:username');
 
@@ -68,13 +69,12 @@ app.factory('adminServices', function ($resource, $http, $cookieStore, $q, baseU
             }
         }
 
-        return resource.update(user);
+        return resource.update({ username: user.username }, user);
     }
 
-    function changeUserPassword(oldPassword, newPassword, confirmPassword, username) {
+    function changeUserPassword(newPassword, confirmPassword, username) {
         setHeaders();
         return request('/api/admin/SetPassword').update({
-            "oldPassword": oldPassword,
             "NewPassword": newPassword,
             "ConfirmPassword": confirmPassword,
             "Username": username

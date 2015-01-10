@@ -1,10 +1,13 @@
 ﻿'use strict';
 
 app.controller('adminTownsController', ['$scope', '$rootScope', 'adminServices', 'serviceFunctions', function ($scope, $rootScope, adminServices, serviceFunctions) {
-    $scope.pagination = {
-        startPage: 1,
-        pageSize: 5,
-    };
+    // use $scope.pagination if you want to remember for this section only
+    //$scope.pagination = {
+    //    startPage: 1,
+    //    pageSize: 5,
+    //};
+
+    $scope.heading = 'Ads Administration - Towns';
 
     $scope.sortBy = '';
     $scope.changeSortBy = function (sortCriteria) {

@@ -66,8 +66,8 @@
     <Content Include="app\index.html" />
     <Content Include="app\js\app.js" />
     <Content Include="app\js\controllers\adminControllers\adminAllAdsController.js" />
-    <Content Include="app\js\controllers\adminControllers\adminCategoriesController.js" />
-    <Content Include="app\js\controllers\adminControllers\adminCrUDCategoryController.js" />
+    <Content Include="app\js\controllers\adminControllers\adminCategoryControllers\adminCategoriesController.js" />
+    <Content Include="app\js\controllers\adminControllers\adminCategoryControllers\adminCrUDCategoryController.js" />
     <Content Include="app\js\controllers\adminControllers\adminCrUDTownController.js" />
     <Content Include="app\js\controllers\adminControllers\adminDeleteAdController.js" />
     <Content Include="app\js\controllers\adminControllers\adminDeleteUserControlle.js" />

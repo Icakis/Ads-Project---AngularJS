@@ -21,6 +21,7 @@ app.factory('adsData', function ($resource, baseUrl) {
     }
 
     function getCategoryById(id) {
+        //console.log(id);
         return $resource(baseUrl + '/api/Categories/:id').get({id:id});
     }
 

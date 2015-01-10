@@ -18,7 +18,7 @@
                         <input type="text" id="phoneInput" name="phoneInput" data-ng-model="user.phoneNumber" />
                     </div>
                     <div data-ng-if="isAdmin()">
-                        <input type="checkbox" data-ng-model="user.isAdmin" id="isAdmin"/>
+                        <input type="checkbox" data-ng-model="user.isAdmin" id="isAdmin" data-ng-checked="user.isAdmin" />
                         <label for="isAdmin">Is Administrator?</label>
                     </div>
                     <div>

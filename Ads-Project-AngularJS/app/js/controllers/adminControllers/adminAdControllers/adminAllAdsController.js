@@ -52,15 +52,16 @@ app.controller('adminAllAdsController', function ($scope, $route, $http, adsData
                 //console.log(data);
                 //console.log($scope.paginationData);
             }, function (error) {
+                //console.log(error);
                 $scope.isShown.isAllAdsShown = true;
+                var messageText = serviceFunctions.messageServerErrors('Cannot get ads. Try again... ', error.data);
                 $scope.deleteFirstMessageIfMaxLengthReached();
                 $scope.Messages.push({
-                    type: "Warning!",
-                    text: 'Cannot get ads (connection lost or somthing gone wrong). Try again...',
-                    messageClass: 'alert-warning',
+                    type: "Error! ",
+                    text: messageText,
+                    messageClass: 'alert-danger',
                     date: new Date()
                 });
-                //console.log(error);
             });
     };
 
@@ -70,15 +71,24 @@ app.controller('adminAllAdsController', function ($scope, $route, $http, adsData
         //console.log(id);
         adminAdsDataServices.approveAdById(id)
             .$promise
-            .then(function (data) {
-                console.log(data);
-                $scope.reloadAllads();
-            }, function (error) {
-                console.log(error);
+            .then(function (response) {
+                //console.log(response);
                 $scope.deleteFirstMessageIfMaxLengthReached();
                 $scope.Messages.push({
-                    type: "Warning!",
-                    text: 'Cannot approve Add (connection lost or somthing gone wrong). Try again...',
+                    type: "Success! ",
+                    text: response.message,// 'Ad approved. ',
+                    messageClass: 'alert-success',
+                    date: new Date()
+                });
+
+                $scope.reloadAllads();
+            }, function (error) {
+                //console.log(error);
+                var messageText = serviceFunctions.messageServerErrors('Cannot approve Add. ', error.data);
+                $scope.deleteFirstMessageIfMaxLengthReached();
+                $scope.Messages.push({
+                    type: "Warning! ",
+                    text: messageText,
                     messageClass: 'alert-warning',
                     date: new Date()
                 });

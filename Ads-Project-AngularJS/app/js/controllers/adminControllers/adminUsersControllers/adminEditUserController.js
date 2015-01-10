@@ -9,12 +9,49 @@ app.controller('adminEditUserController', ['$scope', '$routeParams', '$location'
     // TODO: add in view and  editUserProfileControllers.
     $scope.isEnabledEdit = false;
 
-    adminServices.getUserById($routeParams.userId)
+    //// Returned data does not contain isAdmin!!
+    //adminServices.getUserById($routeParams.userId)
+    //    .$promise
+    //    .then(function (data) {
+    //        console.log(data);
+    //        $scope.user = data;
+    //        $scope.isEnabledEdit = true;
+    //    }, function (error) {
+    //        console.log(error);
+    //        var messageText = serviceFunctions.messageServerErrors('Unable to load user for edit. Try again. ', error.data);
+    //        $scope.deleteFirstMessageIfMaxLengthReached();
+    //        $scope.Messages.push({
+    //            type: "Error! ",
+    //            text: messageText,
+    //            messageClass: 'alert-danger',
+    //            date: new Date()
+    //        });
+    //    });
+
+    adminServices.getAllUsersSortedBy()
         .$promise
         .then(function (data) {
-            console.log(data);
-            $scope.user = data;
-            $scope.isEnabledEdit = true;
+            //console.log(data);
+            var userFound = false;
+            for (var i = 0; i < data.users.length; i++) {
+                if (data.users[i].id === $routeParams.userId) {
+                    //console.log(data.users[i]);
+                    $scope.user = data.users[i];
+                    userFound = true;
+                    break;
+                }
+            }
+
+            if (!userFound) {
+                $scope.deleteFirstMessageIfMaxLengthReached();
+                $scope.Messages.push({
+                    type: "Error! ",
+                    text: 'No such user.',
+                    messageClass: 'alert-danger',
+                    date: new Date()
+                });
+            }
+
         }, function (error) {
             console.log(error);
             $scope.deleteFirstMessageIfMaxLengthReached();
@@ -26,52 +63,18 @@ app.controller('adminEditUserController', ['$scope', '$routeParams', '$location'
             });
         });
 
-    //adminServices.getAllUsersSortedBy()
-    //    .$promise
-    //    .then(function (data) {
-    //        //console.log(data);
-    //        var userFound = false;
-    //        for (var i = 0; i < data.users.length; i++) {
-    //            if (data.users[i].username === $routeParams.userId) {
-    //                //console.log(data.users[i]);
-    //                $scope.user = data.users[i];
-    //                userFound = true;
-    //                break;
-    //            }
-    //        }
-
-    //        if (!userFound) {
-    //            $scope.deleteFirstMessageIfMaxLengthReached();
-    //            $scope.Messages.push({
-    //                type: "Error! ",
-    //                text: 'No such user.',
-    //                messageClass: 'alert-danger',
-    //                date: new Date()
-    //            });
-    //        }
-
-    //    }, function (error) {
-    //        console.log(error);
-    //        $scope.deleteFirstMessageIfMaxLengthReached();
-    //        $scope.Messages.push({
-    //            type: "Error! ",
-    //            text: 'Unable to load user for edit. Try again.',
-    //            messageClass: 'alert-danger',
-    //            date: new Date()
-    //        });
-    //    });
-
     adsData.getAllTowns()
         .$promise
         .then(function (towns) {
             $scope.allTowns = towns;
         }, function (error) {
             //console.log(error);
+            var messageText = serviceFunctions.messageServerErrors('Cannot load Towns for choose. ', error.data);
             $scope.deleteFirstMessageIfMaxLengthReached();
             $scope.Messages.push({
-                type: "Warning!",
-                text: 'Cannot get Towns to choose (connection lost or somthing gone wrong). Try again...',
-                messageClass: 'alert-warning',
+                type: "Error! ",
+                text: messageText,
+                messageClass: 'alert-danger',
                 date: new Date()
             });
         });
@@ -80,22 +83,23 @@ app.controller('adminEditUserController', ['$scope', '$routeParams', '$location'
         //console.log($scope.user);
         adminServices.editUser($scope.user)
             .$promise
-            .then(function (updatedUser) {
-                //console.log(updatedUser);
+            .then(function (data) {
+                //console.log(data);
                 $scope.deleteFirstMessageIfMaxLengthReached();
                 $scope.Messages.push({
                     type: "Success!",
-                    text: "User's profile was updated!",
+                    text: data.message, // "User's profile was updated!",
                     messageClass: 'alert-success',
                     date: new Date()
                 });
-                $location.path('/');
+                $location.path('/admin/users/list');
             }, function (error) {
                 //console.log(error);
+                var messageText = serviceFunctions.messageServerErrors('Uneble to update user\'s profile. ', error.data);
                 $scope.deleteFirstMessageIfMaxLengthReached();
                 $scope.Messages.push({
-                    type: "Alert!",
-                    text: "Uneble to update user's profile (Connection lost or somthing gone wrong).",
+                    type: "Warning! ",
+                    text: messageText,
                     messageClass: 'alert-warning',
                     date: new Date()
                 });
@@ -104,24 +108,24 @@ app.controller('adminEditUserController', ['$scope', '$routeParams', '$location'
 
     $scope.changeUserPassword = function () {
         //console.log($scope.userPasswords);
-        adminServices.changeUserPassword($scope.userPasswords.oldPassword, $scope.userPasswords.newPassword, $scope.userPasswords.confirmPassword, $routeParams.userId)
+        adminServices.changeUserPassword($scope.userPasswords.newPassword, $scope.userPasswords.confirmPassword, $scope.user.username)
             .$promise
             .then(function (data) {
                 //console.log(data);
                 $scope.deleteFirstMessageIfMaxLengthReached();
                 $scope.Messages.push({
-                    type: "Success!",
-                    text: "You're password was updated!",
+                    type: "Success! ",
+                    text: data.message, // "You're password was updated!",
                     messageClass: 'alert-success',
                     date: new Date()
                 });
                 $location.path('/');
             }, function (error) {
                 //console.log(error);
-                var messageText = serviceFunctions.messageServerErrors('Uneble to cahnge your password ', error.data);
+                var messageText = serviceFunctions.messageServerErrors('Uneble to cahnge user\'s password. ', error.data);
                 $scope.deleteFirstMessageIfMaxLengthReached();
                 $scope.Messages.push({
-                    type: "Warning!",
+                    type: "Warning! ",
                     text: messageText,
                     messageClass: 'alert-warning',
                     date: new Date()

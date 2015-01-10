@@ -48,22 +48,23 @@ app.controller('adminDeleteUserController', ['$scope', '$routeParams', '$locatio
         //console.log($scope.user);
         adminServices.deleteUserByUsername($routeParams.userId)
             .$promise
-            .then(function (updatedUser) {
+            .then(function (data) {
                 //console.log(updatedUser);
                 $scope.deleteFirstMessageIfMaxLengthReached();
                 $scope.Messages.push({
-                    type: "Success!",
-                    text: "User's profile was delete!",
+                    type: "Success! ",
+                    text: data.message,
                     messageClass: 'alert-success',
                     date: new Date()
                 });
                 $location.path('/admin/users/list');
             }, function (error) {
                 //console.log(error);
+                var messageText = serviceFunctions.messageServerErrors('Uneble to delete user\'s profile.', error.data);
                 $scope.deleteFirstMessageIfMaxLengthReached();
                 $scope.Messages.push({
-                    type: "Alert!",
-                    text: "Uneble to delete user's profile (Connection lost or somthing gone wrong).",
+                    type: "Warning! ",
+                    text: messageText,
                     messageClass: 'alert-warning',
                     date: new Date()
                 });

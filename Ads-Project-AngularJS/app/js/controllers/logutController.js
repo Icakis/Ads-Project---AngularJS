@@ -8,6 +8,8 @@ app.controller('logoutController', ['$scope', '$location', 'userData', '$rootSco
         pageSize: 2,
     };
 
+    $scope.getLoggedUsername = '';
+
     $scope.Messages = [];
     $scope.Messages.push({
         type: "Success",
