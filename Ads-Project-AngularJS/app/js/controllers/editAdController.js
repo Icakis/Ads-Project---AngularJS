@@ -17,11 +17,12 @@ app.controller('editAdController', ['$scope', 'userData', '$routeParams', 'userA
             $scope.allCategories = categories;
         }, function (error) {
             //console.log(error);
+            var messageText = serviceFunctions.messageServerErrors('Uneble to dispalay Categories for choose. ', error.data);
             $scope.deleteFirstMessageIfMaxLengthReached();
             $scope.Messages.push({
-                type: "Warning",
-                text: "Cannot dispalay Categories to choose (Connection lost or something gone wrong).",
-                messageClass: 'alert-info',
+                type: "Error! ",
+                text: messageText,
+                messageClass: 'alert-danger',
                 date: new Date()
             });
         });
@@ -32,11 +33,12 @@ app.controller('editAdController', ['$scope', 'userData', '$routeParams', 'userA
             $scope.allTowns = towns;
         }, function (error) {
             //console.log(error);
+            var messageText = serviceFunctions.messageServerErrors('Uneble to dispalay Towns for choose. ', error.data);
             $scope.deleteFirstMessageIfMaxLengthReached();
             $scope.Messages.push({
-                type: "Warning",
-                text: "Cannot dispalay Towns to choose (Connection lost or something gone wrong).",
-                messageClass: 'alert-info',
+                type: "Error! ",
+                text: messageText,
+                messageClass: 'alert-danger',
                 date: new Date()
             });
         });
@@ -47,11 +49,12 @@ app.controller('editAdController', ['$scope', 'userData', '$routeParams', 'userA
             //console.log(data);
             $scope.editedAd = data;
         }, function (error) {
-            console.log(error);
+            //console.log(error);
+            var messageText = serviceFunctions.messageServerErrors('Uneble to dispalay ad to edit. ', error.data);
             $scope.deleteFirstMessageIfMaxLengthReached();
             $scope.Messages.push({
-                type: "Error",
-                text: "Cannot dispalay ad to edit (Connection lost or something gone wrong).",
+                type: "Error! ",
+                text: messageText,
                 messageClass: 'alert-danger',
                 date: new Date()
             });
@@ -64,7 +67,7 @@ app.controller('editAdController', ['$scope', 'userData', '$routeParams', 'userA
             }, function (error) {
                 $scope.deleteFirstMessageIfMaxLengthReached();
                 $scope.Messages.push({
-                    type: "Warning",
+                    type: "Warning! ",
                     text: error,
                     messageClass: 'alert-info',
                     date: new Date()
@@ -84,19 +87,20 @@ app.controller('editAdController', ['$scope', 'userData', '$routeParams', 'userA
                 //console.log(data);
                 $scope.deleteFirstMessageIfMaxLengthReached();
                 $scope.Messages.push({
-                    type: "Success",
-                    text: "Add was successfuly edited.",
+                    type: "Success! ",
+                    text: data.message, //"Add was successfuly edited.",
                     messageClass: 'alert-success',
                     date: new Date()
                 });
 
                 $location.path('/user/ads');
             }, function (error) {
-                console.log(error);
+                //console.log(error);
+                var messageText = serviceFunctions.messageServerErrors('Uneble to edit ad. ', error.data);
                 $scope.deleteFirstMessageIfMaxLengthReached();
                 $scope.Messages.push({
-                    type: "Error",
-                    text: error.data.error_description,
+                    type: "Error! ",
+                    text: messageText,
                     messageClass: 'alert-danger',
                     date: new Date()
                 });

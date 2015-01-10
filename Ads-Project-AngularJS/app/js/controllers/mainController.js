@@ -21,12 +21,11 @@ app.controller('mainController', ['$scope', '$location', '$rootScope', 'userData
                 deferred.reject();
                 $location.path('/user/home');
             }
-
-            $scope.getLoggedUsername = userData.getLoggedUser().username;
         } else {
             deferred.reject();
             $location.path('/');
         }
+
         return deferred.promise;
     }
 
@@ -40,6 +39,10 @@ app.controller('mainController', ['$scope', '$location', '$rootScope', 'userData
         };
 
         return false;
+    }
+
+    if (userData.getLoggedUser()) {
+        $rootScope.getLoggedUsername = userData.getLoggedUser().username;
     }
 
     $rootScope.userSection = 'home';

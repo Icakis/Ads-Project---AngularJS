@@ -26,11 +26,12 @@ app.controller('AllAdsController', function ($scope, $route, $http, adsData, use
                 //console.log($scope.paginationData);
             }, function (error) {
                 $scope.isShown.isAllAdsShown = true;
+                var messageText = serviceFunctions.messageServerErrors('Uneble to load ads. ', error.data);
                 $scope.deleteFirstMessageIfMaxLengthReached();
                 $scope.Messages.push({
-                    type: "Warning!",
-                    text: 'Cannot get ads (connection lost or somthing gone wrong). Try again...',
-                    messageClass: 'alert-warning',
+                    type: "Error! ",
+                    text: messageText,
+                    messageClass: 'alert-danger',
                     date: new Date()
                 });
                 //console.log(error);

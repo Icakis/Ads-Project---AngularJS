@@ -6,7 +6,7 @@ app.controller('loginController', ['$scope', '$location', 'userData', 'serviceFu
     if (userData.getLoggedUser()) {
         $scope.deleteFirstMessageIfMaxLengthReached();
         $scope.Messages.push({
-            type: "Alert",
+            type: "Alert! ",
             text: "You're logged! You cannot access login url.",
             messageClass: 'alert-info',
             date: new Date()
@@ -18,12 +18,13 @@ app.controller('loginController', ['$scope', '$location', 'userData', 'serviceFu
     $scope.loginData = {};
     $scope.login = function () {
         $scope.isDisabledLoginButton = true;
-        userData.login($scope.loginData.username, $scope.loginData.password).then(function (response) {
-            //console.log(response);
+        userData.login($scope.loginData.username, $scope.loginData.password).then(function (data) {
+            //console.log(data);
+            //$scope.getLoggedUsername = $scope.loginData.username;
             $scope.deleteFirstMessageIfMaxLengthReached();
             $scope.Messages.push({
-                type: "Success",
-                text: "You're logged!",
+                type: "Success! ",
+                text: data.message, // "You're logged!",
                 messageClass: 'alert-success',
                 date: new Date()
             });

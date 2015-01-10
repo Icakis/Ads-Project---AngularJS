@@ -1,10 +1,6 @@
 ﻿'use strict';
 
 app.controller('editUserProfileController', ['$scope', 'userData', '$location', 'adsData', '$rootScope', 'serviceFunctions', function ($scope, userData, $location, adsData, $rootScope, serviceFunctions) {
-    if (!userData.getLoggedUser()) {
-        $location.path('/user/home');
-    }
-
     $scope.heading = 'Ads - Edit User Profile';
     $rootScope.userSection = 'editProfile';
 
@@ -18,10 +14,11 @@ app.controller('editUserProfileController', ['$scope', 'userData', '$location', 
             //console.log(user);
         }, function (error) {
             //console.log(error);
+            var messageText = serviceFunctions.messageServerErrors('Uneble to load user profile to edit. ', error.data);
             $scope.deleteFirstMessageIfMaxLengthReached();
             $scope.Messages.push({
-                type: "Error!",
-                text: 'Cannot get user profile to edit (connection lost or somthing gone wrong). Try again...',
+                type: "Error! ",
+                text: messageText,
                 messageClass: 'alert-danger',
                 date: new Date()
             });
@@ -33,11 +30,12 @@ app.controller('editUserProfileController', ['$scope', 'userData', '$location', 
             $scope.allTowns = towns;
         }, function (error) {
             //console.log(error);
+            var messageText = serviceFunctions.messageServerErrors('Uneble to dispalay Towns for choose. ', error.data);
             $scope.deleteFirstMessageIfMaxLengthReached();
             $scope.Messages.push({
-                type: "Warning!",
-                text: 'Cannot get Towns to choose (connection lost or somthing gone wrong). Try again...',
-                messageClass: 'alert-warning',
+                type: "Error! ",
+                text: messageText,
+                messageClass: 'alert-danger',
                 date: new Date()
             });
         });
@@ -46,12 +44,12 @@ app.controller('editUserProfileController', ['$scope', 'userData', '$location', 
         //console.log($scope.user);
         userData.editUser($scope.user)
             .$promise
-            .then(function (updatedUser) {
+            .then(function (data) {
                 //console.log(updatedUser);
                 $scope.deleteFirstMessageIfMaxLengthReached();
                 $scope.Messages.push({
-                    type: "Success!",
-                    text: "You're 'profile was updated!",
+                    type: "Success! ",
+                    text: data.message, // "You're 'profile was updated!",
                     messageClass: 'alert-success',
                     date: new Date()
                 });
@@ -78,7 +76,7 @@ app.controller('editUserProfileController', ['$scope', 'userData', '$location', 
                 $scope.deleteFirstMessageIfMaxLengthReached();
                 $scope.Messages.push({
                     type: "Success! ",
-                    text: "You're password was updated!",
+                    text: data.message, // "You're password was updated!",
                     messageClass: 'alert-success',
                     date: new Date()
                 });

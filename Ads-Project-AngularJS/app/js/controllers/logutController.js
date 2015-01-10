@@ -8,7 +8,7 @@ app.controller('logoutController', ['$scope', '$location', 'userData', '$rootSco
         pageSize: 2,
     };
 
-    $scope.getLoggedUsername = '';
+
 
     $scope.Messages = [];
     $scope.Messages.push({
@@ -18,7 +18,7 @@ app.controller('logoutController', ['$scope', '$location', 'userData', '$rootSco
         date: new Date()
     });
 
-
+    //$scope.getLoggedUsername = '';
     $location.path('/');
     //console.log(userData.getLoggedUser());
 }
