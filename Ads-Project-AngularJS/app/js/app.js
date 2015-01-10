@@ -1,7 +1,22 @@
 'use strict';
 
 var app = angular.module('adsApp', ['ngResource', 'ngRoute', 'ngCookies', 'chieffancypants.loadingBar', 'ngSanitize', 'ui.bootstrap']) //'ngAnimate',
-.config(function ($routeProvider) {
+.run(function ($rootScope, $location, userData) {
+    $rootScope.$on('$locationChangeStart', function (event) {
+
+        if ($location.path().indexOf("/user/") != -1 && !userData.getLoggedUser()) {
+            // Authorization check: anonymous site visitors cannot access user routes
+            $location.path("/");
+        }
+
+        if ($location.path().indexOf("/admin/") != -1 && !userData.adminAuthentication()) {
+            // Authorization check: anonymous site visitors cannot access user routes
+            $location.path("/");
+        }
+    });
+}).config(function ($routeProvider) {
+
+
     $routeProvider.when('/', {
         templateUrl: './partials/adsViewPartials/homeView.html',
         controller: 'mainController'
@@ -35,7 +50,6 @@ var app = angular.module('adsApp', ['ngResource', 'ngRoute', 'ngCookies', 'chief
     }).when('/admin/home', {
         templateUrl: './partials/adminView/adminHomeView.html',
         controller: 'adminAllAdsController',
-        //resolve: { isLoggedAdmin: isLoggedAdmin }
     }).when('/admin/ads/delete/:deleteAdId*', {
         templateUrl: './partials/adminView/deleteAdView.html',
         controller: 'adminDeleteAdController',
@@ -72,12 +86,10 @@ var app = angular.module('adsApp', ['ngResource', 'ngRoute', 'ngCookies', 'chief
         templateUrl: './partials/adminView/adminCrUDTownView.html',
         controller: 'adminCrUDTownController',
         //resolve: { isLoggedAdmin: isLoggedAdmin }
+    }).otherwise({
+        templateUrl: './partials/adsViewPartials/homeView.html',
+        controller: 'mainController'
     });
-
-    //    .otherwise({
-    //    templateUrl: './partials/adsViewPartials/homeView.html',
-    //    controller: 'mainController'
-    //});
 });
 
 app.constant('baseUrl', 'http://localhost:1337');

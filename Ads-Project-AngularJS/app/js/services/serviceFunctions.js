@@ -60,3 +60,4 @@ app.factory('serviceFunctions', function ($resource, baseUrl, $q) {
         messageServerErrors: messageServerErrors,
     };
 });
+

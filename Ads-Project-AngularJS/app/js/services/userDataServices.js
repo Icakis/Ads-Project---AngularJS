@@ -95,14 +95,16 @@ app.factory('userData', function ($resource, $http, $cookieStore, $q, baseUrl) {
         return resource.update(updatedUser);
     }
 
-    //function deleteUser(userId) {
-    //    // TODO:
-    //}
+    function adminAuthentication() {
+        //console.log(userData.getLoggedUser());
+        if (getLoggedUser()) {
+            if (getLoggedUser().isAdmin === 'true') {
+                return true;
+            }
+        }
 
-    //function getUserById(userId) {
-    //    // TODO:
-    //}
-
+        return false;
+    }
 
     function changeUserPassword(oldPassword, newPassword, confirmPassword) {
         setHeaders();
@@ -120,8 +122,8 @@ app.factory('userData', function ($resource, $http, $cookieStore, $q, baseUrl) {
         logout: logout,
         getUserProfile: getUserProfile,
         editUser: editUser,
-        //deleteUser: deleteUser,
-        //getUserById: getUserById,
-        changeUserPassword: changeUserPassword
+        changeUserPassword: changeUserPassword,
+        adminAuthentication: adminAuthentication,
     }
 });
+

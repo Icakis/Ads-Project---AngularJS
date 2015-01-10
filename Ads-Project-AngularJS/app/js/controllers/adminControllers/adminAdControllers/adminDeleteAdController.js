@@ -1,12 +1,6 @@
 ﻿'use strict';
 
 app.controller('adminDeleteAdController', ['$scope', 'userData', '$location', '$routeParams', 'adminAdsDataServices', '$rootScope', function ($scope, userData, $location, $routeParams, adminAdsDataServices, $rootScope) {
-    //if (!userData.getLoggedUser()) {
-    //    $location.path('/user/home');
-    //}
-
-    //$scope.isLoggedAdmin();
-
     $scope.heading = 'Ads Administration - Delete Ad';
     $rootScope.userSection = '';
 

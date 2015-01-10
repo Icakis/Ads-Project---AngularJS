@@ -1,7 +1,6 @@
 ﻿'use strict';
 
 app.controller('DatepickerDemoCtrl', function ($scope) {
-
     $scope.today = function () {
         console.log($scope.editedAd.date);
         var str = window.JSON.stringify({ date: new Date() });

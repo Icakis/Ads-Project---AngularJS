@@ -7,8 +7,6 @@ app.controller('adminAllAdsController', function ($scope, $route, $http, adsData
 
     $rootScope.userSection = 'home-admin';
 
-    $scope.isLoggedAdmin();
-
     $scope.filter = {
         category: '',
         town: ''

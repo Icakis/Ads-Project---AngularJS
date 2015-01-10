@@ -22,7 +22,7 @@ app.controller('editUserProfileController', ['$scope', 'userData', '$location', 
             $scope.Messages.push({
                 type: "Error!",
                 text: 'Cannot get user profile to edit (connection lost or somthing gone wrong). Try again...',
-                messageClass: 'alert-dangter',
+                messageClass: 'alert-danger',
                 date: new Date()
             });
         });
@@ -59,10 +59,11 @@ app.controller('editUserProfileController', ['$scope', 'userData', '$location', 
             }, function (error) {
                 //console.log(error);
                 $scope.deleteFirstMessageIfMaxLengthReached();
+                var messageText = serviceFunctions.messageServerErrors('Uneble to update your profile (Connection lost or somthing gone wrong). ', error.data);
                 $scope.Messages.push({
-                    type: "Alert!",
-                    text: 'Uneble to update your profile (Connection lost or somthing gone wrong).',
-                    messageClass: 'alert-alert',
+                    type: "Warning! ",
+                    text: messageText,
+                    messageClass: 'alert-warning',
                     date: new Date()
                 });
             });
@@ -76,7 +77,7 @@ app.controller('editUserProfileController', ['$scope', 'userData', '$location', 
                 //console.log(data);
                 $scope.deleteFirstMessageIfMaxLengthReached();
                 $scope.Messages.push({
-                    type: "Success!",
+                    type: "Success! ",
                     text: "You're password was updated!",
                     messageClass: 'alert-success',
                     date: new Date()
@@ -87,7 +88,7 @@ app.controller('editUserProfileController', ['$scope', 'userData', '$location', 
                 var messageText = serviceFunctions.messageServerErrors('Uneble to cahnge your password ', error.data);
                 $scope.deleteFirstMessageIfMaxLengthReached();
                 $scope.Messages.push({
-                    type: "Warning!",
+                    type: "Warning! ",
                     text: messageText,
                     messageClass: 'alert-warning',
                     date: new Date()

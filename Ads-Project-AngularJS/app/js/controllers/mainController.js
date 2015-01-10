@@ -1,13 +1,6 @@
 ﻿'use strict';
 
 app.controller('mainController', ['$scope', '$location', '$rootScope', 'userData', '$q', function ($scope, $location, $rootScope, userData, $q) {
-    //if (!userData.getLoggedUser()) {
-    //    $location.path('/');
-    //} else {
-    //    $scope.getLoggedUsername = userData.getLoggedUser().username;
-    //    $location.path('/user/home');
-    //}
-
     $scope.heading = 'Ads Home';
     $scope.isUserLogged = function () {
         if (userData.getLoggedUser()) {
@@ -26,7 +19,7 @@ app.controller('mainController', ['$scope', '$location', '$rootScope', 'userData
                 $location.path('/admin/home');
             } else {
                 deferred.reject();
-                //$location.path('/user/home');
+                $location.path('/user/home');
             }
 
             $scope.getLoggedUsername = userData.getLoggedUser().username;
@@ -74,23 +67,6 @@ app.controller('mainController', ['$scope', '$location', '$rootScope', 'userData
         }
     };
 
-    //[{
-    //    type: "Error",
-    //    text: "Hello there!",
-    //    messageClass: 'alert-warning',
-    //    date: new Date()
-    //},
-    //{
-    //    type: "Success",
-    //    text: "Hello there!",
-    //    messageClass: 'alert-success'
-    //}];
-
-    //{
-    //    type: "Error",
-    //    text: "Hello there!",
-    //    messageClass:'alert-success'
-    //}
 
     $scope.isShown = {
         isAllAdsShown: false,

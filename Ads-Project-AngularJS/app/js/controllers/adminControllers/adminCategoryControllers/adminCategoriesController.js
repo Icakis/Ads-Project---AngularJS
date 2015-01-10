@@ -6,6 +6,7 @@ app.controller('adminCategoriesController', ['$scope', '$rootScope', 'adminServi
     //    startPage: 1,
     //    pageSize: 5,
     //};
+
     $scope.heading = 'Ads Administration - Categories';
 
     $scope.sortBy = '';

@@ -27,7 +27,7 @@ app.controller('loginController', ['$scope', '$location', 'userData', 'serviceFu
                 messageClass: 'alert-success',
                 date: new Date()
             });
-            $location.path('/user/home');
+            $location.path('/');
         }, function (error) {
             var messageText = serviceFunctions.messageServerErrors('Uneble to cahnge your password ', error.data);
             $scope.deleteFirstMessageIfMaxLengthReached();
