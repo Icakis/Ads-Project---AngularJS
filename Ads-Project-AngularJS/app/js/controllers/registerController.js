@@ -5,7 +5,7 @@ app.controller('registerController', ['$scope', '$location', 'adsData', 'userDat
     if (userData.getLoggedUser()) {
         $scope.deleteFirstMessageIfMaxLengthReached();
         $scope.Messages.push({
-            type: "Alert",
+            type: "Alert! ",
             text: "You're logged! If you want to register, please logout first.",
             messageClass: 'alert-info',
             date: new Date()
@@ -22,7 +22,7 @@ app.controller('registerController', ['$scope', '$location', 'adsData', 'userDat
         }, function (error) {
             console.log(error);
             $scope.Messages.push({
-                type: "Warning",
+                type: "Warning! ",
                 text: "Cannot dispalay filter by Towns (Connection lost or something gone wrong).",
                 messageClass: 'alert-info',
                 date: new Date()
@@ -36,7 +36,7 @@ app.controller('registerController', ['$scope', '$location', 'adsData', 'userDat
                 //console.log(response);
                 $scope.deleteFirstMessageIfMaxLengthReached();
                 $scope.Messages.push({
-                    type: "Success",
+                    type: "Success! ",
                     text: "You're registered!",
                     messageClass: 'alert-success',
                     date: new Date()
@@ -44,10 +44,10 @@ app.controller('registerController', ['$scope', '$location', 'adsData', 'userDat
                 $location.path('/user/home');
             }, function (error) {
                 //console.log(error);
-                var messageText = serviceFunctions.messageServerErrors('Uneble to cahnge your password ', error.data);
+                var messageText = serviceFunctions.messageServerErrors('Registration failed. ', error.data);
                 $scope.deleteFirstMessageIfMaxLengthReached();
                 $scope.Messages.push({
-                    type: "Error!",
+                    type: "Error! ",
                     text: messageText,
                     messageClass: 'alert-danger',
                     date: new Date()

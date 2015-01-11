@@ -49,6 +49,11 @@ app.factory('serviceFunctions', function ($resource, baseUrl, $q) {
                 }
             }
         }
+
+        if (serverError.message) {
+            errors.push(serverError.message);
+        }
+
         if (errors.length > 0) {
             msg = msg + ":<br>" + errors.join("<br>");
         }

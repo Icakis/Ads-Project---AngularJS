@@ -78,10 +78,11 @@ app.controller('publishNewAdController', ['$scope', 'userData', 'userAdsData', '
                 });
                 $location.path('/user/ads');
             }, function (error) {
+                var messageText = serviceFunctions.messageServerErrors('Cannot creeate new Ad ', error.data);
                 $scope.deleteFirstMessageIfMaxLengthReached();
                 $scope.Messages.push({
-                    type: "Error",
-                    text: "Cannot creeate new Ad(Connection lost or something gone wrong).",
+                    type: "Error! ",
+                    text: messageText,
                     messageClass: 'alert-danger',
                     date: new Date()
                 });

@@ -30,7 +30,7 @@ app.controller('loginController', ['$scope', '$location', 'userData', 'serviceFu
             });
             $location.path('/');
         }, function (error) {
-            var messageText = serviceFunctions.messageServerErrors('Uneble to cahnge your password ', error.data);
+            var messageText = serviceFunctions.messageServerErrors('Login failed. ', error.data);
             $scope.deleteFirstMessageIfMaxLengthReached();
             $scope.Messages.push({
                 type: "Error!",

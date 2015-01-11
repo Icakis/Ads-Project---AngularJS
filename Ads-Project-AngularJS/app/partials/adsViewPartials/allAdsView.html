@@ -5,9 +5,6 @@
                 <h2>{{add.title}}</h2>
                 <span class="adDateSpan">{{add.date | date:'d-MMM-yyyy'}}</span>
             </div>
-            <!--<p class="lead"><button class="btn btn-default">Read More</button></p>
-            <p class="pull-right"><span class="label label-default">keyword</span> <span class="label label-default">tag</span> <span class="label label-default">post</span></p>
-            <ul class="list-inline"><li><a href="#">2 Days Ago</a></li><li><a href="#"><i class="glyphicon glyphicon-comment"></i> 2 Comments</a></li><li><a href="#"><i class="glyphicon glyphicon-share"></i> 14 Shares</a></li></ul>-->
         </div>
     </div>
     <div class="row">
@@ -15,10 +12,10 @@
             <img data-ng-src="{{add.imageDataUrl?add.imageDataUrl:'./img/No_Image_Available.png'}}" class="adImageContainer" />
         </div>
         <div class="col-md-8">
-            <p>{{add.text}}</p>
-            <p>Name: <span>{{add.ownerName}}</span></p>
-            <p>Email: <span>{{add.ownerEmail}}</span></p>
-            <p>Tel: <span>{{add.ownerPhone}}</span></p>
+            <p><strong>About:</strong>{{add.text}}</p>
+            <p><strong>Name:</strong><span>{{add.ownerName}}</span></p>
+            <p><strong>Email:</strong><span>{{add.ownerEmail}}</span></p>
+            <p data-ng-if="add.ownerPhone"><strong>Tel:</strong><span>{{add.ownerPhone}}</span></p>
         </div>
     </div>
     <hr data-ng-if="!$last">
