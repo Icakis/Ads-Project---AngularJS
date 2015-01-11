@@ -68,7 +68,7 @@ aside {
 }
 
 #publishAdImagePreviewContainer {
-    width: 10%;
+    width: 100%;
     display: inline-block;
 }
 
@@ -102,4 +102,8 @@ aside {
 
 .leftBorder {
     border-left: 1px solid #eee;
+}
+
+.headingText {
+    font-size: 2em;
 }

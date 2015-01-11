@@ -36,7 +36,7 @@ app.controller('adminDeleteAdController', ['$scope', 'userData', '$location', '$
                         messageClass: 'alert-success',
                         date: new Date()
                     });
-                    $location.path('/user/ads');
+                    $location.path('/admin/home');
                 }, function (error) {
                     //console.log(error);
                     $scope.deleteFirstMessageIfMaxLengthReached();

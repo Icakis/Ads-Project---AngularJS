@@ -10,46 +10,48 @@
         <main class="col-sm-9" id="middleContainer" data-ng-controller="paginationController">
             <div id="messagesContainer" data-ng-repeat="message in Messages" data-ng-include="'partials/messageView.html'"></div>
             <div data-ng-include="'partials/changeAdCountOnPage.html'"></div>
-            <table>
-                <thead>
-                    <tr>
-                        <th data-ng-click="changeSortBy('UserName')">
-                            Username <span data-ng-if="sortBy == 'UserName'">&#9660;</span><span data-ng-if="sortBy == '-UserName'">&#9650;</span>
-                        </th>
-                        <th data-ng-click="changeSortBy('Name')">
-                            Name<span data-ng-if="sortBy == 'Name'">&#9660;</span><span data-ng-if="sortBy == '-Name'">&#9650;</span>
-                        </th>
-                        <th data-ng-click="changeSortBy('Email')">
-                            Email<span data-ng-if="sortBy == 'Email'">&#9660;</span><span data-ng-if="sortBy == '-Email'">&#9650;</span>
-                        </th>
-                        <th data-ng-click="changeSortBy('PhoneNumber')">
-                            Phone<span data-ng-if="sortBy == 'PhoneNumber'">&#9660;</span><span data-ng-if="sortBy == '-PhoneNumber'">&#9650;</span>
-                        </th>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th data-ng-click="changeSortBy('UserName')">
+                                Username <span data-ng-if="sortBy == 'UserName'">&#9660;</span><span data-ng-if="sortBy == '-UserName'">&#9650;</span>
+                            </th>
+                            <th data-ng-click="changeSortBy('Name')">
+                                Name<span data-ng-if="sortBy == 'Name'">&#9660;</span><span data-ng-if="sortBy == '-Name'">&#9650;</span>
+                            </th>
+                            <th data-ng-click="changeSortBy('Email')">
+                                Email<span data-ng-if="sortBy == 'Email'">&#9660;</span><span data-ng-if="sortBy == '-Email'">&#9650;</span>
+                            </th>
+                            <th data-ng-click="changeSortBy('PhoneNumber')">
+                                Phone<span data-ng-if="sortBy == 'PhoneNumber'">&#9660;</span><span data-ng-if="sortBy == '-PhoneNumber'">&#9650;</span>
+                            </th>
 
-                        <th data-ng-click="changeSortBy('Town.Name')">
-                            Town<span data-ng-if="sortBy == 'Town.Name'">&#9660;</span><span data-ng-if="sortBy == '-Town.Name'">&#9650;</span>
-                        </th>
-                        <th>
-                            is Admin
-                        </th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr data-ng-repeat="user in allUsers">
-                        <td>{{user.username}}</td>
-                        <td>{{user.name}}</td>
-                        <td><a data-ng-href='mailto:{{user.email}}'>{{user.email}}</a> </td>
-                        <td>{{user.phoneNumber}}</td>
-                        <td>{{user.townName}}</td>
-                        <td>{{user.isAdmin}}</td>
-                        <td>
-                            <a data-ng-href="#/admin/users/edit/{{user.id}}">Edit</a>
-                            <a data-ng-href="#/admin/users/delete/{{user.username}}">Delete</a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                            <th data-ng-click="changeSortBy('Town.Name')">
+                                Town<span data-ng-if="sortBy == 'Town.Name'">&#9660;</span><span data-ng-if="sortBy == '-Town.Name'">&#9650;</span>
+                            </th>
+                            <th>
+                                is Admin
+                            </th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr data-ng-repeat="user in allUsers">
+                            <td>{{user.username}}</td>
+                            <td>{{user.name}}</td>
+                            <td><a data-ng-href='mailto:{{user.email}}'>{{user.email}}</a> </td>
+                            <td>{{user.phoneNumber}}</td>
+                            <td>{{user.townName}}</td>
+                            <td>{{user.isAdmin}}</td>
+                            <td>
+                                <a data-ng-href="#/admin/users/edit/{{user.id}}">Edit</a>
+                                <a data-ng-href="#/admin/users/delete/{{user.username}}">Delete</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
             <!-- paging -->
             <div data-ng-include="'partials/paginationView.html'"></div>
             <!-- paging -->

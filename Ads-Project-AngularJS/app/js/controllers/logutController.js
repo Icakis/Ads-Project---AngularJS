@@ -4,13 +4,11 @@ app.controller('logoutController', ['$scope', '$location', 'userData', '$rootSco
     userData.logout();
     $rootScope.userSection = 'home';
     $rootScope.pagination = {
-        startPage: 2,
+        startPage: 1,
         pageSize: 2,
     };
 
-
-
-    $scope.Messages = [];
+    $scope.Messages.splice(0, $scope.Messages.length);
     $scope.Messages.push({
         type: "Success",
         text: "You're log out!",

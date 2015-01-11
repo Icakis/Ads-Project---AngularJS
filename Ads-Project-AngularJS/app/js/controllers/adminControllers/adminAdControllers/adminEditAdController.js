@@ -105,7 +105,7 @@ app.controller('adminEditAdController', ['$scope', 'userData', '$routeParams', '
                         date: new Date()
                     });
 
-                    $location.path('/user/ads');
+                    $location.path('/admin/home');
                 }, function (error) {
                     console.log(error);
                     var messageText = serviceFunctions.messageServerErrors('Uneble to edit Ad ', error.data);

@@ -10,33 +10,35 @@
         <main class="col-sm-9" id="middleContainer" data-ng-controller="paginationController">
             <div id="messagesContainer" data-ng-repeat="message in Messages" data-ng-include="'partials/messageView.html'"></div>
             <div data-ng-include="'partials/changeAdCountOnPage.html'"></div>
-            <table>
-                <thead>
-                    <tr>
-                        <th data-ng-click="changeSortBy('Id')">
-                            Id<span data-ng-if="sortBy == 'Id'">&#9660;</span><span data-ng-if="sortBy == '-Id'">&#9650;</span>
-                        </th>
-                        <th data-ng-click="changeSortBy('Name')">
-                            Town<span data-ng-if="sortBy == 'Name'">&#9660;</span><span data-ng-if="sortBy == '-Name'">&#9650;</span>
-                        </th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr data-ng-repeat="town in allTowns">
-                        <td>{{town.id}}</td>
-                        <td>{{town.username}}</td>
-                        <td>
-                            <a data-ng-href="#/admin/towns/edit/{{town.id}}">Edit</a>
-                            <a data-ng-href="#/admin/towns/delete/{{town.id}}">Delete</a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th data-ng-click="changeSortBy('Id')">
+                                Id<span data-ng-if="sortBy == 'Id'">&#9660;</span><span data-ng-if="sortBy == '-Id'">&#9650;</span>
+                            </th>
+                            <th data-ng-click="changeSortBy('Name')">
+                                Town<span data-ng-if="sortBy == 'Name'">&#9660;</span><span data-ng-if="sortBy == '-Name'">&#9650;</span>
+                            </th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr data-ng-repeat="town in allTowns">
+                            <td>{{town.id}}</td>
+                            <td>{{town.username}}</td>
+                            <td>
+                                <a data-ng-href="#/admin/towns/edit/{{town.id}}">Edit</a>
+                                <a data-ng-href="#/admin/towns/delete/{{town.id}}">Delete</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
             <!-- paging -->
             <div data-ng-include="'partials/paginationView.html'"></div>
             <!-- paging -->
-            
+
             <div>
                 <a data-ng-href="#/admin/towns/create" class="btn btn-default btn-lg">Create New Town</a>
             </div>

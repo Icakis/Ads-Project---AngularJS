@@ -61,7 +61,7 @@ app.controller('publishNewAdController', ['$scope', 'userData', 'userAdsData', '
 
     $scope.deleteImageDataUrl = function () {
         $scope.newAd.imageDataUrl = '';
-        $scope.editedAd.ChangeImage = true;
+        //$scope.newAd.ChangeImage = true;
     };
 
     $scope.publishNewAd = function () {

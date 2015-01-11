@@ -11,7 +11,7 @@
         <div class="col-md-3">
             <img data-ng-src="{{ad.imageDataUrl?ad.imageDataUrl:'./img/No_Image_Available.png'}}" class="adImageContainer" />
         </div>
-        <div class="col-md-7">
+        <div class="col-md-5">
             <p><strong>About: </strong> {{ad.text}}</p>
             <p><strong>Username: </strong><span>{{ad.ownerUsername}}</span></p>
             <p><strong>Name: </strong><span>{{ad.ownerName}}</span></p>
@@ -21,7 +21,7 @@
             <p><strong>Town: </strong><span>{{ad.townName}}</span></p>
 
         </div>
-        <div class="col-md-2 leftBorder">
+        <div class="col-md-4 leftBorder">
             <p data-ng-if="ad.status != 'WaitingApproval'"><strong>Status: </strong>{{ad.status}}</p>
             <p data-ng-if="ad.status == 'WaitingApproval'"><strong>Status: </strong>Waiting Approval</p>
             <a href="" data-ng-if="ad.status != 'Published'" class="btn btn-default btn-lg myAdActionButton" data-ng-click="adminApproveAd(ad.id)">Approve</a>
