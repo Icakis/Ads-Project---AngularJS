@@ -11,7 +11,7 @@ app.controller('AllAdsController', function ($scope, $route, $http, adsData, use
         town: ''
     };
 
-    console.log($scope.Messages);
+    //console.log($scope.Messages);
 
     $scope.range = function (n) {
         return new Array(n);

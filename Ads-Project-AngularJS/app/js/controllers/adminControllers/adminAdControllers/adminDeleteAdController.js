@@ -2,7 +2,7 @@
 
 app.controller('adminDeleteAdController', ['$scope', 'userData', '$location', '$routeParams', 'adminAdsDataServices', '$rootScope', function ($scope, userData, $location, $routeParams, adminAdsDataServices, $rootScope) {
     $scope.heading = 'Ads Administration - Delete Ad';
-    $rootScope.userSection = '';
+    $rootScope.userSection = 'home-admin';
 
     //console.log(userAdsData);
     //console.log($routeParams);

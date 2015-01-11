@@ -53,7 +53,10 @@ app.controller('mainController', ['$scope', '$location', '$rootScope', 'userData
     };
     $scope.itemsLabel = 'ads';
 
-    $scope.Messages = [];
+    if (!$scope.Messages) {
+        $scope.Messages = [];
+    }
+
     $scope.deleteFirstMessageIfMaxLengthReached = function () {
         if ($scope.Messages.length > 2) {
             $scope.Messages.splice(0, 1);

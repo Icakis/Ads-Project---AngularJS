@@ -2,7 +2,7 @@
 
 app.controller('adminEditAdController', ['$scope', 'userData', '$routeParams', 'adminAdsDataServices', 'adsData', '$rootScope', 'serviceFunctions', '$location', function ($scope, userData, $routeParams, adminAdsDataServices, adsData, $rootScope, serviceFunctions, $location) {
     $scope.heading = 'Ads Administration - Edit Ad';
-    $rootScope.userSection = ''; // myAds
+    $rootScope.userSection = 'home-admin';
 
     //console.log($routeParams);
     $scope.editedAd = {};
