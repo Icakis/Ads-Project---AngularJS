@@ -48,7 +48,7 @@ app.controller('mainController', ['$scope', '$location', '$rootScope', 'userData
     $rootScope.userSection = 'home';
     $rootScope.adminSection = 'home-admin';
     $scope.pagination = {
-        startPage: 2,
+        startPage: 1,
         pageSize: 2,
     };
     $scope.itemsLabel = 'ads';

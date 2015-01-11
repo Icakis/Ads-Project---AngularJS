@@ -5,35 +5,30 @@
                 <h2>{{ad.title}}</h2>
                 <span class="adDateSpan">{{ad.date | date:'d-MMM-yyyy'}}</span>
             </div>
-            <!--<p class="lead"><button class="btn btn-default">Read More</button></p>
-            <p class="pull-right"><span class="label label-default">keyword</span> <span class="label label-default">tag</span> <span class="label label-default">post</span></p>
-            <ul class="list-inline"><li><a href="#">2 Days Ago</a></li><li><a href="#"><i class="glyphicon glyphicon-comment"></i> 2 Comments</a></li><li><a href="#"><i class="glyphicon glyphicon-share"></i> 14 Shares</a></li></ul>-->
         </div>
     </div>
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-3">
             <img data-ng-src="{{ad.imageDataUrl?ad.imageDataUrl:'./img/No_Image_Available.png'}}" class="adImageContainer" />
         </div>
-        <div class="col-md-8">
-            <p>{{ad.text}}</p>
-            <p>Username: <span>{{ad.ownerUsername}}</span></p>
-            <p>Name: <span>{{ad.ownerName}}</span></p>
-            <p>Email: <span>{{ad.ownerEmail}}</span></p>
-            <p>Tel: <span>{{ad.ownerPhone}}</span></p>
-            <p>Category: <span>{{ad.categoryName}}</span></p>
-            <p>Town: <span>{{ad.townName}}</span></p>
+        <div class="col-md-7">
+            <p><strong>About: </strong> {{ad.text}}</p>
+            <p><strong>Username: </strong><span>{{ad.ownerUsername}}</span></p>
+            <p><strong>Name: </strong><span>{{ad.ownerName}}</span></p>
+            <p><strong>Email:</strong><span>{{ad.ownerEmail}}</span></p>
+            <p><strong>Tel: </strong><span>{{ad.ownerPhone}}</span></p>
+            <p><strong>Category: </strong><span>{{ad.categoryName}}</span></p>
+            <p><strong>Town: </strong><span>{{ad.townName}}</span></p>
+
         </div>
-        <hr/>
-        <div class="row">
-            <div class="col-md-4">
-                <p>Status: <span>{{ad.status}}</span></p>
-            </div>
-            <div class="col-md-8">
-                <a href="" data-ng-if="ad.status != 'Published'" class="btn btn-default btn-lg" data-ng-click="adminApproveAd(ad.id)">Approve</a>
-                <a ng-href="#/admin/ads/edit/{{ad.id}}" class="btn btn-default btn-lg">Edit</a>
-                <a ng-href="#/admin/ads/delete/{{ad.id}}" class="btn btn-default btn-lg">Delete</a>
-            </div>
+        <div class="col-md-2 leftBorder">
+            <p data-ng-if="ad.status != 'WaitingApproval'"><strong>Status: </strong>{{ad.status}}</p>
+            <p data-ng-if="ad.status == 'WaitingApproval'"><strong>Status: </strong>Waiting Approval</p>
+            <a href="" data-ng-if="ad.status != 'Published'" class="btn btn-default btn-lg myAdActionButton" data-ng-click="adminApproveAd(ad.id)">Approve</a>
+            <a ng-href="#/admin/ads/edit/{{ad.id}}" class="btn btn-default btn-lg myAdActionButton">Edit</a>
+            <a ng-href="#/admin/ads/delete/{{ad.id}}" class="btn btn-default btn-lg myAdActionButton">Delete</a>
         </div>
     </div>
     <hr data-ng-if="!$last">
 </div>
+

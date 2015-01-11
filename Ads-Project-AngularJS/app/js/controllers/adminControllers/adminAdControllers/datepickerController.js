@@ -2,7 +2,7 @@
 
 app.controller('DatepickerDemoCtrl', function ($scope) {
     $scope.today = function () {
-        console.log($scope.editedAd.date);
+        //console.log($scope.editedAd.date);
         var str = window.JSON.stringify({ date: new Date() });
         // str == "{"myDate":"2010-12-27T11:59:18.119Z"}"
         var todayDate = window.JSON.parse(str);

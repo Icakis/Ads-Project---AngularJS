@@ -66,6 +66,7 @@ aside {
     float: right;
     /*vertical-align: top;*/
 }
+
 #publishAdImagePreviewContainer {
     width: 10%;
     display: inline-block;
@@ -75,19 +76,30 @@ aside {
 
 /* columns of same height styles */
 .container-xs-height {
-    display:table;
-    padding-left:0;
-    padding-right:0;
+    display: table;
+    padding-left: 0;
+    padding-right: 0;
 }
+
 .row-xs-height {
-    display:table-row;
+    display: table-row;
 }
+
 .col-xs-height {
-    display:table-cell;
-    float:none;
+    display: table-cell;
+    float: none;
 }
 
 .col-middle {
-    vertical-align:middle;
+    vertical-align: middle;
     text-align: right;
+}
+
+.myAdActionButton {
+    margin-bottom: 1em;
+    width: 8em;
+}
+
+.leftBorder {
+    border-left: 1px solid #eee;
 }

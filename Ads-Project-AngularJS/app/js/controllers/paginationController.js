@@ -18,5 +18,9 @@ app.controller('paginationController', ['$scope', 'userData', function ($scope, 
         //console.log($scope.pagination.startPage);
         $scope.reloadAllads();
     };
+
+    $scope.selectedPage = function ($index) {
+        return $scope.pagination.startPage == $index + 1;
+    };
 }
 ]);

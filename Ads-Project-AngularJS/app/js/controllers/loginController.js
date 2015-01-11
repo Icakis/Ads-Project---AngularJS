@@ -20,11 +20,11 @@ app.controller('loginController', ['$scope', '$location', 'userData', 'serviceFu
         $scope.isDisabledLoginButton = true;
         userData.login($scope.loginData.username, $scope.loginData.password).then(function (data) {
             //console.log(data);
-            //$scope.getLoggedUsername = $scope.loginData.username;
+            var messageText = serviceFunctions.messageServerErrors('You\'re logged!', data);
             $scope.deleteFirstMessageIfMaxLengthReached();
             $scope.Messages.push({
                 type: "Success! ",
-                text: data.message, // "You're logged!",
+                text: messageText,
                 messageClass: 'alert-success',
                 date: new Date()
             });
