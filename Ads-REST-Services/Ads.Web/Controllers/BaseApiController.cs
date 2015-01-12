@@ -6,6 +6,8 @@
 
     public class BaseApiController : ApiController
     {
+        protected const int ImageKilobytesLimit = 50;
+
         public BaseApiController(IAdsData data)
         {
             this.Data = data;
@@ -40,6 +42,23 @@
             }
 
             return null;
+        }
+
+        protected bool ValidateImageSize(string imageDataURL)
+        {
+            // Image delete
+            if (imageDataURL == null)
+            {
+                return true;
+            }
+
+            // Every 4 bytes from Base64 is equal to 3 bytes
+            if ((imageDataURL.Length / 4) * 3 >= ImageKilobytesLimit * 1024)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

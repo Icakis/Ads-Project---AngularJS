@@ -25,6 +25,11 @@
     {
         private ApplicationUserManager userManager;
 
+        public UserController(IAdsData data)
+            : base(data)
+        {
+        }
+
         public UserController()
             : base(new AdsData())
         {
@@ -54,6 +59,11 @@
         [Route("Login")]
         public async Task<HttpResponseMessage> LoginUser(LoginUserBindingModel model)
         {
+            if (model == null)
+            {
+                model = new LoginUserBindingModel();
+            }
+
             // Invoke the "token" OWIN service to perform the login: /api/token
             // Ugly implementation: I use a server-side HTTP POST because I cannot directly invoke the service (it is deeply hidden in the OAuthAuthorizationServerHandler class)
             var request = HttpContext.Current.Request;
@@ -139,6 +149,11 @@
                 return this.BadRequest(this.ModelState);
             }
 
+            if (!this.ValidateImageSize(model.ImageDataURL))
+            {
+                return this.BadRequest(string.Format("The image size should be less than {0}kb!", ImageKilobytesLimit));
+            }
+
             // Validate the current user exists in the database
             var currentUserId = User.Identity.GetUserId();
             var currentUser = this.Data.Users.All().FirstOrDefault(x => x.Id == currentUserId);
@@ -179,7 +194,7 @@
         {
             if (model == null)
             {
-                // Sometimes the model is null, so we create an empty model
+                // When no parameters are passed, the model is null, so we create an empty model
                 model = new GetUserAdsBindingModel();
             }
 
@@ -206,13 +221,14 @@
             ads = ads.Where(ad => ad.OwnerId == currentUserId);
             ads = ads.OrderByDescending(ad => ad.Date).ThenBy(ad => ad.Id);
 
-            // Find the requested page (by given start page and page size)
+            // Apply paging: find the requested page (by given start page and page size)
             int pageSize = Settings.Default.DefaultPageSize;
             if (model.PageSize.HasValue)
             {
                 pageSize = model.PageSize.Value;
             }
-            var numPages = (ads.Count() + pageSize - 1) / pageSize;
+            var numItems = ads.Count();
+            var numPages = (numItems + pageSize - 1) / pageSize;
             if (model.StartPage.HasValue)
             {
                 ads = ads.Skip(pageSize * (model.StartPage.Value - 1));
@@ -235,6 +251,7 @@
             return this.Ok(
                 new
                 {
+                    numItems,
                     numPages,
                     ads = adsToReturn
                 }
@@ -247,7 +264,7 @@
         public IHttpActionResult DeactivateAd(int id)
         {
             return ChangeAdStatus(id, AdvertisementStatus.Inactive,
-                "Advertisement deactivated.");
+                "Advertisement #" + id + " deactivated.");
         }
 
         // PUT api/User/Ads/PublishAgain/{id}
@@ -256,7 +273,7 @@
         public IHttpActionResult PublishAgainAd(int id)
         {
             return ChangeAdStatus(id, AdvertisementStatus.WaitingApproval,
-                "Advertisement submitted for approval.");
+                "Advertisement #" + id + " submitted for approval.");
         }
 
         private IHttpActionResult ChangeAdStatus(int advertisementId,
@@ -266,7 +283,7 @@
 
             if (ad == null)
             {
-                return this.BadRequest("Advertisement " + advertisementId + " not found!");
+                return this.BadRequest("Advertisement #" + advertisementId + " not found!");
             }
 
             // Validate the current user ownership over the ad
@@ -293,7 +310,7 @@
                 .FirstOrDefault(d => d.Id == id);
             if (ad == null)
             {
-                return this.BadRequest("Advertisement " + id + " not found!");
+                return this.BadRequest("Advertisement #" + id + " not found!");
             }
 
             // Validate the current user ownership over the ad
@@ -331,7 +348,12 @@
             var ad = this.Data.Ads.All().FirstOrDefault(d => d.Id == id);
             if (ad == null)
             {
-                return this.BadRequest("Advertisement " + id + " not found!");
+                return this.BadRequest("Advertisement #" + id + " not found!");
+            }
+
+            if (!this.ValidateImageSize(model.ImageDataURL))
+            {
+                return this.BadRequest(string.Format("The image size should be less than {0}kb!", ImageKilobytesLimit));
             }
 
             // Validate the current user ownership over the ad
@@ -356,7 +378,7 @@
             return this.Ok(
                 new
                 {
-                    message = "Advertisement edited successfully"
+                    message = "Advertisement #" + id + " edited successfully."
                 }
             );
         }
@@ -369,7 +391,7 @@
             var ad = this.Data.Ads.All().FirstOrDefault(d => d.Id == id);
             if (ad == null)
             {
-                return this.BadRequest("Advertisement " + id + " not found!");
+                return this.BadRequest("Advertisement #" + id + " not found!");
             }
 
             // Validate the current user ownership over the add
@@ -386,7 +408,7 @@
             return this.Ok(
                new
                {
-                   message = "Advertisement deleted successfully."
+                   message = "Advertisement #" + id + " deleted successfully."
                }
            );
         }
@@ -474,6 +496,12 @@
                 return this.BadRequest("Edit profile for user 'admin' is not allowed!");
             }
 
+            var hasEmailTaken = this.Data.Users.All().Any(x => x.Email == model.Email);
+            if (hasEmailTaken)
+            {
+                return this.BadRequest("Invalid email. The email is already taken!");
+            }
+
             currentUser.Name = model.Name;
             currentUser.Email = model.Email;
             currentUser.PhoneNumber = model.PhoneNumber;
@@ -485,8 +513,7 @@
                 new
                 {
                     message = "User profile edited successfully.",
-                }
-            );
+                });
         }
 
         protected override void Dispose(bool disposing)

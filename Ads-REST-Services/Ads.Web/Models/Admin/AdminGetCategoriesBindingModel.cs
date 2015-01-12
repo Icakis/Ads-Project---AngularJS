@@ -1,17 +1,16 @@
 ﻿namespace Ads.Web.Models.Admin
 {
-    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
 
-    public class AdminGetUsersBindingModel
+    public class AdminGetCategoriesBindingModel
     {
-        public AdminGetUsersBindingModel()
+        public AdminGetCategoriesBindingModel()
         {
             this.StartPage = 1;
         }
         
         /// <summary>
-        /// Sorting expression, e.g. 'UserName', '-UserName' (descending), 'Town.Name'.
+        /// Sorting expression, e.g. 'Name', 'Id', '-Name' (descending).
         /// </summary>
         public string SortBy { get; set; }
 

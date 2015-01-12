@@ -45,7 +45,7 @@ app.controller('editUserProfileController', ['$scope', 'userData', '$location', 
         userData.editUser($scope.user)
             .$promise
             .then(function (data) {
-                //console.log(updatedUser);
+                //console.log(data);
                 $scope.deleteFirstMessageIfMaxLengthReached();
                 $scope.Messages.push({
                     type: "Success! ",
